@@ -1,25 +1,23 @@
 ---
 title: "密钥存储格式"
 author: tdykstra
-description: 
-keywords: "ASP.NET 核心"
-ms.author: riande
+description: "本文档介绍了 ASP.NET 核心数据保护密钥存储格式的实现详细信息。"
 manager: wpickett
+ms.author: riande
 ms.date: 10/14/2016
-ms.topic: article
-ms.assetid: e8996478-f7bf-4b58-bab4-7fdb5d8556c5
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: security/data-protection/implementation/key-storage-format
-ms.openlocfilehash: e761eaa406a9691e3fa36881d42c1a0c1bd8a206
-ms.sourcegitcommit: 0b6c8e6d81d2b3c161cd375036eecbace46a9707
+ms.openlocfilehash: 66783eb7264a4551eafdd9d5c7d99b014701a6de
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/11/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="key-storage-format"></a>密钥存储格式
 
-<a name=data-protection-implementation-key-storage-format></a>
+<a name="data-protection-implementation-key-storage-format"></a>
 
 对象存储在 XML 表示形式中的其余部分。 密钥存储的默认目录为 %localappdata%\asp.net\dataprotection-keys\。
 
@@ -50,7 +48,7 @@ ms.lasthandoff: 08/11/2017
 
 \<密钥 > 元素包含以下属性和子元素：
 
-* 密钥 id。 此值是被看作是授权;文件名是只需以方便人们阅读过去。
+* 密钥 id。此值是被看作是授权;文件名是只需以方便人们阅读过去。
 
 * 版本\<密钥 > 元素，当前固定为 1。
 

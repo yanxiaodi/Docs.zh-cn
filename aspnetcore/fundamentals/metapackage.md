@@ -1,39 +1,38 @@
 ---
-title: "有关 ASP.NET 核心 Microsoft.AspNetCore.All metapackage 2.x 及更高版本"
+title: "ASP.NET Core 2.x 及更高版本的 Microsoft.AspNetCore.All 元包"
 author: Rick-Anderson
-description: "Microsoft.AspNetCore.All metapackage 包括所有受支持的 ASP.NET Core 和实体框架核心包，以及其依赖项。"
-keywords: ASP.NET Core,NuGet,package,Microsoft.AspNetCore.All,metapackage
-ms.author: riande
+description: "Microsoft.AspNetCore.All 元包包含所有受支持的 ASP.NET Core 和 Entity Framework Core 包及其依赖关系。"
 manager: wpickett
+ms.author: riande
 ms.date: 09/20/2017
-ms.topic: article
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: fundamentals/metapackage
-ms.openlocfilehash: 23a07867874eb534c75c4e7b3be00c4a376f8a8b
-ms.sourcegitcommit: 4e45fd4e3f1374cd51cc931cee93c9d72631d9fc
-ms.translationtype: MT
+ms.openlocfilehash: 07220fdae299723088fa85e452cedff5e5685bd7
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
+ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/20/2017
+ms.lasthandoff: 01/30/2018
 ---
-#<a name="microsoftaspnetcoreall-metapackage-for-aspnet-core-2x"></a>有关 ASP.NET 核心 Microsoft.AspNetCore.All metapackage 2.x
+#<a name="microsoftaspnetcoreall-metapackage-for-aspnet-core-2x"></a>ASP.NET Core 2.x 的 Microsoft.AspNetCore.All 元包
 
-此功能需要 ASP.NET Core 2.x。
+此功能需要面向 .NET Core 2.x 的 ASP.NET Core 2.x。
 
-[Microsoft.AspNetCore.All](https://www.nuget.org/packages/Microsoft.AspNetCore.All) ASP.NET Core 的 metapackage 包括：
+ASP.NET Core 的 [Microsoft.AspNetCore.All](https://www.nuget.org/packages/Microsoft.AspNetCore.All) 元包包括：
 
-* 所有受 ASP.NET Core 团队支持包。
-* 所有支持由实体框架核心的包。 
-* 内部和第三方依赖关系，使用 ASP.NET Core 和实体框架核心。 
+* ASP.NET Core 团队支持的所有包。
+* Entity Framework Core 支持的所有包。 
+* ASP.NET Core 和 Entity Framework Core 使用的内部和第三方依赖关系。 
 
-ASP.NET 核心的所有功能 2.x 并且实体框架核心 2.x 包含在`Microsoft.AspNetCore.All`包。 默认的项目模板使用此程序包。
+`Microsoft.AspNetCore.All` 包中包含了 ASP.NET Core 2.x 和 Entity Framework Core 2.x 的所有功能。 默认项目模板使用此包。
 
-版本数`Microsoft.AspNetCore.All`metapackage 表示 ASP.NET Core 版本和实体框架 Core 版本 （.NET Core 版本与对齐）。
+`Microsoft.AspNetCore.All` 元包的版本号表示 ASP.NET Core 版本和 Entity Framework Core 版本（与 .NET Core 版本对齐）。
 
-应用程序使用`Microsoft.AspNetCore.All`metapackage 自动充分利用[.NET 核心运行时存储](https://docs.microsoft.com/dotnet/core/deploying/runtime-store)。 运行时存储包含运行 ASP.NET Core 2.x 应用程序所需的所有运行时资产。 当你使用`Microsoft.AspNetCore.All`metapackage，**没有**资产从引用的 ASP.NET Core NuGet 包与应用程序部署&mdash;.NET 核心运行时存储区包含这些资产。 预编译运行时存储中的资产以提高应用程序启动时间。
+使用 `Microsoft.AspNetCore.All` 元包的应用程序会自动使用 [.NET Core 运行时存储](https://docs.microsoft.com/dotnet/core/deploying/runtime-store)。 此运行时存储包含运行 ASP.NET Core 2.x 应用程序所需的所有运行时资产。 使用 `Microsoft.AspNetCore.All` 元包时，应用程序不会部署引用的 ASP.NET Core NuGet 包中的任何资产&mdash;.NET Core 运行时存储包含这些资产。 运行时存储中的资产已经过预编译，以便缩短应用程序启动时间。
 
-你可以使用包修整过程删除不使用的包。 裁剪后的包不在发布的应用程序输出中。
+可使用包修整过程来删除不使用的包。 已发布的应用程序输出中排除了修整的包。
 
-以下*.csproj*文件引用`Microsoft.AspNetCore.All`metapackage 有关 ASP.NET 核心：
+以下 .csproj 文件引用了 ASP.NET Core 的 `Microsoft.AspNetCore.All` 元包：
 
 [!code-xml[Main](..\mvc\views\view-compilation\sample\MvcRazorCompileOnPublish2.csproj?highlight=9)]

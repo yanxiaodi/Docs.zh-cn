@@ -1,48 +1,46 @@
 ---
 title: "子项派生和经过身份验证的加密"
 author: rick-anderson
-description: 
-keywords: "ASP.NET 核心"
-ms.author: riande
+description: "本文档说明 ASP.NET 核心数据保护的实现详细信息子项派生和身份验证加密。"
 manager: wpickett
+ms.author: riande
 ms.date: 10/14/2016
-ms.topic: article
-ms.assetid: 34bb58a3-5a9a-41e5-b090-08f75b4bbefa
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: security/data-protection/implementation/subkeyderivation
-ms.openlocfilehash: 24ce71b417599bea22b7fae8b384db599f9e907c
-ms.sourcegitcommit: 0b6c8e6d81d2b3c161cd375036eecbace46a9707
+ms.openlocfilehash: 4b905bbc7bb064b6ba1741557bd694c8c67ccfa8
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/11/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="subkey-derivation-and-authenticated-encryption"></a>子项派生和经过身份验证的加密
 
-<a name=data-protection-implementation-subkey-derivation></a>
+<a name="data-protection-implementation-subkey-derivation"></a>
 
 密钥链中的大多数键将包含某种形式的平均信息量，并且将有算法信息指出"CBC 模式下加密 + HMAC 验证"或"GCM 加密 + 验证"。 在这些情况下，我们将嵌入的平均信息量称为此密钥的主密钥材料 （或公里） 和我们执行派生将使用为实际的加密操作的密钥的密钥派生函数。
 
 > [!NOTE]
-> 键是抽象的并自定义实现可能不会按如下所示的那样。 如果密钥提供其自己的实现 IAuthenticatedEncryptor，而不是使用我们的内置工厂之一，将应用不再本节中所述的机制。
+> 键是抽象的并自定义实现可能不会按如下所示的那样。 如果密钥提供其自己的实现`IAuthenticatedEncryptor`而不是使用我们的内置工厂之一，本节中所述的机制不再适用。
 
-<a name=data-protection-implementation-subkey-derivation-aad></a>
+<a name="data-protection-implementation-subkey-derivation-aad"></a>
 
 ## <a name="additional-authenticated-data-and-subkey-derivation"></a>其他经过身份验证的数据和子项派生
 
-IAuthenticatedEncryptor 接口用作所有经过身份验证的加密操作的核心接口。 其加密方法采用两个缓冲区： 纯文本和 additionalAuthenticatedData (AAD)。 纯文本内容流不变 IDataProtector.Protect，对的调用，但是 AAD 由系统生成和包括三个组件：
+`IAuthenticatedEncryptor`接口用作所有经过身份验证的加密操作的核心接口。 其`Encrypt`方法采用两个缓冲区： 纯文本和 additionalAuthenticatedData (AAD)。 纯文本内容流保持不变调用`IDataProtector.Protect`，但 AAD 由系统生成和包括三个组件：
 
 1. 32 位神奇标头 09 F0 C9 F0 标识此版本的数据保护系统。
 
 2. 128 位密钥 id。
 
-3. 从创建 IDataProtector 执行此操作的目的链形成的可变长度字符串。
+3. 从创建目的链形成的可变长度字符串`IDataProtector`，正在执行此操作。
 
-由于 AAD 是为所有三个组件的元组唯一的我们可以使用它从密钥主机派生新密钥，而不是使用密钥主机本身中所有的我们的加密操作。 IAuthenticatedEncryptor.Encrypt 每次调用，密钥派生发生以下过程：
+由于 AAD 是为所有三个组件的元组唯一的我们可以使用它从密钥主机派生新密钥，而不是使用密钥主机本身中所有的我们的加密操作。 每次调用`IAuthenticatedEncryptor.Encrypt`，发生以下密钥派生过程：
 
-（K_E，K_H） = SP800_108_CTR_HMACSHA512 (K_M，AAD，contextHeader | | keyModifier)
+( K_E, K_H ) = SP800_108_CTR_HMACSHA512(K_M, AAD, contextHeader || keyModifier)
 
-在这里，我们正在呼叫 NIST SP800 108 KDF 中计数器模式 (请参阅[NIST SP800-108](http://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf)、 秒。 5.1) 使用以下参数：
+在这里，我们正在呼叫 NIST SP800 108 KDF 中计数器模式 (请参阅[NIST SP800-108](http://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf)，sec。 5.1) 使用以下参数：
 
 * 密钥派生密钥 (KDK) = K_M
 
@@ -52,7 +50,7 @@ IAuthenticatedEncryptor 接口用作所有经过身份验证的加密操作的�
 
 * 上下文 = contextHeader | |keyModifier
 
-上下文标头的可变长度和本质就是我们要为其派生 K_E 和 K_H 的算法的指纹。 密钥修饰符是随机加密每次调用生成的 128 位字符串，并提供以确保与绝大多数概率 KE 和 KH 是唯一对于此特定身份验证加密操作，即使所有其他输入给 KDF 为常数。
+上下文标头的可变长度和本质就是我们要为其派生 K_E 和 K_H 的算法的指纹。 密钥修饰符是每次调用随机生成一个 128 位字符串`Encrypt`并提供以确保与绝大多数概率 KE 和 KH 是唯一对于此特定身份验证加密操作，即使所有其他输入给 KDF 为常数。
 
 CBC 模式下加密 + HMAC 验证操作，|K_E |的密钥长度是对称的块密码，和 |K_H |是的 HMAC 例程的摘要大小。 对 GCM 加密 + 验证操作 |K_H |= 0。
 
@@ -65,7 +63,7 @@ CBC 模式下加密 + HMAC 验证操作，|K_E |的密钥长度是对称的块�
 *输出: = keyModifier | |iv | |E_cbc （K_E，iv，数据） | |HMAC (K_H、 iv | |E_cbc （K_E，iv，数据）)*
 
 > [!NOTE]
-> IDataProtector.Protect 实现将[前面预置的幻标头和密钥 id](authenticated-encryption-details.md#data-protection-implementation-authenticated-encryption-details)到之前将其返回到调用方的输出。 因为神奇的标头和密钥 id 是隐式的一部分[AAD](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation-aad)，因为密钥修饰符作为输入提供给 KDF，这意味着 MAC 进行身份验证的最终返回负载的每个单字节
+> `IDataProtector.Protect`实现将[前面预置的幻标头和密钥 id](authenticated-encryption-details.md)到之前将其返回到调用方的输出。 因为神奇的标头和密钥 id 是隐式的一部分[AAD](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation-aad)，因为密钥修饰符作为输入提供给 KDF，这意味着 MAC 进行身份验证的最终返回负载的每个单字节
 
 ## <a name="galoiscounter-mode-encryption--validation"></a>Galois/计数器模式加密 + 验证
 

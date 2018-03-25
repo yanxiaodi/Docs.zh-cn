@@ -1,33 +1,31 @@
 ---
-title: "ASP.NET 核心标识的自定义的存储提供程序 |Microsoft 文档"
+title: "ASP.NET 核心标识的自定义的存储提供程序"
 author: ardalis
-description: "如何配置 ASP.NET 核心标识的自定义存储提供程序。"
-keywords: "ASP.NET 核心，标识，自定义存储提供程序"
-ms.author: riande
+description: "了解如何配置 ASP.NET 核心标识的自定义存储提供程序。"
 manager: wpickett
+ms.author: riande
 ms.date: 05/24/2017
-ms.topic: article
-ms.assetid: b2ace545-ecf6-4664-b31e-b65bd4a6b025
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: security/authentication/identity-custom-storage-providers
-ms.openlocfilehash: c1d974e72eab388ba7b196c4b48f21a06b59dc20
-ms.sourcegitcommit: f5cf472d49c2475e4d57654efd5fc0a4ccecba4c
+ms.openlocfilehash: 559c5c58b416912b1caef1964ff8d7532bd98439
+ms.sourcegitcommit: 7ac15eaae20b6d70e65f3650af050a7880115cbf
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/30/2017
+ms.lasthandoff: 03/02/2018
 ---
 # <a name="custom-storage-providers-for-aspnet-core-identity"></a>ASP.NET 核心标识的自定义的存储提供程序
 
-通过[Steve Smith](https://ardalis.com/)
+作者：[Steve Smith](https://ardalis.com/)
 
-ASP.NET 核心标识是一种可扩展系统，可用于创建自定义存储提供程序并将其连接到你的应用。 本主题介绍如何创建 ASP.NET 核心标识的自定义的存储提供程序。 它介绍如何创建你自己的存储提供程序的重要概念，但不是的分步演练。
+ASP.NET 核心标识是一种可扩展系统，可用于创建自定义存储提供程序并将其连接到你的应用。 本主题介绍如何创建 ASP.NET 核心标识的自定义的存储提供程序。 它介绍如何创建你自己的存储提供程序的重要概念，但不的分步演练。
 
-[查看或从 GitHub 下载示例](https://github.com/aspnet/Docs/tree/master/aspnetcore/security/authentication/identity/sample)。
+[查看或下载 GitHub 中的示例](https://github.com/aspnet/Docs/tree/master/aspnetcore/security/authentication/identity/sample)。
 
 ## <a name="introduction"></a>介绍
 
-默认情况下，ASP.NET 核心标识系统中使用实体框架核心的 SQL Server 数据库存储用户信息。 对于许多应用程序，此方法也适用。 但是，你可能希望使用不同的持久性机制或数据架构。 例如: 
+默认情况下，ASP.NET 核心标识系统中使用实体框架核心的 SQL Server 数据库存储用户信息。 对于许多应用程序，此方法也适用。 但是，你可能希望使用不同的持久性机制或数据架构。 例如:
 
 * 你使用[Azure 表存储](https://docs.microsoft.com/azure/storage/)或其他数据存储。
 * 数据库表具有不同的结构。 
@@ -62,13 +60,13 @@ ASP.NET 核心标识包含类称为管理器和存储区。 *管理器*是高级
 
 [ASP.NET 核心标识](https://github.com/aspnet/identity)数据类型进行详细介绍下列各节：
 
-### <a name="users"></a>Users
+### <a name="users"></a>用户
 
-注册用户的网站的用户。 [IdentityUser](https://docs.microsoft.com/aspnet/core/api/microsoft.aspnet.identity.corecompat.identityuser)可能扩展类型，或将其用作自定义类型的示例。 不需要从特定的类型来实现自定义标识的存储解决方案继承。
+注册用户的网站的用户。 [IdentityUser](https://docs.microsoft.com/aspnet/core/api/microsoft.aspnet.identity.corecompat.identityuser)可能扩展类型，或将其用作自定义类型的示例。 你不必继承来实现自定义标识的存储解决方案的特定类型。
 
 ### <a name="user-claims"></a>用户声明
 
-一组语句 (或[声明](https://docs.microsoft.com//dotnet/api/system.security.claims.claim)有关的用户的表示用户的标识。 可以启用的用户的标识不是可以通过角色实现更大的表达式。
+一组语句 (或[声明](https://docs.microsoft.com//dotnet/api/system.security.claims.claim)) 有关的用户的表示用户的标识。 可以启用的用户的标识不是可以通过角色实现更大的表达式。
 
 ### <a name="user-logins"></a>用户登录名
 
@@ -114,7 +112,7 @@ ASP.NET 核心标识包含类称为管理器和存储区。 *管理器*是高级
 
 在数据访问类中，提供的代码来执行持久性机制的数据操作。 例如，在自定义提供程序，你可能具有以下代码以创建中的新用户*存储*类：
 
-[!code-csharp[Main](identity-custom-storage-providers/sample/CustomIdentityProviderSample/CustomProvider/CustomUserStore.cs?name=createuser&highlight=7)]
+[!code-csharp[](identity-custom-storage-providers/sample/CustomIdentityProviderSample/CustomProvider/CustomUserStore.cs?name=createuser&highlight=7)]
 
 实现逻辑用于创建用户处于``_usersTable.CreateAsync``方法，如下所示。
 
@@ -128,14 +126,14 @@ ASP.NET 核心标识包含类称为管理器和存储区。 *管理器*是高级
 
 ## <a name="customize-the-user-store"></a>自定义用户存储区
 
-创建`UserStore`提供用户的所有数据操作的方法的类。 此类是等效于[UserStore<TUser> ](https://docs.microsoft.com/aspnet/core/api/microsoft.aspnetcore.identity.entityframeworkcore.userstore-1)类。 在你`UserStore`类中，实现`IUserStore<TUser>`和所需的可选接口。 你选择的可选接口，以实现基于应用程序中提供的功能。
+创建`UserStore`提供用户的所有数据操作的方法的类。 此类是等效于[UserStore<TUser> ](https://docs.microsoft.com/aspnet/core/api/microsoft.aspnetcore.identity.entityframeworkcore.userstore-1)类。 在你`UserStore`类中，实现`IUserStore<TUser>`和所需的可选接口。 你选择的可选接口，以实现基于你的应用程序中提供的功能。
 
 ### <a name="optional-interfaces"></a>可选接口
 
 - IUserRoleStore https://docs.microsoft.com/aspnet/core/api/microsoft.aspnetcore.identity.iuserrolestore-1
 - IUserClaimStore https://docs.microsoft.com/aspnet/core/api/microsoft.aspnetcore.identity.iuserclaimstore-1
 - IUserPasswordStore https://docs.microsoft.com/aspnet/core/api/microsoft.aspnetcore.identity.iuserpasswordstore-1
-- IUserSecurityStampStore<!-- make these all links and remove / -->
+- IUserSecurityStampStore <!-- make these all links and remove / -->
 - IUserEmailStore
 - IPhoneNumberStore
 - IQueryableUserStore
@@ -147,7 +145,7 @@ ASP.NET 核心标识包含类称为管理器和存储区。 *管理器*是高级
 
 在`UserStore`类，你将使用你创建用于执行操作的数据访问类。 它们将传递中使用依赖关系注入。 例如，在 SQL Server 使用 Dapper 实现，`UserStore`类具有`CreateAsync`使用的实例方法`DapperUsersTable`以插入新记录：
 
-[!code-csharp[Main](identity-custom-storage-providers/sample/CustomIdentityProviderSample/CustomProvider/DapperUsersTable.cs?name=createuser&highlight=7)]
+[!code-csharp[](identity-custom-storage-providers/sample/CustomIdentityProviderSample/CustomProvider/DapperUsersTable.cs?name=createuser&highlight=7)]
 
 ### <a name="interfaces-to-implement-when-customizing-user-store"></a>要实现自定义用户存储时的接口
 
@@ -174,7 +172,7 @@ ASP.NET 核心标识包含类称为管理器和存储区。 *管理器*是高级
 - **IQueryableUserStore**  
  [IQueryableUserStore&lt;热熔器&gt;](https://docs.microsoft.com/aspnet/core/api/microsoft.aspnetcore.identity.iqueryableuserstore-1)接口定义成员实现此方法可以提供可查询的用户存储区。
 
-应用程序中实现所需的接口。 例如: 
+应用程序中实现所需的接口。 例如:
 
 ```csharp
 public class UserStore : IUserStore<IdentityUser>,
@@ -198,7 +196,7 @@ public class UserStore : IUserStore<IdentityUser>,
 
 以下是一个示例角色类：
 
-[!code-csharp[Main](identity-custom-storage-providers/sample/CustomIdentityProviderSample/CustomProvider/ApplicationRole.cs)]
+[!code-csharp[](identity-custom-storage-providers/sample/CustomIdentityProviderSample/CustomProvider/ApplicationRole.cs)]
 
 ## <a name="customize-the-role-store"></a>自定义角色存储
 

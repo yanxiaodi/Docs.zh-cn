@@ -1,21 +1,19 @@
 ---
 title: "数据保护简介"
 author: rick-anderson
-description: 
-keywords: ASP.NET Core,
-ms.author: riande
+description: "本文档介绍的数据保护的概念，并概述了相关联的 ASP.NET 核心 Api 设计原则。"
 manager: wpickett
+ms.author: riande
 ms.date: 10/14/2016
-ms.topic: article
-ms.assetid: 4542cd37-b47c-454c-be19-d1b5810d67fe
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: security/data-protection/introduction
-ms.openlocfilehash: b7391fffd5d512c01af5d709755a925f739b59ba
-ms.sourcegitcommit: 9cdbfd0d670d70b9c354216aabee260c52dad5ee
+ms.openlocfilehash: acd38679390b92705703111b72816f1a5d3ba848
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/12/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="introduction-to-data-protection"></a>数据保护简介
 
@@ -33,7 +31,7 @@ ASP.NET 核心数据保护堆栈旨在用作的长期替代<machineKey>在 ASP.N
 
 最后，由于现代应用程序已被组件化，我们已了解是各个组件将想要利用此系统而不考虑其他组件在系统中。 例如，如果持有者令牌组件使用此堆栈，它应运行，而不从一种反 CSRF 机制，也可能使用相同的堆栈的干扰。 因此最后一项要求： 隔离。
 
-我们可以提供进一步的约束为了缩小我们的要求的范围。 我们假定加密系统内运行的所有服务都都同样受信任而，数据不需要使用外部下我们直接控制服务或生成。 此外，我们需要操作是尽可能快，因为 web 服务的每个请求可能会经过加密系统一个或多个时间。 这样，可以对称加密适合我们的方案，而且我们可以如需要的时间之前折扣非对称加密。
+我们可以提供进一步的约束为了缩小我们的要求的范围。 我们假定加密系统内运行的所有服务都都同样受信任而数据不需要使用外部下我们直接控制服务或生成。 此外，我们需要操作是尽可能快，因为 web 服务的每个请求可能会经过加密系统一个或多个时间。 这样，可以对称加密适合我们的方案，而且我们可以如具有所需的时间之前折扣非对称加密。
 
 ## <a name="design-philosophy"></a>设计理念
 

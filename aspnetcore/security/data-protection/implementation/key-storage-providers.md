@@ -1,30 +1,28 @@
 ---
 title: "密钥存储提供程序"
 author: rick-anderson
-description: "密钥存储提供程序"
-keywords: "encryption,ASP.NET 核心"
-ms.author: riande
+description: "了解有关 ASP.NET 核心以及如何配置密钥的存储位置中的密钥存储提供程序。"
 manager: wpickett
+ms.author: riande
 ms.date: 01/14/2017
-ms.topic: article
-ms.assetid: 423e0a79-2f34-44c4-aaf3-146a53c39251
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: security/data-protection/implementation/key-storage-providers
-ms.openlocfilehash: 1c73608245e668c0810813e29f78f1ac3dacc414
-ms.sourcegitcommit: 78d28178345a0eea91556e4cd1adad98b1446db8
+ms.openlocfilehash: 83e02a19e465b3ff81a0c0c62c2c8b090bfab052
+ms.sourcegitcommit: 493a215355576cfa481773365de021bcf04bb9c7
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/22/2017
+ms.lasthandoff: 03/15/2018
 ---
 # <a name="key-storage-providers"></a>密钥存储提供程序
 
-<a name=data-protection-implementation-key-storage-providers></a>
+<a name="data-protection-implementation-key-storage-providers"></a>
 
-默认情况下，数据保护系统[使用启发式方法](../configuration/default-settings.md#data-protection-default-settings)以确定应将在其中保留加密的密钥材料。 开发人员可以重写启发式方法，并手动指定的位置。
+默认情况下，数据保护系统[使用启发式方法](xref:security/data-protection/configuration/default-settings)以确定应将在其中保留加密的密钥材料。 开发人员可以重写启发式方法，并手动指定的位置。
 
 > [!NOTE]
-> 如果您指定一个显式的密钥保持位置，将取消注册数据保护系统在 rest 机制启发式方法提供的默认密钥加密，以便密钥将不再加密对静止。 建议你此外[指定显式密钥加密机制](key-encryption-at-rest.md#data-protection-implementation-key-encryption-at-rest-providers)对于生产应用程序。
+> 如果您指定一个显式的密钥保持位置，将取消注册数据保护系统在 rest 机制启发式方法提供的默认密钥加密，以便密钥将不再加密对静止。 它具有，建议你此外[指定显式密钥加密机制](key-encryption-at-rest.md#data-protection-implementation-key-encryption-at-rest-providers)对于生产应用程序。
 
 数据保护系统附带了几个内置密钥存储提供程序。
 

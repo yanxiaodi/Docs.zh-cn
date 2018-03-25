@@ -2,20 +2,18 @@
 title: "使用 SQL Server LocalDB"
 author: rick-anderson
 description: "结合简单的 MVC 应用使用 SQL Server LocalDB"
-keywords: ASP.NET Core, SQL Server LocalDB, SQL Server, LocalDB
-ms.author: riande
 manager: wpickett
+ms.author: riande
 ms.date: 03/07/2017
-ms.topic: get-started-article
-ms.assetid: ff8fd9b8-7c98-424d-8641-7524e23bf541
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: get-started-article
 uid: tutorials/first-mvc-app/working-with-sql
-ms.openlocfilehash: e44b6de13540d93337bf9a128d287808cffbfb46
-ms.sourcegitcommit: 78d28178345a0eea91556e4cd1adad98b1446db8
+ms.openlocfilehash: a0aa6fdfa51650628021a4ba6d0533e7e0e39200
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/22/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="working-with-sql-server-localdb"></a>使用 SQL Server LocalDB
 
@@ -25,15 +23,15 @@ ms.lasthandoff: 09/22/2017
 
 [!code-csharp[Main](../../tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Startup.cs?name=ConfigureServices&highlight=6-7)]
 
-ASP.NET Core [配置](xref:fundamentals/configuration)系统会读取 `ConnectionString`。 为了进行本地开发，它会从 appsettings.json 文件获取连接字符串：
+ASP.NET Core [配置](xref:fundamentals/configuration/index)系统会读取 `ConnectionString`。 为了进行本地开发，它会从 appsettings.json 文件获取连接字符串：
 
-[!code-javascript[Main](start-mvc/sample/MvcMovie/appsettings.json?highlight=2&range=8-10)]
+[!code-json[Main](start-mvc/sample/MvcMovie/appsettings.json?highlight=2&range=8-10)]
 
-将应用部署到测试或生产服务器时，可使用环境变量或另一种方法将连接字符串设置为实际的 SQL Server。 有关详细信息，请参阅[配置](xref:fundamentals/configuration)。
+将应用部署到测试或生产服务器时，可使用环境变量或另一种方法将连接字符串设置为实际的 SQL Server。 有关详细信息，请参阅[配置](xref:fundamentals/configuration/index)。
 
 ## <a name="sql-server-express-localdb"></a>SQL Server Express LocalDB
 
-LocalDB 是 SQL Server Express 数据库引擎的轻型版本，专门针对程序开发。 LocalDB 按需启动并在用户模式下运行，因此没有复杂的配置。 默认情况下，LocalDB 数据库在 C:/Users/\<user\> 目录中创建“\*.mdf”文件。
+LocalDB 是轻型版的 SQL Server Express 数据库引擎，以程序开发为目标。 LocalDB 按需启动并在用户模式下运行，因此没有复杂的配置。 默认情况下，LocalDB 数据库在 C:/Users/\<user\> 目录中创建“\*.mdf”文件。
 
 * 从“视图”菜单中，打开“SQL Server 对象资源管理器”(SSOX)。
 

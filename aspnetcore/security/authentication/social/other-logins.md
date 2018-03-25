@@ -1,22 +1,21 @@
 ---
 title: "其他身份验证提供程序的简短的调查。"
 author: rick-anderson
-ms.author: riande
 manager: wpickett
+ms.author: riande
 ms.date: 11/03/2016
-ms.topic: article
-ms.assetid: BC36CA84-3DE8-496E-9AA2-2F1B74AE8309
 ms.prod: asp.net-core
+ms.topic: article
 uid: security/authentication/otherlogins
-ms.openlocfilehash: 617b7a7e90f2f27b96bd4d0f793ef69bf738dbde
-ms.sourcegitcommit: 67f54fabbfa4e3942f5bfe1f8a7fdfe4a7a75358
+ms.openlocfilehash: 74d550115d0d58374494fc34a348d01abed9c664
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/19/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="short-survey-of-other-authentication-providers"></a>简短的调查的其他身份验证提供程序
 
-<a name=security-authentication-other-logins></a>
+<a name="security-authentication-other-logins"></a>
 
 通过[Rick Anderson](https://twitter.com/RickAndMSFT)， [Pranav Rastogi](https://github.com/rustd)，和[Valeriy Novytskyy](https://github.com/01binary)
 

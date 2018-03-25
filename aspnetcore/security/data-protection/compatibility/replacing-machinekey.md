@@ -1,25 +1,23 @@
 ---
-title: "在 ASP.NET 中替换 < machineKey >"
+title: "将在 ASP.NET 中的 machineKey"
 author: rick-anderson
-description: "在 ASP.NET 中替换 < machineKey >"
-keywords: "ASP.NET 核心，安全，< machineKey > machineKey"
-ms.author: riande
+description: "发现如何替换 machineKey ASP.NET 以允许使用新且更安全的数据保护系统中。"
 manager: wpickett
+ms.author: riande
 ms.date: 10/14/2016
-ms.topic: article
-ms.assetid: 5ac13589-3837-4b4d-8abe-81f843942120
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: security/data-protection/compatibility/replacing-machinekey
-ms.openlocfilehash: 8c00c05a1120e65f503b70229466fcad561bc6a9
-ms.sourcegitcommit: 78d28178345a0eea91556e4cd1adad98b1446db8
+ms.openlocfilehash: 8113780dd7b8b3010cf77d14abb45730a2f28959
+ms.sourcegitcommit: 493a215355576cfa481773365de021bcf04bb9c7
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/22/2017
+ms.lasthandoff: 03/15/2018
 ---
-# <a name="replacing-machinekey-in-aspnet"></a>替换`<machineKey>`在 ASP.NET 中
+# <a name="replace-machinekey-in-aspnet"></a>将在 ASP.NET 中的 machineKey
 
-<a name=compatibility-replacing-machinekey></a>
+<a name="compatibility-replacing-machinekey"></a>
 
 实现`<machineKey>`在 ASP.NET 中的元素[是可替换](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/)。 这允许对 ASP.NET 加密例程的大多数调用，以通过替换数据保护机制，包括新的数据保护系统路由。
 
@@ -28,7 +26,7 @@ ms.lasthandoff: 09/22/2017
 > [!NOTE]
 > 新的数据保护系统只能安装到现有的 ASP.NET 应用程序面向.NET 4.5.1 或更高版本。 安装将失败，如果应用程序面向.NET 4.5 或降低。
 
-若要安装新的数据保护系统到现有的 ASP.NET 4.5.1+ 项目之后，安装包 Microsoft.AspNetCore.DataProtection.SystemWeb。 这将实例化数据保护系统使用[默认配置](../configuration/default-settings.md#data-protection-default-settings)设置。
+若要安装新的数据保护系统到现有的 ASP.NET 4.5.1+ 项目之后，安装包 Microsoft.AspNetCore.DataProtection.SystemWeb。 这将实例化数据保护系统使用[默认配置](xref:security/data-protection/configuration/default-settings)设置。
 
 当你安装此程序包时，它将插入行到*Web.config*这是告诉 ASP.NET，以将其用于[最加密操作](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/)，包括窗体身份验证、 视图状态和调用MachineKey.Protect。 插入的行，如下所示读取。
 

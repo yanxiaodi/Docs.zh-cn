@@ -1,21 +1,19 @@
 ---
 title: "密码哈希"
 author: rick-anderson
-description: 
-keywords: ASP.NET Core,
-ms.author: riande
+description: "本文档说明如何使用 ASP.NET Core 数据保护 Api 的密码执行哈希。"
 manager: wpickett
+ms.author: riande
 ms.date: 10/14/2016
-ms.topic: article
-ms.assetid: 982a1eb2-1e6f-4909-896f-82784364472d
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: security/data-protection/consumer-apis/password-hashing
-ms.openlocfilehash: d4b39bf7feba8a29e0b5c9e56d53a85b82977b7e
-ms.sourcegitcommit: 9cdbfd0d670d70b9c354216aabee260c52dad5ee
+ms.openlocfilehash: 8e2796108be14ef382f46e6deb3d584517120d27
+ms.sourcegitcommit: 7ac15eaae20b6d70e65f3650af050a7880115cbf
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/12/2017
+ms.lasthandoff: 03/02/2018
 ---
 # <a name="password-hashing"></a>密码哈希
 
@@ -29,6 +27,6 @@ ms.lasthandoff: 09/12/2017
 
 3. `KeyDerivation.Pbkdf2`方法要求调用方指定的所有参数 (salt，PRF 和迭代计数)。 `Rfc2898DeriveBytes`类型提供的这些默认值。
 
-[!code-csharp[Main](password-hashing/samples/passwordhasher.cs)]
+[!code-csharp[](password-hashing/samples/passwordhasher.cs)]
 
 ASP.NET 核心标识，请参阅源代码`PasswordHasher`现实世界的类型用例。

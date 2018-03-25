@@ -1,21 +1,19 @@
 ---
 title: "从 ASP.NET MVC 迁移到 ASP.NET 核心 MVC"
 author: ardalis
-description: 
-keywords: "ASP.NET Core, MVC, 迁移"
-ms.author: riande
+description: "了解如何开始迁移到 ASP.NET 核心 MVC ASP.NET MVC 项目。"
 manager: wpickett
+ms.author: riande
 ms.date: 03/07/2017
-ms.topic: article
-ms.assetid: 3155cc9e-d0c9-424b-886c-35c0ec6f9f4e
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: migration/mvc
-ms.openlocfilehash: 385ab7dfea5b92687a427bdfe9558462227113b1
-ms.sourcegitcommit: 78d28178345a0eea91556e4cd1adad98b1446db8
+ms.openlocfilehash: c9c9f63cd635f364d9b2e081dc051a46a44d3e4f
+ms.sourcegitcommit: 7ac15eaae20b6d70e65f3650af050a7880115cbf
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/22/2017
+ms.lasthandoff: 03/02/2018
 ---
 # <a name="migrating-from-aspnet-mvc-to-aspnet-core-mvc"></a>从 ASP.NET MVC 迁移到 ASP.NET 核心 MVC
 
@@ -50,17 +48,17 @@ ms.lasthandoff: 09/22/2017
 
 * 安装`Microsoft.AspNetCore.Mvc`和`Microsoft.AspNetCore.StaticFiles`NuGet 包。
 
-  `Microsoft.AspNetCore.Mvc`是 ASP.NET 核心 MVC 框架。 `Microsoft.AspNetCore.StaticFiles`是静态文件处理程序。 是一个模块化，ASP.NET 运行时，你必须显式选择中提供静态文件 (请参阅[使用静态文件](../fundamentals/static-files.md))。
+  `Microsoft.AspNetCore.Mvc` 是 ASP.NET 核心 MVC 框架。 `Microsoft.AspNetCore.StaticFiles` 是静态文件处理程序。 是一个模块化，ASP.NET 运行时，你必须显式选择中提供静态文件 (请参阅[使用静态文件](../fundamentals/static-files.md))。
 
 * 打开*.csproj*文件 (右键单击中的项目**解决方案资源管理器**和选择**编辑 WebApp1.csproj**) 并添加`PrepareForPublish`目标：
 
-  [!code-xml[Main](mvc/sample/WebApp1.csproj?range=21-23)]
+  [!code-xml[](mvc/sample/WebApp1.csproj?range=21-23)]
 
   `PrepareForPublish`目标所需的获取通过 Bower 的客户端库。 我们将讨论的更高版本。
 
 * 打开*Startup.cs*文件并将更改代码以匹配以下内容：
 
-  [!code-csharp[Main](mvc/sample/Startup.cs?highlight=14,27-34)]
+  [!code-csharp[](mvc/sample/Startup.cs?highlight=14,27-34)]
 
   `UseStaticFiles`扩展方法将添加静态文件处理程序。 如前所述，ASP.NET 运行时是一个模块化，和中，你必须显式选择要为静态文件服务。 `UseMvc`扩展方法将添加路由。 有关详细信息，请参阅[应用程序启动](../fundamentals/startup.md)和[路由](../fundamentals/routing.md)。
 
@@ -96,7 +94,7 @@ ms.lasthandoff: 09/22/2017
 
 ![Web 应用程序在 Microsoft Edge 中打开](mvc/_static/hello-world.png)
 
-请参阅[控制器](../mvc/controllers/index.md)和[视图](../mvc/views/index.md)有关详细信息。
+请参阅[控制器](xref:mvc/controllers/actions)和[视图](xref:mvc/views/overview)有关详细信息。
 
 现在，我们已最小的工作 ASP.NET Core 项目，我们可以开始从 ASP.NET MVC 项目迁移功能。 我们将需要将以下：
 
@@ -116,7 +114,7 @@ ms.lasthandoff: 09/22/2017
 
 ## <a name="controllers-and-views"></a>控制器和视图
 
-* 将每个方法复制利用 ASP.NET MVC`HomeController`对新`HomeController`。 请注意，在 ASP.NET MVC 内置模板的控制器操作方法的返回类型[ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); 在 ASP.NET 核心 MVC，操作方法返回`IActionResult`相反。 `ActionResult`实现`IActionResult`，因此无需更改你的操作方法的返回类型。
+* 将每个方法复制利用 ASP.NET MVC`HomeController`对新`HomeController`。 请注意，在 ASP.NET MVC 内置模板的控制器操作方法的返回类型[ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); 在 ASP.NET 核心 MVC，操作方法返回`IActionResult`相反。 `ActionResult` 实现`IActionResult`，因此无需更改你的操作方法的返回类型。
 
 * 复制*About.cshtml*， *Contact.cshtml*，和*Index.cshtml* Razor 视图文件从 ASP.NET MVC 项目添加到 ASP.NET 核心项目。
 
@@ -128,7 +126,7 @@ ms.lasthandoff: 09/22/2017
 
 ![联系人页面](mvc/_static/contact-page.png)
 
-请注意在缺乏样式和菜单项。 我们将在下一部分中修复此问题。
+请注意在缺乏样式和菜单项。 此问题将在下一部分得以解决。
 
 ## <a name="static-content"></a>静态内容
 
@@ -142,7 +140,7 @@ ms.lasthandoff: 09/22/2017
 
 * 添加[Bower](https://bower.io/)名为配置文件*bower.json*与项目根目录 (在项目中，右键单击，然后**添加 > 新项 > Bower 配置文件**)。 添加[Bootstrap](http://getbootstrap.com/)和[jQuery](https://jquery.com/)文件 （请参阅下面突出显示的行）。
 
-  [!code-json[Main](mvc/sample/bower.json?highlight=5-6)]
+  [!code-json[](mvc/sample/bower.json?highlight=5-6)]
 
 在保存文件，Bower 将自动下载到的依赖关系*wwwroot/lib*文件夹。 你可以使用**搜索解决方案资源管理器**框查找资产的路径：
 
@@ -150,7 +148,7 @@ ms.lasthandoff: 09/22/2017
 
 请参阅[Bower 与管理客户端包](../client-side/bower.md)有关详细信息。
 
-<a name=migrate-layout-file></a>
+<a name="migrate-layout-file"></a>
 
 ## <a name="migrate-the-layout-file"></a>迁移布局文件
 
@@ -158,7 +156,7 @@ ms.lasthandoff: 09/22/2017
 
 * 创建*视图/共享*文件夹。
 
-* *可选：*复制*_ViewImports.cshtml*从*FullAspNetCore* MVC 项目*视图*文件夹导入到 ASP.NET 核心项目*视图*文件夹。 删除中的任何命名空间声明*_ViewImports.cshtml*文件。 *_ViewImports.cshtml*文件对于视图的所有文件提供命名空间，并使[标记帮助程序](../mvc/views/tag-helpers/index.md)。 新的布局文件中使用标记帮助程序。 *_ViewImports.cshtml*文件是用于 ASP.NET 核心新功能。
+* *可选：*复制*_ViewImports.cshtml*从*FullAspNetCore* MVC 项目*视图*文件夹导入到 ASP.NET 核心项目*视图*文件夹。 删除中的任何命名空间声明*_ViewImports.cshtml*文件。 *_ViewImports.cshtml*文件对于视图的所有文件提供命名空间，并使[标记帮助程序](xref:mvc/views/tag-helpers/intro)。 新的布局文件中使用标记帮助程序。 *_ViewImports.cshtml*文件是用于 ASP.NET 核心新功能。
 
 * 复制*_Layout.cshtml*文件从旧的 ASP.NET MVC 项目*视图/共享*文件夹导入到 ASP.NET 核心项目*视图/共享*文件夹。
 
@@ -189,13 +187,13 @@ ms.lasthandoff: 09/22/2017
 
 已更新*_Layout.cshtml*文件如下所示：
 
-[!code-html[Main](mvc/sample/Views/Shared/_Layout.cshtml?highlight=7,27,39-40)]
+[!code-html[](mvc/sample/Views/Shared/_Layout.cshtml?highlight=7,27,39-40)]
 
 在浏览器中查看站点。 它应现在正确加载，以就地预期的样式。
 
-* *可选：*可能想要尝试使用新的布局文件。 对于此项目中，你可以复制中的布局文件*FullAspNetCore*项目。 新的布局文件使用[标记帮助程序](../mvc/views/tag-helpers/index.md)并且具有其他的改进功能。
+* *可选：*可能想要尝试使用新的布局文件。 对于此项目中，你可以复制中的布局文件*FullAspNetCore*项目。 新的布局文件使用[标记帮助程序](xref:mvc/views/tag-helpers/intro)并且具有其他的改进功能。
 
-## <a name="configure-bundling--minification"></a>配置绑定和缩减
+## <a name="configure-bundling-and-minification"></a>配置绑定和缩减
 
 有关如何配置绑定和缩减的信息，请参阅[捆绑和缩减](../client-side/bundling-and-minification.md)。
 
@@ -226,6 +224,5 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerF
 
 ## <a name="additional-resources"></a>其他资源
 
-* [客户端开发](../client-side/index.md)
-
-* [标记帮助程序](../mvc/views/tag-helpers/index.md)
+* [客户端开发](xref:client-side/index)
+* [标记帮助程序](xref:mvc/views/tag-helpers/intro)

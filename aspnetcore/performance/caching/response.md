@@ -1,26 +1,27 @@
 ---
 title: "响应缓存在 ASP.NET 核心"
 author: rick-anderson
-description: "了解如何使用缓存来降低带宽并提高性能的响应。"
-keywords: "ASP.NET 核心，缓存，HTTP 标头的响应"
-ms.author: riande
+description: "了解如何使用缓存到较低带宽要求的响应，并增加的 ASP.NET Core 应用的性能。"
 manager: wpickett
+ms.author: riande
 ms.date: 09/20/2017
-ms.topic: article
-ms.assetid: cb42035a-60b0-472e-a614-cb79f443f654
 ms.prod: asp.net-core
+ms.topic: article
 uid: performance/caching/response
-ms.openlocfilehash: 79d9246632aae0fe9c3629fd7202842836828151
-ms.sourcegitcommit: 732cd2684246e49e796836596643a8d37e20c46d
+ms.openlocfilehash: c654cfd7c2d291849067bfd3297f940018ccb3d8
+ms.sourcegitcommit: 7ac15eaae20b6d70e65f3650af050a7880115cbf
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 10/01/2017
+ms.lasthandoff: 03/02/2018
 ---
 # <a name="response-caching-in-aspnet-core"></a>响应缓存在 ASP.NET 核心
 
 通过[John Luo](https://github.com/JunTaoLuo)， [Rick Anderson](https://twitter.com/RickAndMSFT)， [Steve Smith](https://ardalis.com/)，和[Luke Latham](https://github.com/guardrex)
 
-[查看或下载的示例代码](https://github.com/aspnet/Docs/tree/master/aspnetcore/performance/caching/response/sample)([如何下载](xref:tutorials/index#how-to-download-a-sample))
+> [!NOTE]
+> 响应缓存[Razor 页与 ASP.NET 核心 2.0 中不支持](https://github.com/aspnet/Mvc/issues/6437)。 此功能将支持[ASP.NET 核心 2.1 版本](https://github.com/aspnet/Home/wiki/Roadmap)。
+  
+[查看或下载示例代码](https://github.com/aspnet/Docs/tree/master/aspnetcore/performance/caching/response/sample)（[如何下载](xref:tutorials/index#how-to-download-a-sample)）
 
 响应缓存可减少客户端或代理对 web 服务器的请求数。 响应缓存还可减少量工作的 web 服务器执行程序生成响应。 响应缓存由标头，指定你希望客户端、 代理和缓存响应的中间件如何控制。
 
@@ -34,19 +35,19 @@ ms.lasthandoff: 10/01/2017
 
 | 指令                                                       | 操作 |
 | --------------------------------------------------------------- | ------ |
-| [公用](https://tools.ietf.org/html/rfc7234#section-5.2.2.5)   | 缓存可能会存储响应。 |
-| [专用](https://tools.ietf.org/html/rfc7234#section-5.2.2.6)  | 不能通过共享缓存中存储响应。 专用缓存可以存储并重复使用响应。 |
-| [最长时间](https://tools.ietf.org/html/rfc7234#section-5.2.1.1)  | 客户端将不会接受其保留时间大于指定的秒数的响应。 示例： `max-age=60` （60 秒）， `max-age=2592000` （1 个月） |
-| [无缓存](https://tools.ietf.org/html/rfc7234#section-5.2.1.4) | **在请求上**： 缓存不得使用存储的响应来满足该请求。 注意： 对于客户端，为源服务器将重新生成响应，并且该中间件更新其缓存中存储的响应。<br><br>**响应**： 响应必须不能用于在不验证源服务器上的后续请求。 |
-| [无存储](https://tools.ietf.org/html/rfc7234#section-5.2.1.5) | **在请求上**： 缓存必须不会将请求的存储。<br><br>**响应**： 缓存不得存储任何响应的一部分。 |
+| [public](https://tools.ietf.org/html/rfc7234#section-5.2.2.5)   | 缓存可能会存储响应。 |
+| [private](https://tools.ietf.org/html/rfc7234#section-5.2.2.6)  | 不能通过共享缓存中存储响应。 专用缓存可以存储并重复使用响应。 |
+| [max-age](https://tools.ietf.org/html/rfc7234#section-5.2.1.1)  | 客户端将不会接受其保留时间大于指定的秒数的响应。 示例： `max-age=60` （60 秒）， `max-age=2592000` （1 个月） |
+| [no-cache](https://tools.ietf.org/html/rfc7234#section-5.2.1.4) | **在请求上**： 缓存不得使用存储的响应来满足该请求。 注意： 对于客户端，为源服务器将重新生成响应，并且该中间件更新其缓存中存储的响应。<br><br>**响应**： 响应必须不能用于在不验证源服务器上的后续请求。 |
+| [no-store](https://tools.ietf.org/html/rfc7234#section-5.2.1.5) | **在请求上**： 缓存必须不会将请求的存储。<br><br>**响应**： 缓存不得存储任何响应的一部分。 |
 
 起缓存作用其他缓存标头下表所示。
 
 | Header                                                     | 函数 |
 | ---------------------------------------------------------- | -------- |
 | [保留时间](https://tools.ietf.org/html/rfc7234#section-5.1)     | 以秒为单位由于生成或者在源服务器已成功验证响应的时间量的估计值。 |
-| [过期](https://tools.ietf.org/html/rfc7234#section-5.3) | 日期/时间后响应被视为是陈旧。 |
-| [杂注](https://tools.ietf.org/html/rfc7234#section-5.4)  | 存在向后兼容性与 HTTP/1.0 缓存设置`no-cache`行为。 如果`Cache-Control`标头是否存在、`Pragma`标头将被忽略。 |
+| [Expires](https://tools.ietf.org/html/rfc7234#section-5.3) | 日期/时间后响应被视为是陈旧。 |
+| [Pragma](https://tools.ietf.org/html/rfc7234#section-5.4)  | 存在向后兼容性与 HTTP/1.0 缓存设置`no-cache`行为。 如果`Cache-Control`标头是否存在、`Pragma`标头将被忽略。 |
 | [改变](https://tools.ietf.org/html/rfc7231#section-7.1.4)  | 指定缓存的响应必须不发送除非所有的`Vary`中缓存的响应的原始请求和新的请求标头字段所匹配。 |
 
 ## <a name="http-based-caching-respects-request-cache-control-directives"></a>基于 HTTP 的缓存方面请求的缓存控制指令
@@ -67,7 +68,7 @@ ms.lasthandoff: 10/01/2017
 
 ### <a name="distributed-cache"></a>分布式的缓存
 
-使用分布式的缓存时云或服务器场中承载应用程序数据存储在内存中。 处理请求的服务器之间共享缓存。 客户端可以提交由组中的任何服务器处理的请求，并且可用于客户端的缓存的数据。 ASP.NET Core 提供 SQL Server 和分布式的 Redis 缓存。
+使用分布式的缓存时云或服务器场中承载应用程序数据存储在内存中。 处理请求的服务器之间共享缓存。 客户端可以提交用于客户端的缓存的数据是否可用的组中的任何服务器处理的请求。 ASP.NET Core 提供 SQL Server 和分布式的 Redis 缓存。
 
 有关详细信息，请参阅[使用分布式缓存](xref:performance/caching/distributed)。
 
@@ -77,7 +78,7 @@ ms.lasthandoff: 10/01/2017
 
 有关详细信息，请参阅[ASP.NET 核心 mvc 缓存标记帮助器](xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper)。
 
-### <a name="distributed-cache-tag-helper"></a>分布式的缓存标记帮助器
+### <a name="distributed-cache-tag-helper"></a>分布式缓存标记帮助程序
 
 你可以使用分布式缓存标记帮助程序缓存的 MVC 视图或分布式的云或 web 场方案中的 Razor 页面中的内容。 分布式缓存标记帮助器使用 SQL Server 或 Redis 来存储数据。
 
@@ -85,12 +86,14 @@ ms.lasthandoff: 10/01/2017
 
 ## <a name="responsecache-attribute"></a>ResponseCache 属性
 
-`ResponseCacheAttribute`指定在缓存中，响应设置适当的标头的所需的参数。 请参阅[ResponseCacheAttribute](/aspnet/core/api/microsoft.aspnetcore.mvc.responsecacheattribute)有关参数的说明。
+[ResponseCacheAttribute](/dotnet/api/Microsoft.AspNetCore.Mvc.ResponseCacheAttribute)指定在缓存中，响应设置适当的标头的所需的参数。
 
 > [!WARNING]
-> 禁用缓存的内容，其中包含已经过身份验证的客户端的信息。 仅应为不会更改基于用户的标识或是否将用户记录的内容启用缓存。
+> 禁用缓存的内容，其中包含已经过身份验证的客户端的信息。 仅应为不会更改基于用户的标识或用户已登录的内容启用缓存。
 
-`VaryByQueryKeys string[]`（需要 ASP.NET Core 1.1 和更高版本）： 设置时，响应缓存中间件因存储的响应的查询密钥的给定列表的值。 必须启用响应缓存中间件设置`VaryByQueryKeys`属性; 否则，会引发一个运行时异常。 没有为没有相应的 HTTP 标头`VaryByQueryKeys`属性。 此属性是一项 HTTP 功能由响应缓存中间件。 若要提供缓存的响应的中间件，对于查询字符串和查询字符串值必须匹配上一个请求。 例如，考虑的请求和下表中显示结果的序列。
+[VaryByQueryKeys](/dotnet/api/microsoft.aspnetcore.mvc.responsecacheattribute.varybyquerykeys)存储的响应因给定的查询密钥列表的值。 时的单个值`*`是响应的所有请求查询字符串参数提供该中间件而异。 `VaryByQueryKeys` 需要 ASP.NET Core 1.1 或更高版本。
+
+必须启用响应缓存中间件设置`VaryByQueryKeys`属性; 否则，会引发一个运行时异常。 没有为相应的 HTTP 标头`VaryByQueryKeys`属性。 该属性是一项 HTTP 功能由响应缓存中间件。 若要提供缓存的响应的中间件，对于查询字符串和查询字符串值必须匹配上一个请求。 例如，考虑的请求和下表中显示结果的序列。
 
 | 请求                          | 结果                   |
 | -------------------------------- | ------------------------ |
@@ -98,9 +101,9 @@ ms.lasthandoff: 10/01/2017
 | `http://example.com?key1=value1` | 返回从中间件 |
 | `http://example.com?key1=value2` | 从服务器返回     |
 
-第一个请求是由服务器返回，并在中间件中缓冲。 由于查询字符串与上一个请求，中间件会返回第二个请求。 第三个请求都不处于中间件缓存中，因为查询字符串值不匹配的上一个请求。 
+第一个请求是由服务器返回，并在中间件中缓冲。 由于查询字符串与上一个请求，中间件会返回第二个请求。 因为查询字符串值不匹配的上一个请求，第三个请求未处于中间件缓存。 
 
-`ResponseCacheAttribute`用于配置和创建 (通过`IFilterFactory`) `ResponseCacheFilter`。 `ResponseCacheFilter`执行的工作的更新的相应 HTTP 标头和响应功能。 筛选器：
+`ResponseCacheAttribute`用于配置和创建 (通过`IFilterFactory`) [ResponseCacheFilter](/dotnet/api/microsoft.aspnetcore.mvc.internal.responsecachefilter)。 `ResponseCacheFilter`执行的工作的更新的相应 HTTP 标头和响应功能。 筛选器：
 
 * 删除任何现有标头`Vary`， `Cache-Control`，和`Pragma`。 
 * 写出相应的标头设置的属性上基于`ResponseCacheAttribute`。 
@@ -110,7 +113,7 @@ ms.lasthandoff: 10/01/2017
 
 此标头只会写入时`VaryByHeader`属性设置。 设置为`Vary`属性的值。 下面的示例使用`VaryByHeader`属性：
 
-[!code-csharp[Main](response/sample/Controllers/HomeController.cs?name=snippet_VaryByHeader&highlight=1)]
+[!code-csharp[](response/sample/Controllers/HomeController.cs?name=snippet_VaryByHeader&highlight=1)]
 
 你可以查看你的浏览器的网络工具的响应标头。 下图显示了输出上边缘 F12**网络**选项卡上时`About2`刷新操作方法：
 
@@ -118,16 +121,16 @@ ms.lasthandoff: 10/01/2017
 
 ### <a name="nostore-and-locationnone"></a>NoStore 和 Location.None
 
-`NoStore`重写的大多数其他属性。 当此属性设置为`true`、`Cache-Control`标头设置为`no-store`。 如果`Location`设置为`None`:
+`NoStore` 重写的大多数其他属性。 当此属性设置为`true`、`Cache-Control`标头设置为`no-store`。 如果`Location`设置为`None`:
 
 * 将 `Cache-Control` 设置为 `no-store,no-cache`。
 * 将 `Pragma` 设置为 `no-cache`。
 
 如果`NoStore`是`false`和`Location`是`None`，`Cache-Control`和`Pragma`设置为`no-cache`。
 
-通常情况下设置`NoStore`到`true`错误页上。 例如: 
+通常情况下设置`NoStore`到`true`错误页上。 例如:
 
-[!code-csharp[Main](response/sample/Controllers/HomeController.cs?name=snippet1&highlight=1)]
+[!code-csharp[](response/sample/Controllers/HomeController.cs?name=snippet1&highlight=1)]
 
 这将导致以下标头：
 
@@ -145,7 +148,7 @@ Pragma: no-cache
 
 下面生成通过设置一个示例，演示标头`Duration`并保留默认值`Location`值：
 
-[!code-csharp[Main](response/sample/Controllers/HomeController.cs?name=snippet_duration&highlight=1)]
+[!code-csharp[](response/sample/Controllers/HomeController.cs?name=snippet_duration&highlight=1)]
 
 这将产生以下标头：
 
@@ -159,11 +162,11 @@ Cache-Control: public,max-age=60
 
 设置缓存配置文件：
 
-[!code-csharp[Main](response/sample/Startup.cs?name=snippet1)] 
+[!code-csharp[](response/sample/Startup.cs?name=snippet1)] 
 
 引用缓存配置文件：
 
-[!code-csharp[Main](response/sample/Controllers/HomeController.cs?name=snippet_controller&highlight=1,4)]
+[!code-csharp[](response/sample/Controllers/HomeController.cs?name=snippet_controller&highlight=1,4)]
 
 `ResponseCache`特性可应用于操作 （方法） 和控制器 （类）。 方法级别的属性重写在类级别特性中指定的设置。
 
@@ -178,5 +181,10 @@ Cache-Control: public,max-age=60
 ## <a name="additional-resources"></a>其他资源
 
 * [在缓存中 HTTP 规范中](https://tools.ietf.org/html/rfc7234#section-3)
-* [缓存控制](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9)
+* [Cache-Control](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9)
+* [内存中缓存](xref:performance/caching/memory)
+* [使用分布式缓存](xref:performance/caching/distributed)
+* [使用更改令牌检测更改](xref:fundamentals/primitives/change-tokens)
 * [响应缓存中间件](xref:performance/caching/middleware)
+* [缓存标记帮助程序](xref:mvc/views/tag-helpers/builtin-th/cache-tag-helper)
+* [分布式缓存标记帮助程序](xref:mvc/views/tag-helpers/builtin-th/distributed-cache-tag-helper)

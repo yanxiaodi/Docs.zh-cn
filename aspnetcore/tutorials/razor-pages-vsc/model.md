@@ -2,21 +2,20 @@
 title: "使用 Visual Studio for Mac 向 Razor 页面应用添加模型"
 author: rick-anderson
 description: "使用 Visual Studio for Mac 在 ASP.NET Core 中向 Razor 页面应用添加模型"
-keywords: "ASP.NET Core, Razor 页面, Razor, MVC, 模型"
-ms.author: riande
 manager: wpickett
+ms.author: riande
 ms.date: 08/27/2017
-ms.topic: get-started-article
-ms.technology: aspnet
 ms.prod: aspnet-core
+ms.technology: aspnet
+ms.topic: get-started-article
 uid: tutorials/razor-pages-vsc/model
-ms.openlocfilehash: f2f09909f4c307ce3e1a0c8571b82a709e1f88f9
-ms.sourcegitcommit: 6e83c55eb0450a3073ef2b95fa5f5bcb20dbbf89
+ms.openlocfilehash: 9600392b47fb8b1dded06faefaff1bf87d67af4e
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/28/2017
+ms.lasthandoff: 01/30/2018
 ---
-# <a name="adding-a-model-to-a-razor-pages-app-in-aspnet-core-with-visual-studio-for-mac"></a>使用 Visual Studio for Mac 在 ASP.NET Core 中向 Razor 页面应用添加模型
+# <a name="adding-a-model-to-a-razor-pages-app-in-aspnet-core-with-visual-studio-code"></a>使用 Visual Studio Code 在 ASP.NET Core 中向 Razor 页面应用添加模型
 
 [!INCLUDE[model1](../../includes/RP/model1.md)]
 
@@ -42,7 +41,7 @@ ms.lasthandoff: 09/28/2017
 * 选择“文件” > “打开文件”，然后选择 RazorPagesMovie.csproj 文件。
 * 将 `Microsoft.EntityFrameworkCore.Tools.DotNet` 的 工具引用添加至第二个 \<ItemGroup>：
 
-[!code-xml[Main](../../tutorials/razor-pages/razor-pages-start/snapshot_cli_sample/RazorPagesMovie/RazorPagesMovie.cli.csproj?range=12-16&highlight=4)]
+[!code-xml[Main](../../tutorials/razor-pages/razor-pages-start/snapshot_cli_sample/RazorPagesMovie/RazorPagesMovie.cli.csproj)]
 
 [!INCLUDE[model 3](../../includes/RP/model3.md)]
 
@@ -77,4 +76,4 @@ ms.lasthandoff: 09/28/2017
 
 >[!div class="step-by-step"]
 [上一篇：入门](xref:tutorials/razor-pages-vsc/razor-pages-start)
-[下一篇：已搭建基架的 Razor 页面](xref:tutorials/razor-pages/page)
+[下一篇：已搭建基架的 Razor 页面](xref:tutorials/razor-pages-vsc/page)

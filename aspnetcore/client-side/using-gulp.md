@@ -2,27 +2,25 @@
 title: "在 ASP.NET 核心中使用 Gulp"
 author: rick-anderson
 description: "了解如何在 ASP.NET 核心中使用 Gulp。"
-keywords: "ASP.NET 核心 Gulp"
-ms.author: riande
 manager: wpickett
-ms.date: 02/28/2017
-ms.topic: article
-ms.assetid: 4095d273-bf3f-46cf-bdcc-18cf6815cbad
-ms.technology: aspnet
-ms.prod: asp.net-core
-uid: client-side/using-gulp
+ms.author: riande
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: d2a2971a46d9d45a8fda5ac56073af608a0ede2b
-ms.sourcegitcommit: 78d28178345a0eea91556e4cd1adad98b1446db8
+ms.date: 02/28/2017
+ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
+uid: client-side/using-gulp
+ms.openlocfilehash: 0a3443e8187d46992f55dc537d0f400c6771c50c
+ms.sourcegitcommit: 7ac15eaae20b6d70e65f3650af050a7880115cbf
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/22/2017
+ms.lasthandoff: 03/02/2018
 ---
 # <a name="introduction-to-using-gulp-in-aspnet-core"></a>在 ASP.NET 核心中使用 Gulp 简介 
 
 通过[艾力克 Reitan](https://github.com/Erikre)， [Scott Addie](https://scottaddie.com)， [Daniel Roth](https://github.com/danroth27)，和[Shayne 贝叶](https://twitter.com/spboyer)
 
-在典型的现代 web 应用程序，可能会生成过程：
+在典型的现代 web 应用中，可能会生成过程：
 
 * 捆绑和 minify JavaScript 和 CSS 文件。
 * 运行工具以调用之前每个生成的绑定和缩减任务。
@@ -31,7 +29,7 @@ ms.lasthandoff: 09/22/2017
 
 A*任务运行程序*是一种工具，可以自动进行这些例程开发任务和的详细信息。 Visual Studio 为两个流行的基于 JavaScript 的任务流道提供内置支持： [Gulp](https://gulpjs.com/)和[Grunt](using-grunt.md)。
 
-## <a name="gulp"></a>Gulp
+## <a name="gulp"></a>gulp
 
 Gulp 是一个基于 JavaScript 的流式处理生成工具包，客户端代码。 它通常用于在生成环境中触发特定事件时流通过一系列的进程的客户端文件。 例如，使用 Gulp 来自动执行[绑定和缩减](bundling-and-minification.md)或清理新生成前的开发环境。
 
@@ -61,13 +59,13 @@ paths.concatCssDest = paths.webroot + "css/site.min.css";
 
 上面的代码中指定的节点模块所需。 `require`函数导入每个模块，以便依赖任务可以使用其功能。 每个导入的模块被分配给变量。 模块可以位于按名称或路径。 在此示例中，模块名为`gulp`， `rimraf`， `gulp-concat`， `gulp-cssmin`，和`gulp-uglify`按名称检索。 此外，创建一系列的路径，以便可以重复使用并在任务中引用的 CSS 和 JavaScript 文件的位置。 下表提供了的模块中包含的描述*gulpfile.js*。
 
-|模块名|描述|
-|---|---|
-|gulp|Gulp 流式处理生成系统中。 有关详细信息，请参阅[gulp](https://www.npmjs.com/package/gulp)。|
-|rimraf|节点删除模块。 有关详细信息，请参阅[rimraf](https://www.npmjs.com/package/rimraf)。|
-|gulp concat|一个连接基于操作系统的换行字符的文件的模块。 有关详细信息，请参阅[gulp concat](https://www.npmjs.com/package/gulp-concat)。|
-|gulp cssmin|Minifies CSS 文件模块。 有关详细信息，请参阅[gulp cssmin](https://www.npmjs.com/package/gulp-cssmin)。|
-|gulp uglify|Minifies 模块*.js*文件。 有关详细信息，请参阅[gulp uglify](https://www.npmjs.com/package/gulp-uglify)。|
+| 模块名 | 描述 |
+| ----------- | ----------- |
+| gulp        | Gulp 流式处理生成系统中。 有关详细信息，请参阅[gulp](https://www.npmjs.com/package/gulp)。 |
+| rimraf      | 节点删除模块。 有关详细信息，请参阅[rimraf](https://www.npmjs.com/package/rimraf)。 |
+| gulp-concat | 一个连接基于操作系统的换行字符的文件的模块。 有关详细信息，请参阅[gulp concat](https://www.npmjs.com/package/gulp-concat)。 |
+| gulp-cssmin | Minifies CSS 文件模块。 有关详细信息，请参阅[gulp cssmin](https://www.npmjs.com/package/gulp-cssmin)。 |
+| gulp-uglify | Minifies 模块*.js*文件。 有关详细信息，请参阅[gulp uglify](https://www.npmjs.com/package/gulp-uglify)。 |
 
 必备项的模块将导入后，可以指定任务。 此处有六项任务注册，表示通过以下代码：
 
@@ -103,8 +101,8 @@ gulp.task("min", ["min:js", "min:css"]);
 
 |任务名称|描述|
 |--- |--- |
-|干净： js|使用 rimraf 节点删除模块删除 site.js 文件的缩减的版本的任务。|
-|干净： css|使用 rimraf 节点删除模块删除 site.css 文件的缩减的版本的任务。|
+|clean:js|使用 rimraf 节点删除模块删除 site.js 文件的缩减的版本的任务。|
+|clean:css|使用 rimraf 节点删除模块删除 site.css 文件的缩减的版本的任务。|
 |清理|一个任务，它调用`clean:js`任务后, 跟`clean:css`任务。|
 |min:js|Minifies 和串联的 js 文件夹中的所有.js 文件的任务。 。 排除 min.js 文件。|
 |min:css|Minifies 和串联的 css 文件夹中的所有.css 文件的任务。 。 排除 min.css 文件。|
@@ -206,7 +204,7 @@ gulp.task("min", ["min:js", "min:css"]);
 </Target>
 ```
 
-现在 Visual Studio 中或从命令提示符处使用运行项目时执行清理任务`dotnet run`命令 (运行`npm install`第一个)。
+现在 Visual Studio 中或从命令提示符处使用运行项目时执行清理任务[dotnet 运行](/dotnet/core/tools/dotnet-run)命令 (运行`npm install`第一个)。
 
 ## <a name="defining-and-running-a-new-task"></a>定义和运行新任务
 
@@ -250,7 +248,7 @@ gulp.task("min", ["min:js", "min:css"]);
     gulp.task("series", ["series:first", "series:second"], function () {});
     ```
  
-    你现在具有三个任务： `series:first`， `series:second`，和`series`。 `series:second`任务包括指定任务要运行和完成之前的数组的第二个参数`series:second`任务将运行。  根据上面，唯一的代码中的指定`series:first`任务必须完成之前`series:second`任务将运行。
+    你现在具有三个任务： `series:first`， `series:second`，和`series`。 `series:second`任务包括指定任务要运行和完成之前的数组的第二个参数`series:second`任务将运行。 根据上面，唯一的代码中的指定`series:first`任务必须完成之前`series:second`任务将运行。
 
 2.  保存*gulpfile.js*。
 
@@ -329,7 +327,7 @@ Intellisense 的详细信息，请参阅[JavaScript IntelliSense](https://docs.m
 
 ## <a name="task-and-module-details"></a>任务和模块的详细信息
 
-Gulp 任务已注册到的函数名称。  如果其他任务都必须运行在当前任务之前，你可以指定依赖关系。 其他函数，您可以运行和监视 Gulp 任务，以及将源设置 (*src*) 和目标 (*dest*) 正在修改的文件。 以下是主 Gulp API 函数：
+Gulp 任务已注册到的函数名称。 如果其他任务都必须运行在当前任务之前，你可以指定依赖关系。 其他函数，您可以运行和监视 Gulp 任务，以及将源设置 (*src*) 和目标 (*dest*) 正在修改的文件。 以下是主 Gulp API 函数：
 
 |Gulp 函数|语法|描述|
 |---   |--- |--- |

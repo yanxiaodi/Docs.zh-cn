@@ -1,21 +1,19 @@
 ---
-title: "阻止在 ASP.NET Core 应用中的打开重定向攻击 |Microsoft 文档"
+title: "阻止在 ASP.NET Core 应用中的打开重定向攻击"
 author: ardalis
 description: "演示如何阻止对 ASP.NET Core 应用打开重定向攻击"
-keywords: "ASP.NET 核心，安全，打开重定向攻击"
-ms.author: riande
 manager: wpickett
+ms.author: riande
 ms.date: 07/07/2017
-ms.topic: article
-ms.assetid: 4604e563-e91a-4ecd-b7ed-00b3f1eee2b5
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: security/preventing-open-redirects
-ms.openlocfilehash: 4083845a77eb19d9ba9beb389a92ceb5c14edbde
-ms.sourcegitcommit: f5cf472d49c2475e4d57654efd5fc0a4ccecba4c
+ms.openlocfilehash: d6cd65a2516c4d5e41428f0c1f2dbbe913ac2123
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/30/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="preventing-open-redirect-attacks-in-an-aspnet-core-app"></a>阻止在 ASP.NET Core 应用中的打开重定向攻击
 
@@ -25,7 +23,7 @@ Web 应用程序将重定向到通过如查询字符串或窗体数据请求指�
 
 ## <a name="what-is-an-open-redirect-attack"></a>打开重定向攻击是什么？
 
-Web 应用程序频繁地将用户重定向到登录页访问要求进行身份验证的资源时。 重定向 typlically 包括`returnUrl`查询字符串参数，以便用户可以在用户成功登录后返回最初请求的 url。 用户进行身份验证后，系统会将它们重定向到他们最初具有请求的 URL。
+Web 应用程序频繁地将用户重定向到登录页访问要求进行身份验证的资源时。 重定向 typlically 包括`returnUrl`查询字符串参数，以便用户可以在用户成功登录后返回最初请求的 url。 用户进行身份验证后，它们在重定向到他们最初具有请求的 URL。
 
 因为请求的查询字符串中指定的目标 URL，则恶意用户可能篡改查询字符串。 篡改过的查询字符串可能导致要将用户重定向到外部、 恶意站点的站点。 这种技术称为打开重定向 （或重定向） 攻击。
 

@@ -1,259 +1,274 @@
 ---
-title: "定位点标记帮助器 |Microsoft 文档"
+title: "定位点标记帮助程序"
 author: pkellner
-description: "演示如何使用定位点标记帮助器"
-keywords: "ASP.NET Core, 标记帮助程序"
-ms.author: riande
+description: "了解 ASP.NET Core 定位点标记帮助程序属性以及每个属性在扩展 HTML 定位点标记的行为中所起的作用。"
 manager: wpickett
-ms.date: 02/14/2017
-ms.topic: article
-ms.assetid: c045d485-d1dc-4cea-a675-46be83b7a011
-ms.technology: aspnet
+ms.author: scaddie
+ms.custom: mvc
+ms.date: 01/31/2018
 ms.prod: aspnet-core
+ms.technology: aspnet
+ms.topic: article
 uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-ms.openlocfilehash: e3754c4313f01bc746ccb8efe11611ae213e3955
-ms.sourcegitcommit: 6e83c55eb0450a3073ef2b95fa5f5bcb20dbbf89
-ms.translationtype: MT
+ms.openlocfilehash: f3b704174c3287edda12725b7973a2464e485bac
+ms.sourcegitcommit: f2a11a89037471a77ad68a67533754b7bb8303e2
+ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/28/2017
+ms.lasthandoff: 02/01/2018
 ---
-# <a name="anchor-tag-helper"></a>定位点标记帮助器
+# <a name="anchor-tag-helper"></a>定位点标记帮助程序
 
-作者：[Peter Kellner](http://peterkellner.net) 
+作者：[Peter Kellner](http://peterkellner.net) 和 [Scott Addie](https://github.com/scottaddie)
 
-定位点标记帮助程序增强了 HTML 定位点 (`<a ... ></a>`) 通过添加新属性的标记。 生成的链接 (上`href`标记) 创建使用新的属性。 该 URL 可以包括可选的协议 （如 https)。
+[查看或下载示例代码](https://github.com/aspnet/Docs/tree/master/aspnetcore/tag-helpers/built-in/samples/TagHelpersBuiltInAspNetCore)（[如何下载](xref:tutorials/index#how-to-download-a-sample)）
 
-下面的扬声器控制器是本文档中的示例中使用。
+[定位点标记帮助程序](/dotnet/api/microsoft.aspnetcore.mvc.taghelpers.anchortaghelper)可通过添加新属性来增强标准的 HTML 定位点 (`<a ... ></a>`) 标记。 按照约定，属性名称将使用前缀 `asp-`。 `asp-` 属性的值决定呈现的定位点元素的 `href` 属性值。
 
-<br/>
-**SpeakerController.cs** 
+本文档中的示例均使用 SpeakerController：
 
-[!code-csharp[SpeakerController](sample/TagHelpersBuiltInAspNetCore/src/TagHelpersBuiltInAspNetCore/Controllers/SpeakerController.cs)]
+[!code-csharp[](samples/TagHelpersBuiltInAspNetCore/Controllers/SpeakerController.cs?name=snippet_SpeakerController)]
 
+`asp-` 属性的清单如下所示。
 
-## <a name="anchor-tag-helper-attributes"></a>定位点标记帮助器属性
+## <a name="asp-controller"></a>asp-controller
 
-- - -
+[asp-controller](/dotnet/api/microsoft.aspnetcore.mvc.taghelpers.anchortaghelper.controller) 属性可分配用于生成 URL 的控制器。 下面的标记列出了所有发言人：
 
-### <a name="asp-controller"></a>asp 控制器
+[!code-cshtml[](samples/TagHelpersBuiltInAspNetCore/Views/Home/Index.cshtml?name=snippet_AspController)]
 
-`asp-controller`用于将相关联的控制器将用于生成 URL。 指定的控制器必须存在于当前项目。 下面的代码列出所有发言人： 
-
-```cshtml
-<a asp-controller="Speaker" asp-action="Index">All Speakers</a>
-```
-
-将生成的标记：
+生成的 HTML：
 
 ```html
 <a href="/Speaker">All Speakers</a>
 ```
 
-如果`asp-controller`指定和`asp-action`不是默认`asp-action`将当前正在执行的视图的默认控制器方法。 即，在上面的示例中，如果`asp-action`留出，和从生成此定位点标记帮助器*HomeController*的`Index`视图 (**/主页**)，将生成的标记：
-
+如果指定了 `asp-controller` 属性，而未指定 `asp-action` 属性，则默认的 `asp-action` 值为与当前正在执行的视图关联的控制器操作。 如果前面的标记中省略了 `asp-action`，并在 HomeController 的索引视图 (/Home) 中使用了定位点标记帮助程序，则生成的 HTML 为：
 
 ```html
 <a href="/Home">All Speakers</a>
 ```
 
-- - -
-  
-### <a name="asp-action"></a>asp 操作
+## <a name="asp-action"></a>asp-action
 
-`asp-action`是将包含控制器中的操作方法的名称在生成`href`。 例如，下面的代码将设置生成`href`以指向扬声器详细信息页：
+[asp-action](/dotnet/api/microsoft.aspnetcore.mvc.taghelpers.anchortaghelper.action) 属性值表示生成的 `href` 属性中包含的控制器操作名称。 下面的标记可将生成的 `href` 属性值设置为发言人评估页：
 
-```html
-<a asp-controller="Speaker" asp-action="Detail">Speaker Detail</a>
-```
+[!code-cshtml[](samples/TagHelpersBuiltInAspNetCore/Views/Home/Index.cshtml?name=snippet_AspAction)]
 
-将生成的标记：
+生成的 HTML：
 
 ```html
-<a href="/Speaker/Detail">Speaker Detail</a>
+<a href="/Speaker/Evaluations">Speaker Evaluations</a>
 ```
 
-如果没有`asp-controller`指定特性时，将使用默认控制器调用执行当前视图的视图。  
- 
-如果该属性`asp-action`是`Index`，则任何操作不追加到的 URL，从而导致默认`Index`所调用方法。 指定的操作 （或默认），必须存在于中引用的控制器`asp-controller`。
+如果未指定 `asp-controller` 属性，则使用默认控制器，该控制器调用执行当前视图的视图。
 
-- - -
-  
-<a name="route"></a>
-### <a name="asp-route-value"></a>asp 的路由的 {value}
+如果 `asp-action` 属性值为 `Index`，则不向 URL 追加任何操作，从而导致调用默认的 `Index` 操作。 `asp-controller` 引用的控制器中必须存在指定的（或默认的）操作。
 
-`asp-route-`是一个通配符路由前缀。 任何 put 后尾随 dash 将解释为潜在的路由参数值。 如果未找到默认路由，则此路由前缀将追加到为请求参数和值生成的 href。 否则它将在路由模板中进行替换。
+## <a name="asp-route-value"></a>asp-route-{value}
 
-假设您有一个控制器方法定义，如下所示：
+[asp-route-{value}](/dotnet/api/microsoft.aspnetcore.mvc.taghelpers.anchortaghelper.routevalues) 属性可实现通配符路由前缀。 占用 `{value}` 占位符的所有值都解释为潜在的路由参数。 如果找不到默认路由，则将此路由前缀作为请求参数和值追加到生成的 `href` 属性。 否则，将在路由模板中替换它。
 
-```csharp
-public IActionResult AnchorTagHelper(string id)
-{
-    var speaker = new SpeakerData()
-    {
-        SpeakerId = 12
-    };      
-    return View(viewName, speaker);
-}
-```
+考虑以下控制器操作：
 
-并且具有默认路由模板中定义你*Startup.cs* ，如下所示：
+[!code-csharp[](samples/TagHelpersBuiltInAspNetCore/Controllers/BuiltInTagController.cs?name=snippet_AnchorTagHelperAction)]
 
-```csharp
-app.UseMvc(routes =>
-{
-   routes.MapRoute(
-    name: "default",
-    template: "{controller=Home}/{action=Index}/{id?}");
-});
+在 Startup.Configure 中定义默认路由模板：
 
-```
+[!code-csharp[](samples/TagHelpersBuiltInAspNetCore/Startup.cs?name=snippet_UseMvc&highlight=8-10)]
 
-**Cshtml**文件，其中包含有必要将使用定位点标记帮助器**扬声器**从控制器中传递到视图的模型参数是，如下所示：
+MVC 视图使用操作提供的模型，如下所示：
 
 ```cshtml
-@model SpeakerData
+@model Speaker
 <!DOCTYPE html>
-<html><body>
-<a asp-controller='Speaker' asp-action='Detail' asp-route-id=@Model.SpeakerId>SpeakerId: @Model.SpeakerId</a>
-<body></html>
+<html>
+<body>
+    <a asp-controller="Speaker"
+       asp-action="Detail" 
+       asp-route-id="@Model.SpeakerId">SpeakerId: @Model.SpeakerId</a>
+</body>
+</html>
 ```
 
-生成的 HTML 将然后是，如下所示，因为**id**位于默认路由。
+默认路由的 `{id?}` 占位符得以匹配。 生成的 HTML：
 
 ```html
-<a href='/Speaker/Detail/12'>SpeakerId: 12</a>
+<a href="/Speaker/Detail/12">SpeakerId: 12</a>
 ```
 
-如果路由前缀不找到路由模板的一部分，这是替换为以下这种情况**cshtml**文件：
+假设路由前缀不属于匹配路由模板的一部分，如下面的 MVC 视图所示：
 
 ```cshtml
-@model SpeakerData
+@model Speaker
 <!DOCTYPE html>
-<html><body>
-<a asp-controller='Speaker' asp-action='Detail' asp-route-speakerid=@Model.SpeakerId>SpeakerId: @Model.SpeakerId</a>
-<body></html>
+<html>
+<body>
+    <a asp-controller="Speaker" 
+       asp-action="Detail" 
+       asp-route-speakerid="@Model.SpeakerId">SpeakerId: @Model.SpeakerId</a>
+<body>
+</html>
 ```
 
-生成的 HTML 将然后是，如下所示，因为**speakerid**匹配的路由中未找到：
-
+生成以下 HTML，因为匹配的路由中未找到 `speakerid`：
 
 ```html
-<a href='/Speaker/Detail?speakerid=12'>SpeakerId: 12</a>
+<a href="/Speaker/Detail?speakerid=12">SpeakerId: 12</a>
 ```
 
-如果任一`asp-controller`或`asp-action`未指定，则相同的默认处理后面，如在`asp-route`属性。
+如果 `asp-controller` 或 `asp-action` 均未指定，则会执行与 `asp-route` 属性中相同的默认处理。
 
-- - -
+## <a name="asp-route"></a>asp-route
 
-### <a name="asp-route"></a>asp 路由
+[asp-route](/dotnet/api/microsoft.aspnetcore.mvc.taghelpers.anchortaghelper.route) 属性用于创建直接链接到命名路由的 URL。 使用[路由属性](xref:mvc/controllers/routing#attribute-routing)，路由可以按 `SpeakerController` 中所示进行命名并用于其 `Evaluations` 操作：
 
-`asp-route`使您能够创建链接直接到命名路由的 URL。 使用路由特性，路由可以命名为中所示`SpeakerController`和中使用其`Evaluations`方法。
+[!code-cshtml[](samples/TagHelpersBuiltInAspNetCore/Controllers/SpeakerController.cs?range=22-24)]
 
-`Name = "speakerevals"`告知定位点标记帮助器以生成直接指向该控制器方法使用的 URL 的路由`/Speaker/Evaluations`。 如果`asp-controller`或`asp-action`指定除了`asp-route`，生成的路由可能不是你的预期。 `asp-route`不应与属性任一使用`asp-controller`或`asp-action`以避免路由冲突。
+在下列标记中，`asp-route` 属性引用命名路由：
 
-- - -
+[!code-cshtml[](samples/TagHelpersBuiltInAspNetCore/Views/Home/Index.cshtml?name=snippet_AspRoute)]
 
-### <a name="asp-all-route-data"></a>asp 所有路线数据
+定位点标记帮助程序使用 URL /Speaker/Evaluations 生成直接指向该控制器操作的路由。 生成的 HTML：
 
-`asp-all-route-data`可以创建的字典的键/值对，其中键是参数名称，值是与该项关联的值。
-
-如以下示例所示，创建一个内联字典和数据传递到 razor 视图。 作为替代方法，还可以使用您的模型传递数据。
-
-```cshtml
-@{
-    var dict =
-        new Dictionary<string, string>
-        {
-            {"speakerId", "11"},
-            {"currentYear", "true"}
-        };
-}
-<a asp-route="speakerevalscurrent" 
-   asp-all-route-data="dict">SpeakerEvals</a>
+```html
+<a href="/Speaker/Evaluations">Speaker Evaluations</a>
 ```
 
-上面的代码生成以下 URL: http://localhost/Speaker/EvaluationsCurrent?speakerId=11&currentYear=true
+如果除了 `asp-route`，还指定了 `asp-controller` 或 `asp-action`，则可能不会生成预期的路由。 为了避免发生路由冲突，不应将 `asp-route` 与 `asp-controller` 和 `asp-action` 属性结合使用。
 
-单击该链接后，控制器方法`EvaluationsCurrent`调用。 因为该控制器具有匹配什么从已创建的两个字符串参数调用`asp-all-route-data`字典。
+## <a name="asp-all-route-data"></a>asp-all-route-data
 
-如果字典匹配项中的任何密钥传送参数，这些值将替换为相应的路由中和其他的不匹配的值会转换为请求参数。
+[asp-all-route-data](/dotnet/api/microsoft.aspnetcore.mvc.taghelpers.anchortaghelper.routevalues) 属性支持创建键值对字典。 键是参数名称，值是参数值。
 
-- - -
+在下面的示例中，将对字典进行初始化并将其传递给 Razor 视图。 或者，也可以使用模型传入数据。
 
-### <a name="asp-fragment"></a>asp 片段
+[!code-cshtml[](samples/TagHelpersBuiltInAspNetCore/Views/Home/Index.cshtml?name=snippet_AspAllRouteData)]
 
-`asp-fragment`定义要追加到 URL 的 URL 片段。 定位点标记帮助程序将添加的哈希字符 （#）。 如果要创建一个标记：
+前面的代码生成以下 HTML：
 
-```cshtml
-<a asp-action="Evaluations" asp-controller="Speaker"  
-   asp-fragment="SpeakerEvaluations">About Speaker Evals</a>
+```html
+<a href="/Speaker/EvaluationsCurrent?speakerId=11&currentYear=true">Speaker Evaluations</a>
 ```
 
-生成的 URL 将是： http://localhost/Speaker/Evaluations#SpeakerEvaluations
+平展 `asp-all-route-data` 字典，以生成满足重载 `Evaluations` 操作要求的查询字符串：
 
-构建客户端应用程序时，哈希标记很有用。 它们可用于轻松的标记和在 JavaScript 中，例如搜索。
+[!code-csharp[](samples/TagHelpersBuiltInAspNetCore/Controllers/SpeakerController.cs?range=26-30)]
 
-- - -
+如果字典中的任何键匹配路由参数，则将根据需要在路由中替换这些值。 其他不匹配的值作为请求参数生成。
 
-### <a name="asp-area"></a>asp 区域
+## <a name="asp-fragment"></a>asp-fragment
 
-`asp-area`设置 ASP.NET Core 使用设置适当的路由的区域名称。 下面是如何区域属性将导致重新路由映射的示例。 设置`asp-area`博客前缀目录`Areas/Blogs`到关联的控制器和视图此定位点标记的路由。
+[asp-fragment](/dotnet/api/microsoft.aspnetcore.mvc.taghelpers.anchortaghelper.fragment) 属性可定义要追加到 URL 的 URL 片段。 定位点标记帮助程序添加哈希字符 (#)。 请考虑以下标记：
 
-* 项目名称
+[!code-cshtml[](samples/TagHelpersBuiltInAspNetCore/Views/Home/Index.cshtml?name=snippet_AspFragment)]
 
-  * *wwwroot*
+生成的 HTML：
 
-  * *区域*
+```html
+<a href="/Speaker/Evaluations#SpeakerEvaluations">Speaker Evaluations</a>
+```
 
-    * *博客*
+生成客户端应用时，哈希标记很有用。 它们可用于在 JavaScript 中轻松地执行标记和搜索等操作。
 
-      * *控制器*
+## <a name="asp-area"></a>asp-area
 
-        * *HomeController.cs*
+[asp-area](/dotnet/api/microsoft.aspnetcore.mvc.taghelpers.anchortaghelper.area) 属性可设置用来设置相应路由的区域名称。 以下示例展示了区域属性如何导致重新映射路由。 如果将 `asp-area` 设置为 “Blogs”，则会为此定位点标记的关联控制器和视图的路由添加目录 Areas/Blogs 作为前缀。
 
-      * *视图*
-
-        * *主页*
-
-          * Index.cshtml
-          
+* **<项目名称\>**
+  * **wwwroot**
+  * **区域**
+    * **博客**
+      * **控制器**
+        * HomeController.cs
+      * **视图**
+        * **主文件夹**
           * *AboutBlog.cshtml*
-          
-  * *控制器*
-  
+          * Index.cshtml
+        * *_ViewStart.cshtml*
+  * **控制器**
 
-        
-指定一个区域标记，它是有效的如```area="Blogs"```引用时```AboutBlog.cshtml```文件将如下所示使用定位点标记帮助器。
+鉴于上述目录层次结构，引用 AboutBlog.cshtml 文件的标记是：
 
-```cshtml
-<a asp-action="AboutBlog" asp-controller="Home" asp-area="Blogs">Blogs About</a>
-```
+[!code-cshtml[](samples/TagHelpersBuiltInAspNetCore/Views/Home/Index.cshtml?name=snippet_AspArea)]
 
-生成的 HTML 将包括区域段，并将如下所示：
+生成的 HTML：
 
 ```html
-<a href="/Blogs/Home/AboutBlog">Blogs About</a>
+<a href="/Blogs/Home/AboutBlog">About Blog</a>
 ```
 
 > [!TIP]
-> Web 应用程序中的工作的 MVC 区域，路由模板必须包括如果它存在到区域的引用。 该模板，这是第二个参数的`routes.MapRoute`方法调用中，将显示为：`template: '"{area:exists}/{controller=Home}/{action=Index}"'`
+> 若要使区域在 MVC 应用中正常工作，路由模板必须包含对该区域（如果存在）的引用。 该模板由 Startup.Configure 中 `routes.MapRoute` 方法调用的第二个参数表示：[!code-csharp[](samples/TagHelpersBuiltInAspNetCore/Startup.cs?name=snippet_UseMvc&highlight=5)]
 
-- - -
+## <a name="asp-protocol"></a>asp-protocol
 
-### <a name="asp-protocol"></a>asp 协议
+[asp-protocol](/dotnet/api/microsoft.aspnetcore.mvc.taghelpers.anchortaghelper.protocol) 属性用于在 URL 中指定协议（比如 `https`）。 例如:
 
-`asp-protocol`可用于指定一种协议 (如`https`) 在你的 URL。 示例包括协议的定位点标记帮助器将如下所示：
+[!code-cshtml[samples/TagHelpersBuiltInAspNetCore/Views/Index.cshtml?name=snippet_AspProtocol]]
 
-```<a asp-protocol="https" asp-action="About" asp-controller="Home">About</a>```
+生成的 HTML：
 
-并将生成 HTML，如下所示：
+```html
+<a href="https://localhost/Home/About">About</a>
+```
 
-```<a href="https://localhost/Home/About">About</a>```
+示例中的主机名为 localhost，但在生成 URL 时，定位点标记帮助程序会使用网站的公共域。
 
-在示例中的域是 localhost，但定位点标记帮助程序生成 URL 时使用网站的公共域。
+## <a name="asp-host"></a>asp-host
 
-- - -
+[asp-host](/dotnet/api/microsoft.aspnetcore.mvc.taghelpers.anchortaghelper.host) 属性用于在 URL 中指定主机名。 例如:
+
+[!code-cshtml[](samples/TagHelpersBuiltInAspNetCore/Views/Home/Index.cshtml?name=snippet_AspHost)]
+
+生成的 HTML：
+
+```html
+<a href="https://microsoft.com/Home/About">About</a>
+```
+
+## <a name="asp-page"></a>asp-page
+
+[asp-page](/dotnet/api/microsoft.aspnetcore.mvc.taghelpers.anchortaghelper.page) 属性适用于 Razor 页面。 使用它向特定页设置定位点标记的 `href` 属性值。 通过在页面名称前面使用正斜杠 (“/”) 作为前缀，可创建 URL。
+
+下列示例指向与会者 Razor 页面：
+
+[!code-cshtml[](samples/TagHelpersBuiltInAspNetCore/Views/Home/Index.cshtml?name=snippet_AspPage)]
+
+生成的 HTML：
+
+```html
+<a href="/Attendee">All Attendees</a>
+```
+
+`asp-page` 属性与 `asp-route`、`asp-controller` 和 `asp-action` 属性互斥。 但是，`asp-page` 可与 `asp-route-{value}` 结合使用以控制路由，如以下标记所示：
+
+[!code-cshtml[](samples/TagHelpersBuiltInAspNetCore/Views/Home/Index.cshtml?name=snippet_AspPageAspRouteId)]
+
+生成的 HTML：
+
+```html
+<a href="/Attendee?attendeeid=10">View Attendee</a>
+```
+
+## <a name="asp-page-handler"></a>asp-page-handler
+
+[asp-page-handler](/dotnet/api/microsoft.aspnetcore.mvc.taghelpers.anchortaghelper.pagehandler) 属性适用于 Razor 页面。 它用于链接到特定的页处理程序。
+
+请考虑以下页处理程序：
+
+[!code-csharp[](samples/TagHelpersBuiltInAspNetCore/Pages/Attendee.cshtml.cs?name=snippet_OnGetProfileHandler)]
+
+页模型的关联标记链接到 `OnGetProfile` 页处理程序。 注意，`asp-page-handler` 属性值中省略了页处理程序方法名称的 `On<Verb>` 前缀。 如果这是异步方法，还会省略 `Async` 后缀。
+
+[!code-cshtml[](samples/TagHelpersBuiltInAspNetCore/Views/Home/Index.cshtml?name=snippet_AspPageHandler)]
+
+生成的 HTML：
+
+```html
+<a href="/Attendee?attendeeid=12&handler=Profile">Attendee Profile</a>
+```
 
 ## <a name="additional-resources"></a>其他资源
 
 * [区域](xref:mvc/controllers/areas)
+* [Razor 页面简介](xref:mvc/razor-pages/index)

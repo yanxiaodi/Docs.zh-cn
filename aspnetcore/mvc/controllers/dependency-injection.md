@@ -1,53 +1,51 @@
 ---
-title: "依赖关系注入到控制器"
+title: "控制器中的依赖关系注入"
 author: ardalis
 description: 
-keywords: ASP.NET Core
-ms.author: riande
 manager: wpickett
+ms.author: riande
 ms.date: 10/14/2016
-ms.topic: article
-ms.assetid: bc8b4ba3-e9ba-48fd-b1eb-cd48ff6bc7a1
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: mvc/controllers/dependency-injection
-ms.openlocfilehash: 4c632f521cf314bcf8c84f40c52a580a26a5ceee
-ms.sourcegitcommit: 732cd2684246e49e796836596643a8d37e20c46d
-ms.translationtype: MT
+ms.openlocfilehash: 118f504311b58258b5a0510477280505135dd2d9
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
+ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 10/01/2017
+ms.lasthandoff: 01/30/2018
 ---
-# <a name="dependency-injection-into-controllers"></a>依赖关系注入到控制器
+# <a name="dependency-injection-into-controllers"></a>控制器中的依赖关系注入
 
-<a name=dependency-injection-controllers></a>
+<a name="dependency-injection-controllers"></a>
 
-通过[Steve Smith](https://ardalis.com/)
+作者：[Steve Smith](https://ardalis.com/)
 
-ASP.NET 核心 MVC 控制器应请求其构造函数通过显式及其依赖项。 在某些情况下，单个控制器操作可能需要一种服务，并且它不会使有意义的控制器级别请求。 在这种情况下，你还可以选择中插入一项服务作为上的操作方法的参数。
+ASP.NET Core MVC 控制器应该通过构造函数显式请求其依赖关系。 在某些情况下，单独的控制器操作可能需要服务，但在控制器级别上请求可能没有意义。 在此情况下，也可在操作方法上选择将服务作为参数注入。
 
-[查看或下载的示例代码](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/controllers/dependency-injection/sample)([如何下载](xref:tutorials/index#how-to-download-a-sample))
+[查看或下载示例代码](https://github.com/aspnet/Docs/tree/master/aspnetcore/mvc/controllers/dependency-injection/sample)（[如何下载](xref:tutorials/index#how-to-download-a-sample)）
 
 ## <a name="dependency-injection"></a>依赖关系注入
 
-依赖关系注入是一种遵循[依赖反向原则](http://deviq.com/dependency-inversion-principle/)，并允许应用程序由组成的松散耦合的模块。 ASP.NET Core 提供的内置支持[依赖关系注入](../../fundamentals/dependency-injection.md)，这使应用程序更易于测试和维护。
+依赖关系注入是遵循 [Dependency Inversion Principle](http://deviq.com/dependency-inversion-principle/)（依赖关系反向原则）的方法，允许应用程序由松散耦合的模块组成。 ASP.NET Core 具有对[依赖关系注入](../../fundamentals/dependency-injection.md)的内置支持，能更易于测试和维护应用程序。
 
 ## <a name="constructor-injection"></a>构造函数注入
 
-对基于构造函数的依赖关系注入 ASP.NET 核心的内置支持扩展到了 MVC 控制器。 通过只需将服务类型添加到你的控制器作为构造函数参数中，ASP.NET Core 将尝试解决该类型使用其内置服务容器。 定义服务是通常情况下，但并非总是使用接口。 例如，如果应用程序依赖于当前时间的业务逻辑，可以插入检索时间 （而不是硬编码），这将使你的测试中使用的设定的时间实现，传递的服务。
+ASP.NET Core 对基于构造函数的依赖关系注入的内置支持扩展到 MVC 控制器。 通过将服务类型作为构造函数参数添加到控制器中，ASP.NET Core 将尝试使用其内置的服务容器来解析该类型。 通常（但不总是）使用接口来定义服务。 例如，如果应用程序具有依赖于当前时间的业务逻辑，则可以注入一个检索时间（而不是对其进行硬编码）的服务，这将允许测试进入使用设置时间的实现。
 
 [!code-csharp[Main](dependency-injection/sample/src/ControllerDI/Interfaces/IDateTime.cs)]
 
 
-实现类似于此接口，以便它在运行时使用的系统时钟很简单了：
+实现这样一个接口，以便在运行时使用系统时钟，此操作很简单：
 
 [!code-csharp[Main](dependency-injection/sample/src/ControllerDI/Services/SystemDateTime.cs)]
 
 
-与此就地，我们可以在控制器中使用服务。 在这种情况下，我们已添加到某些逻辑`HomeController``Index`方法可向用户显示问候语基于一天的时间。
+准备就绪后，我们可在控制器中使用服务。 在此情况下，我们在 `HomeController` `Index` 方法中添加了一些逻辑，根据每天的时间向用户显示问候语。
 
 [!code-csharp[Main](./dependency-injection/sample/src/ControllerDI/Controllers/HomeController.cs?highlight=8,10,12,17,18,19,20,21,22,23,24,25,26,27,28,29,30&range=1-31,51-52)]
 
-如果我们运行应用程序现在，我们将很可能会遇到错误：
+如果现在运行应用程序，很可能会遇到错误：
 
 ```
 An unhandled exception occurred while processing the request.
@@ -56,21 +54,21 @@ InvalidOperationException: Unable to resolve service for type 'ControllerDI.Inte
 Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
 ```
 
-我们尚未配置中的服务时发生该错误`ConfigureServices`方法中的我们`Startup`类。 若要指定的请求`IDateTime`应使用的实例解析`SystemDateTime`，将突出显示的行将添加到下面列表中你`ConfigureServices`方法：
+当我们尚未在 `Startup` 类的 `ConfigureServices` 方法中配置服务时，会发生此错误。 若要指定应使用 `SystemDateTime` 的实例解析 `IDateTime` 的请求，请将下面列表中突出显示的行添加到 `ConfigureServices` 方法中：
 
 [!code-csharp[Main](./dependency-injection/sample/src/ControllerDI/Startup.cs?highlight=4&range=26-27,42-44)]
 
 > [!NOTE]
-> 无法使用任意多个不同的生存期选项来实现此特定服务 (`Transient`， `Scoped`，或`Singleton`)。 请参阅[依赖关系注入](../../fundamentals/dependency-injection.md)了解其中每个作用域选项将如何影响你的服务的行为。
+> 可以使用几种不同的生存期选项（`Transient``Scoped` 或 `Singleton`）中的任意一个来实现此特定服务。 请参阅[依赖关系注入](../../fundamentals/dependency-injection.md)，了解每个作用域选项将如何影响服务的行为。
 
-服务已配置后，运行应用程序和导航到主页页面应显示基于时间的消息按预期方式：
+一旦服务配置完毕，运行应用程序并导航到主页应按预期显示基于时间的消息：
 
 ![服务器问候语](dependency-injection/_static/server-greeting.png)
 
 >[!TIP]
-> 请参阅[测试控制器逻辑](testing.md)若要了解如何显式请求依赖关系[http://deviq.com/explicit-dependencies-principle/](http://deviq.com/explicit-dependencies-principle/)控制器中使代码可以轻松地测试。
+> 请参阅[测试控制器逻辑](testing.md)，了解如何显式请求依赖关系，控制器中的 [http://deviq.com/explicit-dependencies-principle/](http://deviq.com/explicit-dependencies-principle/) 可轻松测试代码。
 
-ASP.NET 核心内置的依赖关系注入支持拥有仅请求服务的类的单个构造函数。 如果你有多个构造函数，您会收到一个异常内容如下：
+ASP.NET Core 的内置依赖关系注入支持请求服务的类只拥有一个构造函数。 如果有多个构造函数，可能会收到如下异常消息：
 
 ```
 An unhandled exception occurred while processing the request.
@@ -79,31 +77,31 @@ InvalidOperationException: Multiple constructors accepting all given argument ty
 Microsoft.Extensions.DependencyInjection.ActivatorUtilities.FindApplicableConstructor(Type instanceType, Type[] argumentTypes, ConstructorInfo& matchingConstructor, Nullable`1[]& parameterMap)
 ```
 
-正如所指出的错误消息，你可以更正此问题具有只需单个构造函数。 你还可以[默认依赖关系注入支持替换第三方实现](../../fundamentals/dependency-injection.md#replacing-the-default-services-container)，许多这样才能支持多个构造函数。
+如错误消息所述，仅拥有一个构造函数可更正此问题。 还可[将默认依赖关系注入支持替换为第三方实现](../../fundamentals/dependency-injection.md#replacing-the-default-services-container)，其中许多可支持多个构造函数。
 
-## <a name="action-injection-with-fromservices"></a>与 FromServices 操作注入
+## <a name="action-injection-with-fromservices"></a>FromServices 的操作注入
 
-有时你不需要多个操作的服务在你的控制器。 在这种情况下，可能有必要将服务注入作为参数传递给的操作方法。 这可通过将属性参数标记`[FromServices]`如下所示：
+有时，控制器中不需要多个操作的服务。 在此情况下，将服务作为参数注入操作方法可能是有意义的。 通过标记具有属性 `[FromServices]` 的参数来完成此操作，如下所示：
 
 [!code-csharp[Main](./dependency-injection/sample/src/ControllerDI/Controllers/HomeController.cs?highlight=1&range=33-38)]
 
-## <a name="accessing-settings-from-a-controller"></a>从控制器的访问设置
+## <a name="accessing-settings-from-a-controller"></a>从控制器访问设置
 
-访问应用程序或配置设置从控制器中的是通用模式。 此访问都应该使用中所述的选项模式[配置](../../fundamentals/configuration.md)。 你通常应该不会请求设置直接从你使用依赖关系注入的控制器。 更好的方法是请求`IOptions<T>`实例，其中`T`是你需要配置类。
+从控制器中访问应用程序或配置设置是一种常见模式。 此访问应使用[配置](xref:fundamentals/configuration/index)中所述的选项模式。 通常不应使用依赖关系注入直接从控制器请求设置。 最好请求 `IOptions<T>` 实例，其中 `T` 是所需的配置类。
 
-若要使用的选项模式，你需要创建一个类，表示的选项，例如这个：
+若要使用选项模式，需要创建一个表示选项的类，例如：
 
 [!code-csharp[Main](dependency-injection/sample/src/ControllerDI/Model/SampleWebSettings.cs)]
 
-然后你需要配置应用程序使用选项模型并将您的配置类添加到中的服务集合`ConfigureServices`:
+然后，需要将应用程序配置为使用选项模型，并将配置类添加到 `ConfigureServices` 中的服务集合：
 
 [!code-csharp[Main](./dependency-injection/sample/src/ControllerDI/Startup.cs?highlight=3,4,5,6,9,16,19&range=14-44)]
 
 > [!NOTE]
-> 在上面的列表中，我们在配置应用程序读取从 JSON 格式的文件的设置。 如上面的注释代码中所示，还可以完全在代码中，配置设置。 请参阅[配置](../../fundamentals/configuration.md)有关进一步的配置选项。
+> 在上面的列表中，我们要将应用程序配置为从 JSON 格式的文件中读取设置。 也可以完全使用代码配置设置，如上面注释的代码所示。 有关进一步的配置选项，请参阅[配置](xref:fundamentals/configuration/index)。
 
-一旦你指定的强类型的配置对象 (在这种情况下， `SampleWebSettings`) 并将它添加到服务集合中，你可以从那里请求任何控制器或操作的方法请求的实例，通过`IOptions<T>`(在这种情况下， `IOptions<SampleWebSettings>`). 下面的代码演示如何一个将请求从控制器的设置：
+一旦指定了强类型的配置对象（在本例中为 `SampleWebSettings`）并将其添加到服务集合中，就可通过请求 `IOptions<T>` 的实例，从任何 Controller 或 Action 方法请求它（在本例中为 `IOptions<SampleWebSettings>`）。 以下代码显示了如何从控制器请求设置：
 
 [!code-csharp[Main](./dependency-injection/sample/src/ControllerDI/Controllers/SettingsController.cs?highlight=3,5,7&range=7-22)]
 
-遵循选项模式允许设置和配置从另一个，相互脱耦，并确保以下控制器[关注点分离](http://deviq.com/separation-of-concerns/)，因为它不需要知道如何或位置来查找的设置信息。 这还使得控制器到单元测试更易于[测试控制器逻辑](testing.md)，因为没有任何[静态粘贴](http://deviq.com/static-cling/)或控制器类中的设置类的直接实例化。
+遵循选项模式，可将设置和配置相互分离，并确保控制器遵循 [separation of concerns](http://deviq.com/separation-of-concerns/)（问题分离），因为它不需要知道如何或在哪里找到设置信息。 由于控制器类中没有 [static cling](http://deviq.com/static-cling/)（静态粘附）或设置类的直接实例化，因此控制器更易于对[测试控制器逻辑](testing.md)进行单元测试。

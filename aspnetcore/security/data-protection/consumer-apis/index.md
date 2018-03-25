@@ -1,21 +1,19 @@
 ---
 title: "使用者 API"
 author: rick-anderson
-description: 
-keywords: ASP.NET Core
-ms.author: riande
+description: "此文档充当各 ASP.NET Core 使用者 API 数据保护主题的目录。"
 manager: wpickett
+ms.author: riande
 ms.date: 10/14/2016
-ms.topic: article
-ms.assetid: dff0cde2-6612-4b32-bafc-c00bf6d370f2
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: security/data-protection/consumer-apis/index
-ms.openlocfilehash: f689acf9af51276631749ac2a5ca2ec21f1cfcb5
-ms.sourcegitcommit: 0b6c8e6d81d2b3c161cd375036eecbace46a9707
+ms.openlocfilehash: a36dbaa7c34ed0cd99bfb2b27a9d59b81ffccbcf
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/11/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="consumer-apis"></a>使用者 API
 

@@ -1,79 +1,156 @@
 ---
-title: "限制标识方案"
+title: "具有特定的方案-授权 ASP.NET 核心"
 author: rick-anderson
-description: 
-keywords: "ASP.NET 核心"
-ms.author: riande
+description: "此文章介绍了如何使用多个身份验证方法时限制为特定方案的标识。"
 manager: wpickett
-ms.date: 10/14/2016
-ms.topic: article
-ms.assetid: d3d6ca1b-b4b5-4bf7-898e-dcd90ec1bf8c
-ms.technology: aspnet
+ms.author: riande
+ms.date: 10/12/2017
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: security/authorization/limitingidentitybyscheme
-ms.openlocfilehash: 2483c441da317a5c29b611b3a4910eae3c01fd7a
-ms.sourcegitcommit: 0b6c8e6d81d2b3c161cd375036eecbace46a9707
+ms.openlocfilehash: dd044a0829382f9f7f0c3256c6e669340f2d5240
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/11/2017
+ms.lasthandoff: 01/30/2018
 ---
-# <a name="limiting-identity-by-scheme"></a>限制标识方案
+# <a name="authorize-with-a-specific-scheme"></a>具有特定方案授权
 
-<a name=security-authorization-limiting-by-scheme></a>
+在某些情况下，如单页面应用程序 (Spa) 很常见的是使用多个身份验证方法。 例如，应用可能会使用基于 cookie 的身份验证登录和 JWT 持有者身份验证的 JavaScript 请求。 在某些情况下，应用程序可能具有身份验证处理程序的多个的实例。 例如，其中一个包含基本标识的两个 cookie 处理程序，另一个时创建已触发多因素身份验证 (MFA)。 用户请求要求额外的安全的操作，因此，可能会触发 MFA。
 
-在某些情况下，如单页面应用程序就可以得到多个身份验证方法。 例如，你的应用程序可以将基于 cookie 的身份验证登录和持有者身份验证用于 JavaScript 请求。 在某些情况下可能具有多个实例的身份验证中间件。 例如，两个 cookie 中间件其中一个包含一个基本的标识，因为需要额外的安全的操作，则用户要求具有触发多因素身份验证时将创建一个。
+# <a name="aspnet-core-2xtabaspnetcore2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
 
-当身份验证中间件过程中配置身份验证，例如命名身份验证方案
+当在身份验证过程中配置身份验证服务，名为身份验证方案。 例如:
 
 ```csharp
-app.UseCookieAuthentication(new CookieAuthenticationOptions()
+public void ConfigureServices(IServiceCollection services)
 {
-    AuthenticationScheme = "Cookie",
-    LoginPath = new PathString("/Account/Unauthorized/"),
-    AccessDeniedPath = new PathString("/Account/Forbidden/"),
-    AutomaticAuthenticate = false
-});
+    // Code omitted for brevity
 
-app.UseBearerAuthentication(options =>
-{
-    options.AuthenticationScheme = "Bearer";
-    options.AutomaticAuthenticate = false;
-});
+    services.AddAuthentication()
+        .AddCookie(options => {
+            options.LoginPath = "/Account/Unauthorized/";
+            options.AccessDeniedPath = "/Account/Forbidden/";
+        })
+        .AddJwtBearer(options => {
+            options.Audience = "http://localhost:5001/";
+            options.Authority = "http://localhost:5000/";
+        });
 ```
 
-在此配置中两个身份验证中间件已添加，一个 cookie，一个用于持有者。
+已在前面的代码中，添加两个身份验证处理程序： 一个用于 cookie，一个用于持有者。
 
 >[!NOTE]
->添加多个身份验证中间件时你应确保任何中间件配置为自动运行。 执行此操作通过设置`AutomaticAuthenticate`选项属性设置为 false。 如果您不能执行此筛选由方案将不起作用。
+>指定的默认方案会导致`HttpContext.User`属性设置为该标识。 如果不需要该行为，禁用调用的无参数形式`AddAuthentication`。
+
+# <a name="aspnet-core-1xtabaspnetcore1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
+
+身份验证方案进行命名时在身份验证过程配置身份验证中间件。 例如:
+
+```csharp
+public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+{
+    // Code omitted for brevity
+
+    app.UseCookieAuthentication(new CookieAuthenticationOptions()
+    {
+        AuthenticationScheme = "Cookie",
+        LoginPath = "/Account/Unauthorized/",
+        AccessDeniedPath = "/Account/Forbidden/",
+        AutomaticAuthenticate = false
+    });
+    
+    app.UseJwtBearerAuthentication(new JwtBearerOptions()
+    {
+        AuthenticationScheme = "Bearer",
+        AutomaticAuthenticate = false,
+        Audience = "http://localhost:5001/",
+        Authority = "http://localhost:5000/",
+        RequireHttpsMetadata = false
+    });
+```
+
+已在前面的代码中，添加两个身份验证中间件： 一个用于 cookie，一个用于持有者。
+
+>[!NOTE]
+>指定的默认方案会导致`HttpContext.User`属性设置为该标识。 如果不需要该行为，禁用设置`AuthenticationOptions.AutomaticAuthenticate`属性`false`。
+
+---
 
 ## <a name="selecting-the-scheme-with-the-authorize-attribute"></a>选择带有 Authorize 属性的方案
 
-因为没有身份验证中间件配置为自动运行并创建你必须的标识，授权在选择将使用的中间件。 选择你想要授权使用的中间件的最简单方法是使用`ActiveAuthenticationSchemes`属性。 此属性接受要使用的身份验证方案的逗号分隔列表。 例如，
+在授权，终端应用指示要使用的处理程序。 选择与应用程序将授权通过传递到身份验证方案的以逗号分隔列表的处理程序`[Authorize]`。 `[Authorize]`属性指定的身份验证方案或方案，可使用无论配置默认值。 例如:
+
+# <a name="aspnet-core-2xtabaspnetcore2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
 
 ```csharp
-[Authorize(ActiveAuthenticationSchemes = "Cookie,Bearer")]
+[Authorize(AuthenticationSchemes = AuthSchemes)]
+public class MixedController : Controller
+    // Requires the following imports:
+    // using Microsoft.AspNetCore.Authentication.Cookies;
+    // using Microsoft.AspNetCore.Authentication.JwtBearer;
+    private const string AuthSchemes =
+        CookieAuthenticationDefaults.AuthenticationScheme + "," +
+        JwtBearerDefaults.AuthenticationScheme;
+```
+
+# <a name="aspnet-core-1xtabaspnetcore1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
+
+```csharp
+[Authorize(ActiveAuthenticationSchemes = AuthSchemes)]
+public class MixedController : Controller
+    // Requires the following imports:
+    // using Microsoft.AspNetCore.Authentication.Cookies;
+    // using Microsoft.AspNetCore.Authentication.JwtBearer;
+    private const string AuthSchemes =
+        CookieAuthenticationDefaults.AuthenticationScheme + "," +
+        JwtBearerDefaults.AuthenticationScheme;
+```
+
+---
+
+在前面的示例中，cookie 和持有者处理程序运行，并有机会在创建并追加当前用户的标识。 通过指定一种方案，相应的处理程序运行。
+
+# <a name="aspnet-core-2xtabaspnetcore2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
+
+```csharp
+[Authorize(AuthenticationSchemes = 
+    JwtBearerDefaults.AuthenticationScheme)]
 public class MixedController : Controller
 ```
 
-在上例中的 cookie 和持有者中间件将运行并有机会在创建并追加当前用户的标识。 通过指定一种方案仅指定的中间件将运行;
+# <a name="aspnet-core-1xtabaspnetcore1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
 
 ```csharp
-[Authorize(ActiveAuthenticationSchemes = "Bearer")]
+[Authorize(ActiveAuthenticationSchemes = 
+    JwtBearerDefaults.AuthenticationScheme)]
+public class MixedController : Controller
 ```
 
-在这种情况下仅使用持有者方案中间件将运行，和基于 cookie 的所有标识将被都忽略。
+---
+
+在前面的代码中，仅具有"Bearer"方案处理程序运行。 任何基于 cookie 的标识将被忽略。
 
 ## <a name="selecting-the-scheme-with-policies"></a>选择使用策略的方案
 
-如果想要指定在所需的架构[策略](policies.md#security-authorization-policies-based)可以设置`AuthenticationSchemes`集合添加你的策略时。
+如果想要指定在所需的架构[策略](xref:security/authorization/policies)，你可以设置`AuthenticationSchemes`集合添加你的策略时：
 
 ```csharp
-options.AddPolicy("Over18", policy =>
+services.AddAuthorization(options =>
 {
-    policy.AuthenticationSchemes.Add("Bearer");
-    policy.RequireAuthenticatedUser();
-    policy.Requirements.Add(new Over18Requirement());
+    options.AddPolicy("Over18", policy =>
+    {
+        policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
+        policy.RequireAuthenticatedUser();
+        policy.Requirements.Add(new MinimumAgeRequirement());
+    });
 });
 ```
 
-在此示例中 Over18 策略才会根据创建的标识运行`Bearer`中间件。
+在前面的示例中，"Over18"策略仅运行针对"Bearer"处理程序创建的标识。 通过设置来使用策略`[Authorize]`特性的`Policy`属性：
+
+```csharp
+[Authorize(Policy = "Over18")]
+public class RegistrationController : Controller
+```

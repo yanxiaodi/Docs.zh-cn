@@ -2,20 +2,18 @@
 title: "添加视图"
 author: rick-anderson
 description: "将视图添加到简单的 ASP.NET Core MVC 应用"
-keywords: ASP.NET Core,cli
-ms.author: riande
 manager: wpickett
+ms.author: riande
 ms.date: 03/30/2017
-ms.topic: get-started-article
-ms.assetid: 69421638-1638-41e6-9ad7-cad666abf4db
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: get-started-article
 uid: tutorials/first-mvc-app-xplat/adding-view
-ms.openlocfilehash: ae613141c3b29bec015098f3b4293d0fae377bd4
-ms.sourcegitcommit: 78d28178345a0eea91556e4cd1adad98b1446db8
+ms.openlocfilehash: c22fdfc6504869d5e139f86cb3a8b2952e74a87d
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/22/2017
+ms.lasthandoff: 01/30/2018
 ---
 [!INCLUDE[adding-view](../../includes/mvc-intro/adding_view1.md)]
 

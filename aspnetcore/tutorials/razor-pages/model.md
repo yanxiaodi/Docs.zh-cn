@@ -2,19 +2,18 @@
 title: "在 ASP.NET Core 中向 Razor 页面应用添加模型"
 author: rick-anderson
 description: "在 ASP.NET Core 中向 Razor 页面应用添加模型"
-keywords: "ASP.NET Core, Razor 页面, Razor, MVC"
-ms.author: riande
 manager: wpickett
+ms.author: riande
 ms.date: 07/27/2017
-ms.topic: get-started-article
-ms.technology: aspnet
 ms.prod: aspnet-core
-uid: tutorials/razor-pages/modelz
-ms.openlocfilehash: bd2c3e09366e228fade69f843849e7452196c475
-ms.sourcegitcommit: 6e83c55eb0450a3073ef2b95fa5f5bcb20dbbf89
+ms.technology: aspnet
+ms.topic: get-started-article
+uid: tutorials/razor-pages/model
+ms.openlocfilehash: 0ce7693bfdc37d930488304b329dbcd533a5ec1d
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/28/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="adding-a-model-to-a-razor-pages-app"></a>向 Razor 页面应用添加模型
 
@@ -40,9 +39,9 @@ ms.lasthandoff: 09/28/2017
 
 使用 Startup.cs 文件中的[依存关系注入](xref:fundamentals/dependency-injection)容器注册数据库上下文。
 
-[!code-csharp[Main](../../tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie/Startup.cs?name=snippet_ConfigureServices&highlight=3-6)]
+[!code-csharp[Main](../../tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie/Startup.cs?name=snippet_ConfigureServices&highlight=3-5,7-9)]
 
-生成项目以确定没有任何错误。
+生成项目以验证有没有任何错误存在。
 
 <a name="pmc"></a>
 ## <a name="add-scaffold-tooling-and-perform-initial-migration"></a>添加基架工具并执行初始迁移
@@ -60,7 +59,7 @@ ms.lasthandoff: 09/28/2017
 在 PMC 中，输入以下命令：
 
 ```powershell
-Install-Package Microsoft.VisualStudio.Web.CodeGeneration.Design -Version 2.0.0
+Install-Package Microsoft.VisualStudio.Web.CodeGeneration.Design
 Add-Migration Initial
 Update-Database
 ```
@@ -73,7 +72,21 @@ Update-Database
 
 [!INCLUDE[model 4windows](../../includes/RP/model4Win.md)]
 
-[!INCLUDE[model 4](../../includes/RP/model4.md)]
+[!INCLUDE[model 4](../../includes/RP/model4tbl.md)]
+
+<a name="test"></a>
+### <a name="test-the-app"></a>测试应用
+
+* 运行应用并将 `/Movies` 追加到浏览器中的 URL (`http://localhost:port/movies`)。
+* 测试“创建”链接。
+
+ ![创建页面](../../tutorials/razor-pages/model/_static/conan.png)
+
+<a name="scaffold"></a>
+
+* 测试“编辑”、“详细信息”和“删除”链接。
+
+如果收到 SQL 异常，则验证是否已运行迁移并更新了数据库：
 
 下一个教程介绍由基架创建的文件。
 

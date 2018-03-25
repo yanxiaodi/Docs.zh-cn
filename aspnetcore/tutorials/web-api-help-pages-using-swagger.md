@@ -2,24 +2,22 @@
 title: "使用 Swagger 的 ASP.NET Core Web API 帮助页"
 author: spboyer
 description: "本教程提供添加 Swagger 以生成文档的演练和针对 Web API 应用程序的帮助页。"
-keywords: "ASP.NET Core, Swagger, Swashbuckle, 帮助页, Web API"
-ms.author: spboyer
 manager: wpickett
+ms.author: spboyer
 ms.date: 09/01/2017
-ms.topic: article
-ms.assetid: 54bb961d-29d9-4dee-8e2c-a93fc33c16f2
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: tutorials/web-api-help-pages-using-swagger
-ms.openlocfilehash: 7eeb8f0517b8806cabdd59e7d81f8c2272238615
-ms.sourcegitcommit: 6e83c55eb0450a3073ef2b95fa5f5bcb20dbbf89
+ms.openlocfilehash: 911504d9472ae78a0d1d002f1feb57f3a160d5bf
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/28/2017
+ms.lasthandoff: 01/30/2018
 ---
-# <a name="aspnet-web-api-help-pages-using-swagger"></a>使用 Swagger 的 ASP.NET Web API 帮助页
+# <a name="aspnet-core-web-api-help-pages-using-swagger"></a>使用 Swagger 的 ASP.NET Core Web API 帮助页
 
-<a name=web-api-help-pages-using-swagger></a>
+<a name="web-api-help-pages-using-swagger"></a>
 
 作者：[Shayne Boyer](https://twitter.com/spboyer) 和 [Scott Addie](https://twitter.com/Scott_Addie)
 
@@ -222,7 +220,13 @@ Swagger 提供了为对象模型进行归档和自定义 UI 以匹配你的主�
 
 [!code-xml[Main](../tutorials/web-api-help-pages-using-swagger/sample/TodoApi/TodoApi.csproj?range=7-9)]
 
+# <a name="net-core-clitabnetcore-cli"></a>[.NET Core CLI](#tab/netcore-cli)
+
+查看 Visual Studio Code。
+
 ---
+
+启用 XML 注释，为未记录的公共类型和成员提供调试信息。 未记录的类型和成员由以下警告消息指示：缺少对公共可见类型或成员的 XML 注释。
 
 配置 Swagger 以使用生成的 XML 文件。 对于 Linux 或非 Windows 操作系统，文件名和路径区分大小写。 例如，“ToDoApi.XML”文件可以在 Windows 上找到，但无法在 CentOS 上找到。
 

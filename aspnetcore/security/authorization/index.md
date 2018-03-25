@@ -1,38 +1,41 @@
 ---
 title: "ASP.NET Core 中的授权"
 author: rick-anderson
-description: 
-keywords: ASP.NET Core
-ms.author: riande
+description: "发现 ASP.NET Core 授权主题，这些主题介绍如何向应用用户提供权限和特权。"
 manager: wpickett
-ms.date: 10/14/2016
-ms.topic: article
-ms.assetid: 1abd456b-2199-4ba3-9698-3241e0bd4afc
-ms.technology: aspnet
+ms.author: riande
+ms.custom: mvc
+ms.date: 02/19/2018
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: security/authorization/index
-ms.openlocfilehash: c632a3a6009545fcd93ea36131aad1b761e58998
-ms.sourcegitcommit: 0b6c8e6d81d2b3c161cd375036eecbace46a9707
+ms.openlocfilehash: 652a01d58f7a7d19faa8531b61ea780bc379c428
+ms.sourcegitcommit: d43c84c4c80527c85e49d53691b293669557a79d
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/11/2017
+ms.lasthandoff: 02/20/2018
 ---
-# <a name="authorization-in-aspnet-core--simple-role-claims-based-and-custom"></a>ASP.NET Core 中的授权：简单、基于角色、基于声明和自定义
+# <a name="authorization-in-aspnet-core"></a>ASP.NET Core 中的授权
 
-* [介绍](introduction.md)
+* [介绍](xref:security/authorization/introduction)
 
-* [简单授权](simple.md)
+* [通过授权保护的用户数据创建应用](xref:security/authorization/secure-data)
 
-* [基于角色的授权](roles.md)
+* [Razor 页面授权](xref:security/authorization/razor-pages-authorization)
 
-* [基于声明的授权](claims.md)
+* [简单授权](xref:security/authorization/simple)
 
-* [基于自定义策略的授权](policies.md)
+* [基于角色的授权](xref:security/authorization/roles)
 
-* [要求处理程序中的依赖关系注入](dependencyinjection.md)
+* [基于声明的授权](xref:security/authorization/claims)
 
-* [基于资源的授权](resourcebased.md)
+* [基于策略的授权](xref:security/authorization/policies)
 
-* [基于视图的授权](views.md)
+* [要求处理程序中的依赖关系注入](xref:security/authorization/dependencyinjection)
 
-* [使用方案限制标识](limitingidentitybyscheme.md)
+* [基于资源的授权](xref:security/authorization/resourcebased)
+
+* [基于视图的授权](xref:security/authorization/views)
+
+* [特定方案授权](xref:security/authorization/limitingidentitybyscheme)

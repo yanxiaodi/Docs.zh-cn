@@ -2,25 +2,26 @@
 title: "ASP.NET Core MVC 和 Visual Studio for Mac 入门"
 author: rick-anderson
 description: "ASP.NET Core MVC 和 Visual Studio 入门"
-keywords: ASP.NET Core, MVC, Visual Studio for Mac, Entity Framework
-ms.author: riande
 manager: wpickett
+ms.author: riande
 ms.date: 8/23/2017
-ms.topic: article
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: tutorials/first-mvc-app-mac/start-mvc
-ms.openlocfilehash: 028d6d3246908a9cd44a6834449d2fdbc9cae0b8
-ms.sourcegitcommit: 9cdbfd0d670d70b9c354216aabee260c52dad5ee
+ms.openlocfilehash: 05a2323851c58c95667066a74c11f1d015405e6f
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/12/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="getting-started-with-aspnet-core-mvc-and-visual-studio-for-mac"></a>ASP.NET Core MVC 和 Visual Studio for Mac 入门
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
-本教程介绍使用 [Visual Studio for Mac](https://www.visualstudio.com/vs/visual-studio-mac/) 生成 ASP.NET Core MVC Web 应用所涉及的基础知识。 [!INCLUDE[consider RP](../../includes/razor.md)]
+本教程介绍使用 [Visual Studio for Mac](https://www.visualstudio.com/vs/visual-studio-mac/) 生成 ASP.NET Core MVC Web 应用所涉及的基础知识。 
+
+[!INCLUDE[consider RP](../../includes/razor.md)]
 
 本教程提供 3 个版本：
 
@@ -28,9 +29,9 @@ ms.lasthandoff: 09/12/2017
 * Windows：[使用 Visual Studio 生成 ASP.NET Core MVC 应用](xref:tutorials/first-mvc-app/start-mvc)
 * Linux、macOS和 Windows：[使用 Visual Studio Code 生成 ASP.NET Core MVC 应用](xref:tutorials/first-mvc-app-xplat/start-mvc)
 
-## <a name="prerequisites"></a>先决条件
+## <a name="prerequisites"></a>系统必备
 
-本教程需要 [.NET Core 2.0.0 SDK](https://www.microsoft.com/net/core) 或更高版本。 请参阅适用于 ASP.NET Core 1.1 版本的 [PDF](https://github.com/aspnet/Docs/blob/master/aspnetcore/tutorials/first-mvc-app-mac/start-mvc/8-23-17.pdf)。
+本教程需要 [.NET Core 2.0.0 SDK](https://www.microsoft.com/net/core) 或更高版本。
 
 安装以下组件：
 
@@ -53,7 +54,7 @@ ms.lasthandoff: 09/12/2017
 
 ### <a name="launch-the-app"></a>启动应用
 
-在 Visual Studio 中，选择“运行”>“开始执行(不调试)”以启动应用。 Visual Studio 启动 [IIS Express](https://docs.microsoft.com/iis/extensions/introduction-to-iis-express/iis-express-overview)，启动浏览器并导航到 `http://localhost:port`，其中的“端口”是随机选择的端口号。
+在 Visual Studio 中，选择“运行”>“开始执行(不调试)”以启动应用。 Visual Studio 启动 [Kestrel](xref:fundamentals/servers/index#kestrel)，启动浏览器并导航到 `http://localhost:port`，其中的“端口”是随机选择的端口号。
 
 ![具有新项目的浏览器](start-mvc/b1.png)
 

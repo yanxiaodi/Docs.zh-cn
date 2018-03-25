@@ -2,32 +2,30 @@
 title: "ASP.NET Core MVC 和 EF Core - 教程系列"
 author: tdykstra
 description: 
-keywords: ASP.NET Core
-ms.author: tdykstra
 manager: wpickett
-ms.date: 03/15/2017
-ms.topic: get-started-article
-ms.assetid: 9918be4c-2096-404f-9b2a-ed5cde90042a
-ms.technology: aspnet
+ms.author: tdykstra
+ms.date: 10/15/2017
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: get-started-article
 uid: data/ef-mvc/index
-ms.openlocfilehash: d1c9faf4babeb3423139418aecc88411e8bfc852
-ms.sourcegitcommit: 0b6c8e6d81d2b3c161cd375036eecbace46a9707
+ms.openlocfilehash: 72ac1064b597a300d660236ff35f842b6959d4ef
+ms.sourcegitcommit: 493a215355576cfa481773365de021bcf04bb9c7
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/11/2017
+ms.lasthandoff: 03/15/2018
 ---
-# <a name="getting-started-with-aspnet-core-and-entity-framework-core-using-visual-studio"></a>借助 Visual Studio 使用 ASP.NET Core 和 Entity Framework Core 入门
+# <a name="get-started-with-aspnet-core-mvc-and-entity-framework-core-using-visual-studio"></a>ASP.NET Core MVC 和 Entity Framework Core 入门（使用 Visual Studio）
 
-下面的一系列教程介绍如何创建使用 Entity Framework Core 进行数据访问的 ASP.NET Core MVC Web 应用程序。 这些教程需要 Visual Studio 2017。
+[!INCLUDE[RP better than MVC](../../includes/RP-EF/rp-over-mvc.md)]
 
-1. [入门](intro.md)
-2. [创建、读取、更新和删除操作](crud.md)
-3. [排序、筛选、分页和分组](sort-filter-page.md)
-4. [迁移](migrations.md)
-5. [创建复杂数据模型](complex-data-model.md)
-6. [读取相关数据](read-related-data.md)
-7. [更新相关数据](update-related-data.md)
-8. [处理并发冲突](concurrency.md)
-9. [继承](inheritance.md)
-10. [高级主题](advanced.md)
+1. [入门](xref:data/ef-mvc/intro)
+1. [创建、读取、更新和删除操作](xref:data/ef-mvc/crud)
+1. [排序、筛选、分页和分组](xref:data/ef-mvc/sort-filter-page)
+1. [迁移](xref:data/ef-mvc/migrations)
+1. [创建复杂数据模型](xref:data/ef-mvc/complex-data-model)
+1. [读取相关数据](xref:data/ef-mvc/read-related-data)
+1. [更新相关数据](xref:data/ef-mvc/update-related-data)
+1. [处理并发冲突](xref:data/ef-mvc/concurrency)
+1. [继承](xref:data/ef-mvc/inheritance)
+1. [高级主题](xref:data/ef-mvc/advanced)

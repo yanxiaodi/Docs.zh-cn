@@ -1,36 +1,35 @@
 ---
 title: "启用 ASP.NET Core 中的身份验证器应用的 QR 代码生成"
 author: rick-anderson
-description: "启用 ASP.NET Core 中的身份验证器应用的 QR 代码生成"
-keywords: "ASP.NET 核心、 MVC，QR 代码生成、 身份验证器、 2FA"
-ms.author: riande
+description: "了解如何启用使用 ASP.NET Core 双因素身份验证的身份验证器应用的 QR 代码生成。"
 manager: wpickett
+ms.author: riande
 ms.date: 09/24/2017
-ms.topic: article
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: security/authentication/identity-enable-qrcodes
-ms.openlocfilehash: 36a3dc542f3321c5e6ebaa078efd8bde3f50948f
-ms.sourcegitcommit: e4a1df2a5a85f299322548809e547a79b380bb92
+ms.openlocfilehash: dd326bb32565b743d21e196bcb616a716d7994bf
+ms.sourcegitcommit: 493a215355576cfa481773365de021bcf04bb9c7
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/29/2017
+ms.lasthandoff: 03/15/2018
 ---
 # <a name="enabling-qr-code-generation-for-authenticator-apps-in-aspnet-core"></a>启用 ASP.NET Core 中的身份验证器应用的 QR 代码生成
 
 注意： 本主题适用于 ASP.NET Core 2.x
 
-ASP.NET 核心附带的单个身份验证的身份验证器应用程序的支持。 两个因素身份验证 (2FA) 身份验证器应用，使用基于时间的一次性密码算法 (TOTP)，是建议 2FA 的 approch 行业。 2FA 使用 TOTP 优于 SMS 2FA。 验证器应用提供哪些用户确认其用户名和密码后，必须输入一个 6 到 8 位代码。 通常在智能手机上安装验证器应用。
+ASP.NET 核心附带的单个身份验证的身份验证器应用程序的支持。 两个因素身份验证 (2FA) 身份验证器应用，使用基于时间的一次性密码算法 (TOTP)，是推荐的方法为 2FA 行业。 2FA 使用 TOTP 优于 SMS 2FA。 验证器应用提供哪些用户确认其用户名和密码后，必须输入一个 6 到 8 位代码。 通常在智能手机上安装验证器应用。
 
-ASP.NET 核心 web 应用程序模板支持身份验证器，但不是提供对 QRCode 生成的支持。 QRCode 生成器轻松地 2FA 的安装程序。 本文档将指导你完成添加[QR 代码](https://wikipedia.org/wiki/QR_code)生成到 2FA 配置页。
+ASP.NET 核心 web 应用程序模板支持身份验证器，但不提供对 QRCode 生成的支持。 QRCode 生成器轻松地 2FA 的安装程序。 本文档将指导你完成添加[QR 代码](https://wikipedia.org/wiki/QR_code)生成到 2FA 配置页。
 
 ## <a name="adding-qr-codes-to-the-2fa-configuration-page"></a>将 QR 代码添加到 2FA 配置页
 
-这些说明使用*qrcode.js*从 https://davidshimjs.github.io/qrcodejs/ 存储库。
+这些说明使用*qrcode.js*从https://davidshimjs.github.io/qrcodejs/存储库。
 
 * 下载[qrcode.js javascript 库](https://davidshimjs.github.io/qrcodejs/)到`wwwroot\lib`项目文件夹中的。
 
-* 在*Pages\Account\Manage\EnableAuthenticator.cshtml* （Razor 页） 或*Views\Account\Manage\EnableAuthenticator.cshtml* (MVC)、 找到`Scripts`文件末尾的部分：
+* 在*Pages\Account\Manage\EnableAuthenticator.cshtml* （Razor 页） 或*Views\Manage\EnableAuthenticator.cshtml* (MVC)、 找到`Scripts`文件末尾的部分：
 
 ```cshtml
 @section Scripts {
@@ -62,7 +61,7 @@ ASP.NET 核心 web 应用程序模板支持身份验证器，但不是提供对 
 
 ## <a name="change-the-site-name-in-the-qr-code"></a>更改 QR 代码中的站点名称
 
-最初创建你的项目时选择的项目名称中获取 QR 代码中的站点名称。 你可以通过查找对其进行更改`GenerateQrCodeUri(string email, string unformattedKey)`中的方法*EnableAuthenticator.cshtml.cs*文件。 
+最初创建你的项目时选择的项目名称中获取 QR 代码中的站点名称。 你可以通过查找对其进行更改`GenerateQrCodeUri(string email, string unformattedKey)`中的方法*Pages\Account\Manage\EnableAuthenticator.cshtml.cs* （Razor 页） 文件或*Controllers\ManageController.cs* (MVC) 文件。 
 
 从模板的默认代码将如下所示：
 
@@ -85,10 +84,8 @@ QR 代码库可以替换你首选的库。 HTML 包含`qrCode`元素在其中可
 
 QR 代码的格式正确 URL 可用于:
 
-* `AuthenticatorUri`模型的属性。
-* `data-url`中的属性`qrCodeData`元素。 
-
-使用`@Html.Raw`访问视图中的模型属性 （否则为 & 符的 url 中将双编码和 QR 代码的标签参数将被忽略）。
+* `AuthenticatorUri` 模型的属性。
+* `data-url` 中的属性`qrCodeData`元素。 
 
 ## <a name="totp-client-and-server-time-skew"></a>TOTP 客户端和服务器时间偏差
 

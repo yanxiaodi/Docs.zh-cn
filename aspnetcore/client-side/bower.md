@@ -2,27 +2,28 @@
 title: "使用 ASP.NET Core 中的 Bower"
 author: rick-anderson
 description: "管理 Bower 的客户端包。"
-keywords: "ASP.NET 核心、 bower"
-ms.author: riande
 manager: wpickett
-ms.date: 02/14/2017
-ms.topic: article
-ms.assetid: df7c43da-280e-4df6-86cb-eecec8f12bfc
-ms.technology: aspnet
-ms.prod: asp.net-core
-uid: client-side/bower
+ms.author: riande
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: f5d9acc59b6f40dc8a336f59925d639fff007c4e
-ms.sourcegitcommit: 78d28178345a0eea91556e4cd1adad98b1446db8
+ms.date: 02/14/2017
+ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
+uid: client-side/bower
+ms.openlocfilehash: 67695843846cfaf1619db11a7bffcc65802e0f69
+ms.sourcegitcommit: 7ac15eaae20b6d70e65f3650af050a7880115cbf
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/22/2017
+ms.lasthandoff: 03/02/2018
 ---
 # <a name="manage-client-side-packages-with-bower-in-aspnet-core"></a>管理 ASP.NET Core 中的 Bower 的客户端包
 
 通过[Rick Anderson](https://twitter.com/RickAndMSFT)，[了米](https://blog.falafel.com/falafel-software-recognized-sitefinity-website-year/)，和[Scott Addie](https://scottaddie.com) 
 
-[Bower](https://bower.io/)调用自身"的程序包管理器 web。" 内部.NET 生态系统，它将填入 void 留下的 NuGet 的无法传送静态内容的文件。 对于 ASP.NET Core 项目，这些静态文件，则所固有的客户端库，如[jQuery](http://jquery.com/)和[Bootstrap](http://getbootstrap.com/)。 对于.NET 库，你仍然使用[NuGet](https://www.nuget.org/)程序包管理器。
+> [!IMPORTANT]
+> 而维持 Bower，其 maintainer 建议使用另一种解决方案。 与 Webpack yarn 是一个常用的替代项为其[迁移说明](https://bower.io/blog/2017/how-to-migrate-away-from-bower/)可用。
+
+[Bower](https://bower.io/)调用自身"web 程序包管理器"。 内部.NET 生态系统，它将填入 void 留下的 NuGet 的无法传送静态内容的文件。 对于 ASP.NET Core 项目，这些静态文件，则所固有的客户端库，如[jQuery](http://jquery.com/)和[Bootstrap](http://getbootstrap.com/)。 对于.NET 库，你仍然使用[NuGet](https://www.nuget.org/)程序包管理器。
 
 设置客户端的 ASP.NET Core 项目模板创建的新项目生成过程。 [jQuery](http://jquery.com/)和[Bootstrap](http://getbootstrap.com/)安装，并支持 Bower。
 
@@ -44,7 +45,7 @@ ms.lasthandoff: 09/22/2017
 
 ### <a name="manual-installation-in-bowerjson"></a>手动安装在 bower.json
 
-打开*bower.json*文件并添加到的依赖项的"字体出色"。 IntelliSense 会显示可用的包。 某个包被选中，将显示可用的版本。 下面的映像版本旧，以及将与你看到的内容不匹配。
+打开*bower.json*文件并添加到的依赖项的"字体出色"。 IntelliSense 会显示可用的包。 某个包被选中，将显示可用的版本。 下面的映像不较旧，并不会匹配你看到的内容。
 
 ![Bower 包资源管理器的智能感知](bower/_static/add-package.png)
 
@@ -66,19 +67,19 @@ Bower 使用[语义版本控制](http://semver.org/)来组织依赖关系。 语
 
 打开*views/shared\_Layout.cshtml*文件并将字体出色的 CSS 文件添加到环境[标记帮助器](xref:mvc/views/tag-helpers/intro)为`Development`。 从解决方案资源管理器，将拖*字体 awesome.css*内`<environment names="Development">`元素。
 
-[!code-html[Main](bower/sample/_Layout.cshtml?highlight=4&range=9-13)]
+[!code-html[](bower/sample/_Layout.cshtml?highlight=4&range=9-13)]
 
 在生产应用程序会添加*字体 awesome.min.css*到环境标记帮助器`Staging,Production`。
 
 内容替换*Views\Home\About.cshtml* Razor 文件替换为以下标记：
 
-[!code-html[Main](bower/sample/About.cshtml)]
+[!code-html[](bower/sample/About.cshtml)]
 
 运行应用程序并导航到关于视图，以验证字体出色包正常运行。
 
 ## <a name="exploring-the-client-side-build-process"></a>浏览客户端生成过程
 
-大多数 ASP.NET Core 项目模板已配置为使用 Bower。 此下一个演练中创建空的 ASP.NET Core 项目启动，并手动添加每个部分，以便您可以如何在项目中使用 Bower 获取获得感觉。 你看到可以项目结构会发生什么情况，并且不会进行运行时输出为每个配置更改。
+大多数 ASP.NET Core 项目模板已配置为使用 Bower。 此下一个演练中创建空的 ASP.NET Core 项目启动，并手动添加每个部分，以便您可以如何在项目中使用 Bower 获取获得感觉。 你可以查看到的项目结构和运行时，输出会和每个配置更改会发生什么情况。
 
 将客户端生成过程用于 Bower 的常规步骤如下：
 
@@ -95,7 +96,7 @@ Bower 使用[语义版本控制](http://semver.org/)来组织依赖关系。 语
 
 * 打开*bower.json*，并添加 jquery 和引导到`dependencies`部分。 生成*bower.json*文件将如下所示下面的示例。 版本将会发生更改，并且可能不匹配下图所示。
 
-[!code-json[Main](bower/sample/bower.json?highlight=5,6)]
+[!code-json[](bower/sample/bower.json?highlight=5,6)]
 
 * 保存*bower.json*文件。
 
@@ -108,7 +109,7 @@ Bower 使用[语义版本控制](http://semver.org/)来组织依赖关系。 语
 * 添加`Microsoft.AspNetCore.StaticFiles`到项目的 NuGet 包。
 * 启用静态文件提供与[静态文件中间件](https://docs.microsoft.com/aspnet/core/api/microsoft.aspnetcore.builder.staticfileextensions)。 添加对的调用[UseStaticFiles](https://docs.microsoft.com/aspnet/core/api/microsoft.aspnetcore.builder.staticfileextensions)到`Configure`方法`Startup`。
 
-[!code-csharp[Main](bower/sample/Startup.cs?highlight=9)]
+[!code-csharp[](bower/sample/Startup.cs?highlight=9)]
 
 ### <a name="reference-packages"></a>引用包
 
@@ -118,7 +119,7 @@ Bower 使用[语义版本控制](http://semver.org/)来组织依赖关系。 语
 
  内容替换*Index.html*替换为以下标记：
 
-[!code-html[Main](bower/sample/Index.html)]
+[!code-html[](bower/sample/Index.html)]
 
 * 运行应用程序并导航到`http://localhost:<port>/Index.html`。 或者，使用*Index.html*打开，按`Ctrl+Shift+W`。 验证应用 jumbotron 样式，jQuery 代码响应时单击该按钮，以及启动按钮更改状态。
 

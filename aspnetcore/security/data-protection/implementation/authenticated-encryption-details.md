@@ -1,25 +1,23 @@
 ---
-title: "经过身份验证的加密的详细信息。"
+title: "经过身份验证的加密详细信息"
 author: rick-anderson
-description: 
-keywords: ASP.NET Core
-ms.author: riande
+description: "本文档概述了 ASP.NET 核心数据保护的实现详细信息进行加密身份验证。"
 manager: wpickett
+ms.author: riande
 ms.date: 10/14/2016
-ms.topic: article
-ms.assetid: 826e6d5d-9620-44e6-ad93-3b1d9969b70b
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: security/data-protection/implementation/authenticated-encryption-details
-ms.openlocfilehash: 4d0e63d7722071ab8806a217e96ee7ad7bf10286
-ms.sourcegitcommit: 6e83c55eb0450a3073ef2b95fa5f5bcb20dbbf89
+ms.openlocfilehash: b58f36a5f0353da69d6f1ef4db542aba8267027a
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/28/2017
+ms.lasthandoff: 01/30/2018
 ---
-# <a name="authenticated-encryption-details"></a>经过身份验证的加密的详细信息。
+# <a name="authenticated-encryption-details"></a>经过身份验证的加密详细信息
 
-<a name=data-protection-implementation-authenticated-encryption-details></a>
+<a name="data-protection-implementation-authenticated-encryption-details"></a>
 
 对 IDataProtector.Protect 调用都是经过身份验证的加密操作。 保护方法提供保密性和真实性，并且它会绑定到用于此特定 IDataProtector 实例派生其根 IDataProtectionProvider 目的链。
 

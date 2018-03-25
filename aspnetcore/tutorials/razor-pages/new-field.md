@@ -2,19 +2,18 @@
 title: "将新字段添加到 Razor 页面"
 author: rick-anderson
 description: "演示如何使用 Entity Framework Core 将新字段添加到 Razor 页面"
-keywords: "ASP.NET Core, Entity Framework Core, 迁移"
-ms.author: riande
 manager: wpickett
+ms.author: riande
 ms.date: 08/07/2017
-ms.topic: get-started-article
-ms.technology: aspnet
 ms.prod: aspnet-core
+ms.technology: aspnet
+ms.topic: get-started-article
 uid: tutorials/razor-pages/new-field
-ms.openlocfilehash: cab986d0a7b7ac68cdda36a558e9b05c429108d0
-ms.sourcegitcommit: 6e83c55eb0450a3073ef2b95fa5f5bcb20dbbf89
+ms.openlocfilehash: 36412e9d1f3143f0d1999d0e754e6627f0984ad5
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/28/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="adding-a-new-field-to-a-razor-page"></a>将新字段添加到 Razor 页面
 
@@ -77,7 +76,7 @@ SqlException: Invalid column name 'Rating'.
 <a name="pmc"></a> 从“工具”菜单中，选择“NuGet 包管理器”>“包管理器控制台”。
 在 PMC 中，输入以下命令：
 
-```PMC
+```powershell
 Add-Migration Rating
 Update-Database
 ```
@@ -97,7 +96,7 @@ Update-Database
 * 选择“确定”。
 * 在 [PMC](xref:tutorials/razor-pages/new-field#pmc) 中更新数据库：
 
-  ```PMC
+  ```powershell
   Update-Database
   ```
 

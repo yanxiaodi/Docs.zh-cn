@@ -2,19 +2,18 @@
 title: "利用 Visual Studio Code 在 ASP.NET Core 中开始使用 Razor 页面"
 author: rick-anderson
 description: "利用 Visual Studio Code 在 ASP.NET Core 中开始使用 Razor 页面"
-keywords: "ASP.NET Core, Razor 页面, 搭建基架, Entity Framework Core, EF, EF Core, 数据库, mac, macOS, Visual Studio Code, Code"
-ms.author: riande
 manager: wpickett
+ms.author: riande
 ms.date: 08/27/2017
-ms.topic: get-started-article
-ms.technology: aspnet
 ms.prod: aspnet-core
+ms.technology: aspnet
+ms.topic: get-started-article
 uid: tutorials/razor-pages-vsc/razor-pages-start
-ms.openlocfilehash: 1b9dff14fa98314601fa44aa229aef6b73bb79d0
-ms.sourcegitcommit: 67f54fabbfa4e3942f5bfe1f8a7fdfe4a7a75358
+ms.openlocfilehash: 7c01d802e59951281c86c8eab64b7c6b9d646fbf
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/19/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="getting-started-with-razor-pages-in-aspnet-core-with-visual-studio-code"></a>利用 Visual Studio Code 在 ASP.NET Core 中开始使用 Razor 页面
 
@@ -22,7 +21,7 @@ ms.lasthandoff: 09/19/2017
 
 本教程介绍构建 ASP.NET Core Razor 页面 Web 应用的基础知识。 我们建议在学习本教程前先阅读 [Razor 页面介绍](xref:mvc/razor-pages/index)。 Razor 页面是在 ASP.NET Core 中为 Web 应用程序生成 UI 时建议使用的方法。
 
-## <a name="prerequisites"></a>先决条件
+## <a name="prerequisites"></a>系统必备
 
 安装以下组件：
 

@@ -15,7 +15,7 @@
       * `5000-AppSecret`: `5.0.0.0_secret_value`
       * `5100-AppSecret`: `5.1.0.0_secret_value`
   * 向 Azure Active Directory 注册示例应用程序。
-  * 授权应用程序访问密钥保管库。 当你使用`Set-AzureRmKeyVaultAccessPolicy`PowerShell cmdlet 来授权应用程序访问密钥保管库，提供`List`和`Get`访问与机密`-PermissionsToKeys list,get`。
+  * 授权应用程序访问密钥保管库。 当你使用`Set-AzureRmKeyVaultAccessPolicy`PowerShell cmdlet 来授权应用程序访问密钥保管库，提供`List`和`Get`访问与机密`-PermissionsToSecrets list,get`。
 2. 更新应用程序的*appsettings.json*的值的文件`Vault`， `ClientId`，和`ClientSecret`。
 3. 运行示例应用程序，它可以通过获取其配置值从`IConfigurationRoot`带前缀的机密名称与同名。 在此示例中，该前缀是应用程序的版本，它提供给`PrefixKeyVaultSecretManager`添加 Azure 密钥保管库配置提供程序时。 值`AppSecret`一起被获取`config["AppSecret"]`。
 4. 更改中的项目文件中的应用程序集版本`5.0.0.0`到`5.1.0.0`并再次运行该应用。 此时，返回的机密值是`5.1.0.0_secret_value`。

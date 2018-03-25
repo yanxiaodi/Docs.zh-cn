@@ -1,25 +1,21 @@
 ---
 title: "Microsoft 帐户外部登录设置"
 author: rick-anderson
-description: 
-keywords: ASP.NET Core
-ms.author: riande
+description: "本教程演示的集成到现有的 ASP.NET Core 应用程序的 Microsoft 帐户用户身份验证。"
 manager: wpickett
+ms.author: riande
 ms.date: 08/24/2017
-ms.topic: article
-ms.assetid: 66DB4B94-C78C-4005-BA03-3D982B87C268
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: security/authentication/microsoft-logins
-ms.openlocfilehash: cb4ea63664f29e39c2dd26cbf814a484a295ec6c
-ms.sourcegitcommit: 6e83c55eb0450a3073ef2b95fa5f5bcb20dbbf89
+ms.openlocfilehash: d57647da978f7edaaddedba7c9f4c1de8dc07405
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/28/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="configuring-microsoft-account-authentication"></a>配置 Microsoft 帐户身份验证
-
-<a name=security-authentication-microsoft-logins></a>
 
 作者：[Valeriy Novytskyy](https://github.com/01binary) 和 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -110,7 +106,7 @@ app.UseMicrosoftAccountAuthentication(new MicrosoftAccountOptions()
 
 ---
 
-尽管在 Microsoft 开发人员门户上使用的术语名称这些令牌`ApplicationId`和`Password`，它们会作为公开`ClientId`和`ClientSecret`到配置 API。
+尽管在 Microsoft 开发人员门户上使用的术语名称这些令牌`ApplicationId`和`Password`，它们作为公开`ClientId`和`ClientSecret`到配置 API。
 
 请参阅[MicrosoftAccountOptions](https://docs.microsoft.com/aspnet/core/api/microsoft.aspnetcore.builder.microsoftaccountoptions)支持 Microsoft 帐户身份验证的配置选项的详细信息的 API 参考。 这可以用于请求有关用户的不同信息。
 

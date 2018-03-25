@@ -1,25 +1,23 @@
 ---
-title: "防止跨站点脚本"
+title: "防止跨站点脚本 (XSS) 在 ASP.NET 核心"
 author: rick-anderson
-description: 
-keywords: "ASP.NET 核心"
-ms.author: riande
+description: "了解有关跨站点脚本 (XSS) 和一些解决这一漏洞在 ASP.NET Core 应用程序技术。"
 manager: wpickett
+ms.author: riande
 ms.date: 10/14/2016
-ms.topic: article
-ms.assetid: 95790927-2bfe-445e-b1fd-429c2c7030ce
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: security/cross-site-scripting
-ms.openlocfilehash: 1816977837efd82f374a03d9f776db21358e2850
-ms.sourcegitcommit: 0b6c8e6d81d2b3c161cd375036eecbace46a9707
+ms.openlocfilehash: 9e54ee0b1169c01629c3cd91a378509a73c53904
+ms.sourcegitcommit: 493a215355576cfa481773365de021bcf04bb9c7
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/11/2017
+ms.lasthandoff: 03/15/2018
 ---
-# <a name="preventing-cross-site-scripting"></a>防止跨站点脚本
+# <a name="preventing-cross-site-scripting-xss-in-aspnet-core"></a>防止跨站点脚本 (XSS) 在 ASP.NET 核心
 
-<a name=security-cross-site-scripting></a>
+作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
 跨站点脚本 (XSS) 是一个安全漏洞，这会使攻击者将客户端脚本 (通常是 JavaScript) 放入网页。 当其他用户加载受影响的页的攻击者脚本将运行时，从而使攻击者窃取 cookie 和会话令牌更改通过 DOM 操作网页的内容或将浏览器重定向到另一页。 当应用程序接受用户输入，并输出它在页中而不验证、 编码或转义它时，通常会发生 XSS 漏洞。
 
@@ -33,7 +31,7 @@ ms.lasthandoff: 08/11/2017
 
 3. 将不受信任的数据放入 HTML 特性之前请确保它是 HTML 编码的属性。 HTML 特性编码为 HTML 编码的超集，并将其他字符编码如"和。
 
-4. 将不受信任的数据放入 JavaScript 之前将数据放在一个 HTML 元素在运行时检索其内容。 如果这不可能，则确保数据被编码 JavaScript。 JavaScript 编码 javascript 采用危险的字符并将其替换为其十六进制，例如&lt;将编码为`\u003C`。
+4. 将不受信任的数据放入 JavaScript 之前将数据放在一个 HTML 元素在运行时检索其内容。 如果这不是可能的则确保数据被编码 JavaScript。 JavaScript 编码 javascript 采用危险的字符并将其替换为其十六进制，例如&lt;将编码为`\u003C`。
 
 5. 将不受信任的数据放入一个 URL 查询字符串之前确保它是编码的 URL。
 
@@ -58,11 +56,11 @@ ms.lasthandoff: 08/11/2017
    ```
 
 >[!WARNING]
-> ASP.NET 核心 MVC 提供`HtmlString`不在输出时自动编码的类。 这应永远不会用于与不受信任的输入结合使用这会将公开 XSS 漏洞。
+> ASP.NET 核心 MVC 提供`HtmlString`在输出时不自动编码的类。 这应永远不会用于与不受信任的输入结合使用这会将公开 XSS 漏洞。
 
 ## <a name="javascript-encoding-using-razor"></a>使用 Razor Javascript 编码
 
-可能有些时候你想要插入处理在视图中的 JavaScript 值。 有两种方法可以实现此目的。 插入简单值的最安全方法是将值放在一个标记的数据属性并检索你在 JavaScript。 例如: 
+可能有些时候你想要插入处理在视图中的 JavaScript 值。 有两种方法可以实现此目的。 插入简单值的最安全方法是将值放在一个标记的数据属性并检索你在 JavaScript。 例如:
 
 ```none
 @{
@@ -143,11 +141,11 @@ ms.lasthandoff: 08/11/2017
    ```
 
 >[!WARNING]
-> 请勿连接 JavaScript 创建 DOM 元素中不受信任的输入。 应使用`createElement()`并将属性值分配适当如`node.TextContent=`，或使用`element.SetAttribute()` / `element[attribute]=`否则向基于 DOM 的 XSS 公开自己。
+> 不连接不受信任的输入，在 JavaScript 中创建 DOM 元素。 应使用`createElement()`并将属性值分配适当如`node.TextContent=`，或使用`element.SetAttribute()` / `element[attribute]=`否则向基于 DOM 的 XSS 公开自己。
 
 ## <a name="accessing-encoders-in-code"></a>访问代码中的编码器
 
-HTML、 JavaScript 和 URL 编码器可供代码使用两种方式，可以将它们通过注入[依赖关系注入](../fundamentals/dependency-injection.md#fundamentals-dependency-injection)或者你可以使用中包含的默认编码器`System.Text.Encodings.Web`命名空间。 如果你使用的默认编码器，则有你应用于字符范围为安全处理将不会生效-默认编码器使用的可能的安全编码规则。
+HTML、 JavaScript 和 URL 编码器可供代码使用两种方式，可以将它们通过注入[依赖关系注入](../fundamentals/dependency-injection.md#fundamentals-dependency-injection)或者你可以使用中包含的默认编码器`System.Text.Encodings.Web`命名空间。 如果你使用的默认编码器，则你应用到任何要被视为为安全的字符范围不会生效-默认编码器使用的可能的安全编码规则。
 
 若要使用可配置编码器通过你的构造函数应采用的 DI *HtmlEncoder*， *JavaScriptEncoder*和*UrlEncoder*作为适当的参数。 例如，
 
@@ -171,7 +169,7 @@ public class HomeController : Controller
 
 ## <a name="encoding-url-parameters"></a>编码的 URL 参数
 
-如果你想要构建 URL 查询字符串以不受信任的输入作为值使用`UrlEncoder`值进行编码。 例如，
+如果你想要构建 URL 查询字符串以不受信任的输入作为值使用`UrlEncoder`值进行编码。 例如，应用于对象的
 
 ```csharp
 var example = "\"Quoted Value with spaces and &\"";
@@ -183,7 +181,7 @@ var example = "\"Quoted Value with spaces and &\"";
 >[!WARNING]
 > 不要使用不受信任的输入的 URL 路径的一部分。 始终将不受信任的输入传递作为查询字符串值。
 
-<a name=security-cross-site-scripting-customization></a>
+<a name="security-cross-site-scripting-customization"></a>
 
 ## <a name="customizing-the-encoders"></a>自定义编码器
 
@@ -230,4 +228,4 @@ services.AddSingleton<HtmlEncoder>(
 
 ## <a name="validation-as-an-xss-prevention-technique"></a>验证在 XSS 预防方法
 
-验证可以在限制 XSS 攻击的有用工具。 例如，一个简单的数值字符串只能包含字符 0-9 不会触发 XSS 受到攻击。 验证变得更复杂应想要接受用户输入的中的 HTML HTML 输入内容分析为难以进行，即使不是不可能。 MarkDown 以及其他文本的格式将丰富的输入的更安全选项。 你应永远不会依赖于单独的验证。 始终对不受信任的输入，输出之前进行编码，无论何种验证已执行。
+验证可以在限制 XSS 攻击的有用工具。 例如，一个简单的数值字符串只能包含字符 0-9 将不会触发 XSS 受到攻击。 验证变得更复杂应想要接受用户输入的中的 HTML HTML 输入内容分析为难以进行，即使不是不可能。 MarkDown 以及其他文本的格式将丰富的输入的更安全选项。 你应永远不会依赖于单独的验证。 始终对不受信任的输入，输出之前进行编码，无论何种验证已执行。

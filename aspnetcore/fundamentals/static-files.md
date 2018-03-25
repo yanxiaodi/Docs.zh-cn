@@ -1,225 +1,256 @@
 ---
-title: "使用 ASP.NET Core 中的静态文件"
+title: "在 ASP.NET Core 中处理静态文件"
 author: rick-anderson
-description: "了解如何使用 ASP.NET Core 中的静态文件。"
-keywords: "ASP.NET 核心，静态文件、 静态资产，HTML、 CSS、 JavaScript"
-ms.author: riande
+description: "了解如何在 ASP.NET Core Web 应用中提供和保护静态文件，以及如何配置静态文件托管中间件行为。"
 manager: wpickett
-ms.date: 4/07/2017
-ms.topic: article
-ms.assetid: e32245c7-4eee-4831-bd2e-915dbf9f5f70
-ms.technology: aspnet
+ms.author: riande
+ms.custom: mvc
+ms.date: 01/18/2018
+ms.devlang: csharp
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: fundamentals/static-files
-ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: e099c4767958f153134e0fb6b3de8132ab1ead82
-ms.sourcegitcommit: 732cd2684246e49e796836596643a8d37e20c46d
-ms.translationtype: MT
+ms.openlocfilehash: 7b156830ab59db3c08fbff6b2c4180d8765a113b
+ms.sourcegitcommit: f2a11a89037471a77ad68a67533754b7bb8303e2
+ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 10/01/2017
+ms.lasthandoff: 02/01/2018
 ---
-# <a name="working-with-static-files-in-aspnet-core"></a>使用 ASP.NET Core 中的静态文件
+# <a name="work-with-static-files-in-aspnet-core"></a>在 ASP.NET Core 中处理静态文件
 
-<a name=fundamentals-static-files></a>
+作者：[Rick Anderson](https://twitter.com/RickAndMSFT) 和 [Scott Addie](https://twitter.com/Scott_Addie)
 
-作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
+静态文件（如 HTML、CSS、图像和 JavaScript）是 ASP.NET Core 应用直接提供给客户端的资产。 需要进行一些配置才能提供这些文件。
 
-静态文件，如 HTML、 CSS、 映像和 JavaScript，作为 ASP.NET Core 应用程序可以提供给客户端直接的资产。
+[查看或下载示例代码](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/static-files/samples)（[如何下载](xref:tutorials/index#how-to-download-a-sample)）
 
-[查看或下载的示例代码](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/static-files/sample)([如何下载](xref:tutorials/index#how-to-download-a-sample))
+## <a name="serve-static-files"></a>提供静态文件
 
-## <a name="serving-static-files"></a>为静态文件提供服务
+静态文件存储在项目的 Web 根目录中。 默认目录是 \<content_root>/wwwroot，但可通过 [UseWebRoot](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.usewebroot#Microsoft_AspNetCore_Hosting_HostingAbstractionsWebHostBuilderExtensions_UseWebRoot_Microsoft_AspNetCore_Hosting_IWebHostBuilder_System_String_) 方法更改目录。 有关详细信息，请参阅[内容根目录](xref:fundamentals/index#content-root)和 [Web 根目录](xref:fundamentals/index#web-root)。
 
-静态文件通常位于`web root`(*\<内容根 > / wwwroot*) 文件夹。 请参阅[内容根](xref:fundamentals/index#content-root)和[Web 根](xref:fundamentals/index#web-root)有关详细信息。 通常设置为当前目录的内容的根，以便你的项目的`web root`将开发中找到。
+应用的 Web 主机必须识别内容根目录。
 
-[!code-csharp[Main](../common/samples/WebApplication1/Program.cs?highlight=5&start=12&end=22)]
+# <a name="aspnet-core-2xtabaspnetcore2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
 
-可以下任何文件夹中存储静态文件`web root`和访问与该根的相对路径。 例如，当创建默认 Web 应用程序项目中使用 Visual Studio，还有一些文件夹中创建*wwwroot*文件夹- *css*，*映像*，和*js*。 用于访问中的图像的 URI*映像*子文件夹：
+采用 `WebHost.CreateDefaultBuilder` 方法可将内容根目录设置为当前目录：
 
-* `http://<app>/images/<imageFileName>`
-* `http://localhost:9189/images/banner3.svg`
+[!code-csharp[](../common/samples/WebApplication1DotNetCore2.0App/Program.cs?name=snippet_Main&highlight=9)]
 
-在静态文件提供的顺序，你必须配置[中间件](middleware.md)将静态文件添加到管道。 可以通过上添加一个依赖项配置静态文件中间件*Microsoft.AspNetCore.StaticFiles*包到你的项目并调用`UseStaticFiles`扩展方法从`Startup.Configure`:
+# <a name="aspnet-core-1xtabaspnetcore1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
 
-[!code-csharp[Main](../fundamentals/static-files/sample/StartupStaticFiles.cs?highlight=3&name=snippet1)]
+调用 `Program.Main` 中的 [UseContentRoot](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.usecontentroot#Microsoft_AspNetCore_Hosting_HostingAbstractionsWebHostBuilderExtensions_UseContentRoot_Microsoft_AspNetCore_Hosting_IWebHostBuilder_System_String_) 将内容根目录设为当前目录：
 
-`app.UseStaticFiles();`使中的文件`web root`(*wwwroot*默认情况下) servable。 稍后我将介绍如何使其他目录内容与 servable `UseStaticFiles`。
+[!code-csharp[](static-files/samples/1x/Program.cs?name=snippet_ProgramClass&highlight=7)]
 
-必须包括 NuGet 包"Microsoft.AspNetCore.StaticFiles"。
+---
 
-> [!NOTE]
-> `web root`默认为*wwwroot*目录中，但你可以设置`web root`目录`UseWebRoot`。
+可通过 Web 根目录的相关路径访问静态文件。 例如，Web 应用程序项目模板包含 wwwroot 文件夹中的多个文件夹：
 
-假设你有想要提供的静态文件位于项目层次结构`web root`。 例如: 
+* **wwwroot**
+  * **css**
+  * **images**
+  * **js**
 
-* wwwroot
-  * css
-  * 图像
-  * ...
-* MyStaticFiles
-  * test.png
+用于访问 images 子文件夹中的文件的 URI 格式为 http://\<server_address>/images/\<image_file_name>。 例如，http://localhost:9189/images/banner3.svg。
 
-请求访问*test.png*，配置静态文件中间件，如下所示：
+# <a name="aspnet-core-2xtabaspnetcore2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
 
-[!code-csharp[Main](../fundamentals/static-files/sample/StartupTwoStaticFiles.cs?highlight=5,6,7,8,9,10&name=snippet1)]
+如果以 .NET Framework 为目标，请将 [Microsoft.AspNetCore.StaticFiles](https://www.nuget.org/packages/Microsoft.AspNetCore.StaticFiles/) 包添加到项目。 如果以 .NET Core 为目标，请将 [Microsoft.AspNetCore.All 元包](xref:fundamentals/metapackage)加入此包。
 
-对请求`http://<app>/StaticFiles/test.png`将提供*test.png*文件。
+# <a name="aspnet-core-1xtabaspnetcore1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
 
-`StaticFileOptions()`可以设置响应标头。 例如，下面的代码将设置从提供的静态文件*wwwroot*文件夹和集`Cache-Control`标头以使它们为 10 分钟 （600 秒） 公开一个可缓存：
+将 [Microsoft.AspNetCore.StaticFiles](https://www.nuget.org/packages/Microsoft.AspNetCore.StaticFiles/) 包添加到项目。
 
-[!code-csharp[Main](../fundamentals/static-files/sample/StartupAddHeader.cs?name=snippet1)]
+---
 
-![已添加显示的缓存控制标头的响应标头](static-files/_static/add-header.png)
+配置提供静态文件的[中间件](xref:fundamentals/middleware/index)。
+
+### <a name="serve-files-inside-of-web-root"></a>提供 Web 根目录内的文件
+
+调用 `Startup.Configure` 中的 [UseStaticFiles](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) 方法：
+
+[!code-csharp[](static-files/samples/1x/StartupStaticFiles.cs?name=snippet_ConfigureMethod&highlight=3)]
+
+无参数 `UseStaticFiles` 方法重载将 Web 根目录中的文件标记为可用。 以下标记引用 wwwroot/images/banner1.svg：
+
+[!code-cshtml[](static-files/samples/1x/Views/Home/Index.cshtml?name=snippet_static_file_wwwroot)]
+
+### <a name="serve-files-outside-of-web-root"></a>提供 Web 根目录外的文件
+
+考虑一个目录层次结构，其中要提供的静态文件位于 Web 根目录之外：
+
+* **wwwroot**
+  * **css**
+  * **images**
+  * **js**
+* **MyStaticFiles**
+  * **images**
+      * banner1.svg
+
+按如下方式配置静态文件中间件后，请求可访问 banner1.svg 文件：
+
+[!code-csharp[](static-files/samples/1x/StartupTwoStaticFiles.cs?name=snippet_ConfigureMethod&highlight=5-10)]
+
+在前面的代码中，MyStaticFiles 目录层次结构通过 StaticFiles URI 段公开。 请求 http://\<server_address>/StaticFiles/images/banner1.svg 提供 banner1.svg 文件。
+
+以下标记引用 MyStaticFiles/images/banner1.svg：
+
+[!code-cshtml[](static-files/samples/1x/Views/Home/Index.cshtml?name=snippet_static_file_outside)]
+
+### <a name="set-http-response-headers"></a>设置 HTTP 响应标头
+
+[StaticFileOptions](/dotnet/api/microsoft.aspnetcore.builder.staticfileoptions) 对象可用于设置 HTTP 响应标头。 除配置从 Web 根目录提供静态文件外，以下代码还设置 `Cache-Control` 标头：
+
+[!code-csharp[](static-files/samples/1x/StartupAddHeader.cs?name=snippet_ConfigureMethod)]
+
+[HeaderDictionaryExtensions.Append](/dotnet/api/microsoft.aspnetcore.http.headerdictionaryextensions.append) 方法存在于 [Microsoft.AspNetCore.Http](https://www.nuget.org/packages/Microsoft.AspNetCore.Http/) 包中。
+
+可公开缓存这些文件 10 分钟（600 秒）：
+
+![已添加显示 Cache-Control 标头的响应头](static-files/_static/add-header.png)
 
 ## <a name="static-file-authorization"></a>静态文件授权
 
-静态文件模块提供**没有**授权检查。 由它提供任何文件包括正在*wwwroot*可公开访问。 若要为文件服务基于授权：
+静态文件中间件不提供授权检查。 可公开访问由静态文件中间件提供的任何文件，包括 wwwroot 下的文件。 根据授权提供文件：
 
-* 将其外部存储*wwwroot*和访问静态文件中间件任何目录**和**
+* 将文件存储在 wwwroot 和静态文件中间件可访问的任何目录之外并
+* 通过有授权的操作方法提供文件。 返回 [FileResult](/dotnet/api/microsoft.aspnetcore.mvc.fileresult) 对象：
 
-* 通过返回的控制器操作提供它们`FileResult`应用授权的位置
+[!code-csharp[](static-files/samples/1x/Controllers/HomeController.cs?name=snippet_BannerImageAction)]
 
-## <a name="enabling-directory-browsing"></a>启用目录浏览
+## <a name="enable-directory-browsing"></a>启用目录浏览
 
-目录浏览可让你的 web 应用的用户查看的目录和指定的目录中的文件列表。 默认情况下，出于安全原因禁用目录浏览 (请参阅[注意事项](#considerations))。 若要启用目录浏览，请调用`UseDirectoryBrowser`扩展方法从`Startup.Configure`:
+通过目录浏览，Web 应用的用户可查看目录列表和指定目录中的文件。 出于安全考虑，目录浏览默认处于禁用状态（请参阅[注意事项](#considerations)）。 调用 `Startup.Configure` 中的 [UseDirectoryBrowser](/dotnet/api/microsoft.aspnetcore.builder.directorybrowserextensions.usedirectorybrowser#Microsoft_AspNetCore_Builder_DirectoryBrowserExtensions_UseDirectoryBrowser_Microsoft_AspNetCore_Builder_IApplicationBuilder_Microsoft_AspNetCore_Builder_DirectoryBrowserOptions_) 方法来启用目录浏览：
 
-[!code-csharp[Main](static-files/sample/StartupBrowse.cs?name=snippet1)]
+[!code-csharp[](static-files/samples/1x/StartupBrowse.cs?name=snippet_ConfigureMethod&highlight=12-17)]
 
-并添加所需的服务通过调用`AddDirectoryBrowser`扩展方法从`Startup.ConfigureServices`:
+调用 `Startup.ConfigureServices` 中的[AddDirectoryBrowser](/dotnet/api/microsoft.extensions.dependencyinjection.directorybrowserserviceextensions.adddirectorybrowser#Microsoft_Extensions_DependencyInjection_DirectoryBrowserServiceExtensions_AddDirectoryBrowser_Microsoft_Extensions_DependencyInjection_IServiceCollection_) 方法来添加所需服务：
 
-[!code-csharp[Main](static-files/sample/StartupBrowse.cs?name=snippet2)]
+[!code-csharp[](static-files/samples/1x/StartupBrowse.cs?name=snippet_ConfigureServicesMethod&highlight=3)]
 
-上面的代码中允许目录浏览的*wwwroot/images*文件夹使用 URL http://\<应用 > / MyImages，以链接到每个文件和文件夹：
+上述代码允许使用 URL http://\<server_address>/MyImages 浏览 wwwroot/images 文件夹的目录，并链接到每个文件和文件夹：
 
 ![目录浏览](static-files/_static/dir-browse.png)
 
-请参阅[注意事项](#considerations)上启用浏览时安全风险。
+有关启用浏览时的安全风险，请参阅[注意事项](#considerations)。
 
-请注意两个`app.UseStaticFiles`调用。 服务的 CSS、 映像和中的 JavaScript 所需的第一个*wwwroot*文件夹，并为目录浏览的第二个调用*wwwroot/images*文件夹使用 URL http://\<应用> / MyImages:
+请注意以下示例中的两个 `UseStaticFiles` 调用。 第一个调用提供 wwwroot 文件夹中的静态文件。 第二个调用使用 URL http://\<server_address>/MyImages 浏览 wwwroot/images 文件夹的目录：
 
-[!code-csharp[Main](static-files/sample/StartupBrowse.cs?highlight=3,5&name=snippet1)]
+[!code-csharp[](static-files/samples/1x/StartupBrowse.cs?name=snippet_ConfigureMethod&highlight=3,5)]
 
-## <a name="serving-a-default-document"></a>为提供服务的默认文档
+## <a name="serve-a-default-document"></a>提供默认文档
 
-设置默认主页提供站点访问者在访问你的站点时的开端。 为了使你的 Web 应用，以便为默认页上，而无需完全限定 URI 用户提供服务，在调用`UseDefaultFiles`扩展方法从`Startup.Configure`，如下所示。
+设置默认主页为访问者访问网站时提供了逻辑起点。 若要在用户不完全限定 URI 的情况下提供默认页面，请调用 `Startup.Configure` 中的 [UseDefaultFiles](/dotnet/api/microsoft.aspnetcore.builder.defaultfilesextensions.usedefaultfiles#Microsoft_AspNetCore_Builder_DefaultFilesExtensions_UseDefaultFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) 方法：
 
-[!code-csharp[Main](../fundamentals/static-files/sample/StartupEmpty.cs?highlight=3&name=snippet1)]
+[!code-csharp[](static-files/samples/1x/StartupEmpty.cs?name=snippet_ConfigureMethod&highlight=3)]
 
-> [!NOTE]
-> `UseDefaultFiles`前必须调用`UseStaticFiles`用于默认文件。 `UseDefaultFiles`是不实际处理该文件的 URL 重新编写器。 你必须启用静态文件中间件 (`UseStaticFiles`) 来处理该文件。
+> [!IMPORTANT]
+> 要提供默认文件，必须在 `UseStaticFiles` 前调用 `UseDefaultFiles`。 `UseDefaultFiles` 实际上用于重写 URL，不提供文件。 通过 `UseStaticFiles` 启用静态文件中间件来提供文件。
 
-与`UseDefaultFiles`，将搜索到的文件夹的请求：
+使用 `UseDefaultFiles` 请求文件夹搜索：
 
 * default.htm
 * default.html
 * index.htm
 * index.html
 
-从列表中找到的第一个文件将提供服务，就像该请求是完全限定的 URI （尽管浏览器 URL 将继续显示所请求的 URI）。
+将请求视为完全限定 URI，提供在列表中找到的第一个文件。 浏览器 URL 继续反映请求的 URI。
 
-下面的代码演示如何更改默认的文件名为*mydefault.html*。
+以下代码将默认文件名更改为 mydefault.html：
 
-[!code-csharp[Main](static-files/sample/StartupDefault.cs?name=snippet1)]
+[!code-csharp[](static-files/samples/1x/StartupDefault.cs?name=snippet_ConfigureMethod)]
 
 ## <a name="usefileserver"></a>UseFileServer
 
-`UseFileServer`将功能组合`UseStaticFiles`， `UseDefaultFiles`，和`UseDirectoryBrowser`。
+[UseFileServer](/dotnet/api/microsoft.aspnetcore.builder.fileserverextensions.usefileserver#Microsoft_AspNetCore_Builder_FileServerExtensions_UseFileServer_Microsoft_AspNetCore_Builder_IApplicationBuilder_) 结合了 `UseStaticFiles`、`UseDefaultFiles` 和 `UseDirectoryBrowser` 的功能。
 
-下面的代码使静态文件和默认的文件以提供服务，但不允许目录浏览：
+以下代码提供静态文件和默认文件。 未启用目录浏览。
 
 ```csharp
 app.UseFileServer();
-   ```
+```
 
-以下代码启用静态文件，默认文件和目录浏览：
+以下代码通过启用目录浏览基于无参数重载进行构建：
 
 ```csharp
 app.UseFileServer(enableDirectoryBrowsing: true);
-   ```
+```
 
-请参阅[注意事项](#considerations)上启用浏览时安全风险。 与`UseStaticFiles`， `UseDefaultFiles`，和`UseDirectoryBrowser`，如果你想要提供文件存在于外部`web root`，实例化和配置`FileServerOptions`将作为参数传递的对象`UseFileServer`。 例如，给定以下目录层次结构中你的 Web 应用：
+考虑以下目录层次结构：
 
-* wwwroot
-
-  * css
-
-  * 图像
-
-  * ...
-
-* MyStaticFiles
-
-  * test.png
-
+* **wwwroot**
+  * **css**
+  * **images**
+  * **js**
+* **MyStaticFiles**
+  * **images**
+      * banner1.svg
   * default.html
 
-使用上面的层次结构示例中，你可能想要启用静态文件、 默认文件和浏览`MyStaticFiles`目录。 在下面的代码段中，这来实现通过单个调用`FileServerOptions`。
+以下代码启用静态文件、默认文件和及 `MyStaticFiles` 的目录浏览：
 
-[!code-csharp[Main](static-files/sample/StartupUseFileServer.cs?highlight=5,6,7,8,9,10,11&name=snippet1)]
+[!code-csharp[](static-files/samples/1x/StartupUseFileServer.cs?name=snippet_ConfigureMethod&highlight=5-11)]
 
-如果`enableDirectoryBrowsing`设置为`true`需要调用`AddDirectoryBrowser`扩展方法从`Startup.ConfigureServices`:
+`EnableDirectoryBrowsing` 属性值为 `true` 时必须调用 `AddDirectoryBrowser`：
 
-[!code-csharp[Main](static-files/sample/StartupUseFileServer.cs?name=snippet2)]
+[!code-csharp[](static-files/samples/1x/StartupUseFileServer.cs?name=snippet_ConfigureServicesMethod)]
 
-使用的文件层次结构和上面的代码：
+使用文件层次结构和前面的代码，URL 解析如下：
 
 | URI            |                             响应  |
 | ------- | ------|
-| `http://<app>/StaticFiles/test.png`    |      MyStaticFiles/test.png |
-| `http://<app>/StaticFiles`              |     MyStaticFiles/default.html |
+| http://\<server_address>/StaticFiles/images/banner1.svg    |      MyStaticFiles/images/banner1.svg |
+| http://\<server_address>/StaticFiles             |     MyStaticFiles/default.html |
 
-如果没有默认命名文件位于*MyStaticFiles*目录、 http://\<应用 > / StaticFiles 返回具有可单击链接列出的目录：
+如果 MyStaticFiles 目录中不存在默认命名文件，则 http://\<server_address>/StaticFiles 返回包含可单击链接的目录列表：
 
-![静态文件列表](static-files/_static/db2.PNG)
+![静态文件列表](static-files/_static/db2.png)
 
 > [!NOTE]
-> `UseDefaultFiles`和`UseDirectoryBrowser`需要 url http://\<应用 > / 不包含尾随斜杠和原因 StaticFiles 客户端将重定向到 http://\<应用 > /StaticFiles/ （添加尾部反斜杠）。 如果没有在文档中的尾随斜杠相对 Url 将是不正确的。
+> `UseDefaultFiles` 和 `UseDirectoryBrowser` 使用不带尾部反斜杠的 URL http://\<server_address>/StaticFiles 触发客户端并重定向到 http://\<server_address>/StaticFiles/。 注意添加尾部反斜杠。 无尾部反斜杠，文档中的相对 URL 被视为无效。
 
 ## <a name="fileextensioncontenttypeprovider"></a>FileExtensionContentTypeProvider
 
-`FileExtensionContentTypeProvider`类包含将文件扩展名映射到 MIME 内容类型的集合。 在下面的示例中，于已知的 MIME 类型注册多个文件扩展名、".rtf"替换为，并删除".mp4"。
+[FileExtensionContentTypeProvider](/dotnet/api/microsoft.aspnetcore.staticfiles.fileextensioncontenttypeprovider) 类包含 `Mappings` 属性，用作文件扩展名到 MIME 内容类型的映射。 在以下示例中，多个文件扩展名注册到了已知的 MIME 类型。 替换了 .rtf 扩展名，删除了 .mp4。
 
-[!code-csharp[Main](../fundamentals/static-files/sample/StartupFileExtensionContentTypeProvider.cs?highlight=3,4,5,6,7,8,9,10,11,12,19&name=snippet1)]
+[!code-csharp[](static-files/samples/1x/StartupFileExtensionContentTypeProvider.cs?name=snippet_ConfigureMethod&highlight=3-12,19)]
 
-请参阅[MIME 内容类型](http://www.iana.org/assignments/media-types/media-types.xhtml)。
+请参阅 [MIME 内容类型](http://www.iana.org/assignments/media-types/media-types.xhtml)。
 
-## <a name="non-standard-content-types"></a>非标准的内容类型
+## <a name="non-standard-content-types"></a>非标准内容类型
 
-ASP.NET 静态文件中间件理解几乎 400 已知的文件内容类型。 如果用户请求了未知的文件类型的文件，静态文件中间件将返回 HTTP 404 （未找到） 响应。 如果启用了目录浏览，将显示文件的链接，但的 URI 将返回 HTTP 404 错误。
+静态文件中间件可理解近 400 种已知文件内容类型。 如果用户请求未知文件类型的文件，则静态文件中间件会返回 HTTP 404（未找到）响应。 如果启用了目录浏览，则会显示该文件的链接。 URI 返回 HTTP 404 错误。
 
-以下代码启用为未知的类型，并将呈现为图像未知的文件。
+以下代码提供未知类型，并以图像形式呈现未知文件：
 
-[!code-csharp[Main](static-files/sample/StartupServeUnknownFileTypes.cs?name=snippet1)]
+[!code-csharp[](static-files/samples/1x/StartupServeUnknownFileTypes.cs?name=snippet_ConfigureMethod)]
 
-使用上面的代码中，具有未知的内容类型的文件的请求将返回为映像。
+使用前面的代码，请求的文件含未知内容类型时，以图像形式返回请求。
 
->[!WARNING]
-> 启用`ServeUnknownFileTypes`存在安全风险，并使用它阻止这么做。  `FileExtensionContentTypeProvider`（上文所述） 提供一个更安全的替代方法为文件使用非标准扩展提供服务。
+> [!WARNING]
+> 启用 [ServeUnknownFileTypes](/dotnet/api/microsoft.aspnetcore.builder.staticfileoptions.serveunknownfiletypes#Microsoft_AspNetCore_Builder_StaticFileOptions_ServeUnknownFileTypes) 存在安全风险。 它默认处于禁用状态，不建议使用。 [FileExtensionContentTypeProvider](#fileextensioncontenttypeprovider) 提供了更安全的替代方法来提供含非标准扩展名的文件。
 
 ### <a name="considerations"></a>注意事项
 
->[!WARNING]
-> `UseDirectoryBrowser`和`UseStaticFiles`可能会泄漏机密。 我们建议你**不**启用目录浏览在生产环境中。 请注意你使用有关哪些目录的启用`UseStaticFiles`或`UseDirectoryBrowser`因为整个目录及其所有子目录将可访问。 我们建议你如保留其自己的目录中的公共内容*\<内容的根 > / wwwroot*、 离开应用程序视图、 配置文件，等等。
+> [!WARNING]
+> `UseDirectoryBrowser` 和 `UseStaticFiles` 可能会泄漏机密。 强烈建议在生产中禁用目录浏览。 请仔细查看 `UseStaticFiles` 或 `UseDirectoryBrowser` 启用了哪些目录。 整个目录及其子目录均可公开访问。 将适合公开的文件存储在专用目录中，如 \<content_root>/wwwroot。 将这些文件与 MVC 视图、Razor 页面（仅限 2.x）和配置文件等分开
 
-* 通过公开的内容的 Url`UseDirectoryBrowser`和`UseStaticFiles`受到的区分大小写和其基础文件系统的字符限制。 例如，Windows 不区分大小写，但不是 Mac 和 Linux。
+* 使用 `UseDirectoryBrowser` 和 `UseStaticFiles` 公开的内容的 URL 受大小写和基础文件系统字符限制的影响。 例如，Windows 不区分大小写 &mdash; Mac 和 Linux 却要区分。
 
-* 在 IIS 中承载的 ASP.NET Core 应用程序使用 ASP.NET 核心模块将所有请求都转发到包括静态文件的请求的应用程序。 因为它不会获取一个机会处理请求，它们均由 ASP.NET 核心模块处理之前未使用 IIS 静态文件处理程序。
+* 托管于 IIS 中的 ASP.NET Core 应用使用 [ASP.NET Core 模块 (ANCM)](xref:fundamentals/servers/aspnet-core-module) 将所有请求转发到应用，包括静态文件请求。 未使用 IIS 静态文件处理程序。 在 ANCM 处理请求前，处理程序没有机会处理请求。
 
-* 若要删除 IIS 静态文件处理程序 （在服务器或网站级别）：
+* 在 IIS Manager 中完成以下步骤，删除服务器或网站级别的 IIS 静态文件处理程序：
+    1. 转到“模块”功能。
+    1. 在列表中选择 StaticFileModule。
+    1. 单击“操作”侧栏中的“删除”。
 
-     * 导航到**模块**功能
+> [!WARNING]
+> 如果启用了 IIS 静态文件处理程序且 ANCM 配置不正确，则会提供静态文件。 例如，如果未部署 web.config 文件，则会发生这种情况。
 
-     * 选择**StaticFileModule**列表中
-
-     * 点击**删除**中**操作**侧栏
-
->[!WARNING]
-> 如果启用了 IIS 静态文件处理程序**和**ASP.NET 核心模块 (ANCM) 未正确配置 (例如如果*web.config*未部署)，将提供静态文件。
-
-* 代码文件 （包括 c# 和 Razor） 应放置在应用程序项目之外`web root`(*wwwroot*默认情况下)。 这将创建应用程序的客户端内容和服务器端源代码，以防止服务器端代码将泄漏之间完全分离。
+* 将代码文件（包括 .cs 和 .cshtml ）放在应用项目的 Web 根目录之外。 这样就在应用的客户端内容和基于服务器的代码间创建了逻辑分隔。 可以防止服务器端代码泄漏。
 
 ## <a name="additional-resources"></a>其他资源
 
-* [中间件](middleware.md)
-
-* [ASP.NET Core 简介](../index.md)
+* [中间件](xref:fundamentals/middleware/index)
+* [ASP.NET Core 简介](xref:index)

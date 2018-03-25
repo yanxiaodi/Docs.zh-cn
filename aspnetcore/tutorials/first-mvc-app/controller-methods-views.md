@@ -2,20 +2,18 @@
 title: "控制器方法和视图"
 author: rick-anderson
 description: "使用控制器方法、视图和 DataAnnotations"
-keywords: ASP.NET Core
-ms.author: riande
 manager: wpickett
+ms.author: riande
 ms.date: 03/07/2017
-ms.topic: get-started-article
-ms.assetid: c7313211-b271-4adf-bab8-8e72603cc0ce
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: get-started-article
 uid: tutorials/first-mvc-app/controller-methods-views
-ms.openlocfilehash: 8960853438d3227de3ef7c50936626149d8d5997
-ms.sourcegitcommit: 0b6c8e6d81d2b3c161cd375036eecbace46a9707
+ms.openlocfilehash: 200f02f9815966653b3b46918737c60d11f11d5a
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/11/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="controller-methods-and-views"></a>控制器方法和视图
 

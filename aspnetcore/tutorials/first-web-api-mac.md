@@ -1,29 +1,28 @@
 ---
 title: "使用 ASP.NET Core 和 Visual Studio for Mac 创建 Web API"
-description: "使用 ASP.NET Core MVC 和 Visual Studio for Mac 创建 Web API"
 author: rick-anderson
+description: "使用 ASP.NET Core MVC 和 Visual Studio for Mac 创建 Web API"
+helpviewer_heywords: ASP.NET Core, WebAPI, Web API, REST, mac, macOS, HTTP, Service, HTTP Service
+manager: wpickett
 ms.author: riande
 ms.date: 09/15/2017
-ms.topic: get-started-article
 ms.prod: asp.net-core
-uid: tutorials/first-web-api-mac
-helpviewer_heywords: ASP.NET Core, WebAPI, Web API, REST, mac, macOS, HTTP, Service, HTTP Service
 ms.technology: aspnet
-keywords: "ASP.NET Core, WebAPI, Web API, REST, mac, macOS, HTTP, 服务, HTTP 服务"
-manager: wpickett
-ms.openlocfilehash: 6835cdefcc001452a3ffc8f4fd6a2f55f7274692
-ms.sourcegitcommit: 78d28178345a0eea91556e4cd1adad98b1446db8
+ms.topic: get-started-article
+uid: tutorials/first-web-api-mac
+ms.openlocfilehash: b0e1a331fe3229119f4669fa336b6af4822785bf
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/22/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="create-a-web-api-with-aspnet-core-mvc-and-visual-studio-for-mac"></a>使用 ASP.NET Core MVC 和 Visual Studio for Mac 创建 Web API
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT) 和 [Mike Wasson](https://github.com/mikewasson)
 
-在本教程中，将生成用于管理“待办事项”列表的 Web API。 不会生成 UI。
+本教程将生成一个用于管理“待办事项”列表的 Web API。 不构造 UI。
 
-本教程有三个版本：
+本教程提供 3 个版本：
 
 * macOS：使用 Visual Studio for Mac 创建 Web API（本教程）
 * Windows：[使用 Visual Studio for Windows 创建 Web API](xref:tutorials/first-web-api)
@@ -35,11 +34,11 @@ ms.lasthandoff: 09/22/2017
 
 * 请参阅 [Mac 或 Linux 上的 ASP.NET Core MVC 介绍](xref:tutorials/first-mvc-app-xplat/index)，获取使用永久数据库的示例。
 
-## <a name="prerequisites"></a>先决条件
+## <a name="prerequisites"></a>系统必备
 
 安装以下组件：
 
-- [.NET Core SDK](https://www.microsoft.com/net/core#macos)  
+- [.NET Core 2.0.0 SDK](https://www.microsoft.com/net/core) 或更高版本
 - [Visual Studio for Mac](https://www.visualstudio.com/vs/visual-studio-mac/)
 
 ## <a name="create-the-project"></a>创建项目
@@ -79,7 +78,7 @@ ms.lasthandoff: 09/22/2017
 
 模型是表示应用程序中的数据的对象。 在此示例中，唯一的模型是待办事项。
 
-添加名为“Models”的文件夹。 在解决方案资源管理器中，右键单击项目。 选择“添加” > “新建文件夹”。 将文件夹命名为“Models”。
+添加名为“模型”的文件夹。 在解决方案资源管理器中，右键单击项目。 选择“添加” > “新建文件夹”。 将文件夹命名为“Models”。
 
 ![新建文件夹](first-web-api-mac/_static/folder.png)
 
@@ -197,7 +196,7 @@ public IActionResult GetById(string id)
 ## <a name="next-steps"></a>后续步骤
 
 * [路由到控制器操作](xref:mvc/controllers/routing)
-* 有关部署 API 的信息，请参阅[发布和部署](../publishing/index.md)。
-* [查看或下载示例代码](https://github.com/aspnet/Docs/tree/master/aspnetcore/tutorials/first-web-api/sample)
+* 有关部署 API 的信息，请参阅[托管和部署](xref:host-and-deploy/index)。
+* [查看或下载示例代码](https://github.com/aspnet/Docs/tree/master/aspnetcore/tutorials/first-web-api/sample)（[如何下载](xref:tutorials/index#how-to-download-a-sample)）
 * [Postman](https://www.getpostman.com/)
 * [Fiddler](https://www.telerik.com/download/fiddler)

@@ -1,28 +1,38 @@
 ---
 title: "在 ASP.NET Core 中使用数据"
 author: rick-anderson
-description: 
-keywords: ASP.NET Core
-ms.author: riande
+description: "提供介绍如何处理数据的文章的链接。 许多都使用 Entity Framework Core。"
 manager: wpickett
-ms.date: 10/14/2016
-ms.topic: article
-ms.assetid: a8fb7eb7-e0e5-4394-84f3-1f1dbe0ba2ef
-ms.technology: aspnet
+ms.author: riande
+ms.date: 10/14/2017
 ms.prod: asp.net-core
-ms.openlocfilehash: 3566127476289ae085a9161132b103638bc9b068
-ms.sourcegitcommit: 0b6c8e6d81d2b3c161cd375036eecbace46a9707
+ms.technology: aspnet
+ms.topic: article
+uid: data/index
+ms.openlocfilehash: 6cdd8b2889a2a53c2767e5a5ebb170c31d2c31a4
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/11/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="working-with-data-in-aspnet-core"></a>在 ASP.NET Core 中使用数据 
 
-*   [借助 Visual Studio 使用 ASP.NET Core 和 Entity Framework Core 入门](ef-mvc/index.md)
+* [通过 Visual Studio 开始使用 Razor 页面和 Entity Framework Core](xref:data/ef-rp/index)
+
+   * [Razor 页面及 EF 入门](xref:data/ef-rp/intro)
+   * [创建、读取、更新和删除操作](xref:data/ef-rp/crud)
+   * [排序、筛选器、页和组](xref:data/ef-rp/sort-filter-page)
+   * [迁移](xref:data/ef-rp/migrations)
+   * [创建复杂数据模型](xref:data/ef-rp/complex-data-model)
+   * [读取相关数据](xref:data/ef-rp/read-related-data)
+   * [更新相关数据](xref:data/ef-rp/update-related-data)
+   * [处理并发冲突](xref:data/ef-rp/concurrency)
+
+*   [ASP.NET Core MVC 和 Entity Framework Core 入门（使用 Visual Studio）](ef-mvc/index.md)
     *   [入门](ef-mvc/intro.md)
-    *   [创建、读取、更新和删除操作](ef-mvc/crud.md)
-    *   [排序、筛选、分页和分组](ef-mvc/sort-filter-page.md)
-    *   [迁移](ef-mvc/migrations.md)
+    *   [创建、读取、更新和删除操作](xref:data/ef-mvc/crud)
+    *   [排序、筛选器、页和组](xref:data/ef-mvc/sort-filter-page)
+    *   [迁移](xref:data/ef-mvc/migrations)
     *   [创建复杂数据模型](ef-mvc/complex-data-model.md)
     *   [读取相关数据](ef-mvc/read-related-data.md)
     *   [更新相关数据](ef-mvc/update-related-data.md)
@@ -36,4 +46,5 @@ ms.lasthandoff: 08/11/2017
     *   [使用 Visual Studio 连接服务添加 Azure 存储](https://azure.microsoft.com/documentation/articles/vs-azure-tools-connected-services-storage/)
     *   [开始使用 Azure Blob 存储和 Visual Studio 连接服务](https://azure.microsoft.com/documentation/articles/vs-storage-aspnet5-getting-started-blobs/)
     *   [开始使用队列存储和 Visual Studio 连接服务](https://azure.microsoft.com/documentation/articles/vs-storage-aspnet5-getting-started-queues/)
-    *   [如何开始使用 Azure 表服务和 Visual Studio 连接服务](https://azure.microsoft.com/documentation/articles/vs-storage-aspnet5-getting-started-tables/)
+    *   [开始使用 Azure 表存储和 Visual Studio 连接服务](https://azure.microsoft.com/documentation/articles/vs-storage-aspnet5-getting-started-tables/)
+

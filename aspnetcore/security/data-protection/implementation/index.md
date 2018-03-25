@@ -1,25 +1,23 @@
 ---
 title: "实现"
 author: rick-anderson
-description: 
-keywords: ASP.NET Core
-ms.author: riande
+description: "此文档充当各 ASP.NET Core 数据保护实现主题的目录。"
 manager: wpickett
+ms.author: riande
 ms.date: 10/14/2016
-ms.topic: article
-ms.assetid: 706a11bb-bf6e-4e91-930b-e3f4e71d04a0
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: security/data-protection/implementation/index
-ms.openlocfilehash: a26f910f30e437306a68394aee2c58fa0eca78b4
-ms.sourcegitcommit: 0b6c8e6d81d2b3c161cd375036eecbace46a9707
+ms.openlocfilehash: a464e961c0df1eb5f3def40d2a8c306454ed02d8
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/11/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="implementation"></a>实现
 
-* [已验证的加密详细信息。](authenticated-encryption-details.md)
+* [已验证的加密详细信息](authenticated-encryption-details.md)
 
 * [子项派生和已验证的加密](subkeyderivation.md)
 

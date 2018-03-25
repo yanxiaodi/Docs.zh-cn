@@ -2,62 +2,60 @@
 title: "布局"
 author: ardalis
 description: 
-keywords: ASP.NET Core,
-ms.author: riande
 manager: wpickett
+ms.author: riande
 ms.date: 10/14/2016
-ms.topic: article
-ms.assetid: 29f12d1f-9734-48bd-bf1a-cee53a8ab700
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: mvc/views/layout
-ms.openlocfilehash: 25aa5fc730d9076fdcf9d29cb5d9dfa75a246a1a
-ms.sourcegitcommit: 9cdbfd0d670d70b9c354216aabee260c52dad5ee
-ms.translationtype: MT
+ms.openlocfilehash: 3e9e5949d8940a33508e24f0da015b49b7ba468c
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
+ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/12/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="layout"></a>布局
 
-通过[Steve Smith](https://ardalis.com/)
+作者：[Steve Smith](https://ardalis.com/)
 
-视图频繁共享 visual 和编程元素。 在本文中，你将了解如何使用通用的布局、 共享指令，以及在 ASP.NET 应用程序运行之前呈现视图的常见代码。
+视图经常共享可视和编程元素。 本文介绍如何在 ASP.NET 应用中呈现视图之前，使用通用布局、共享指令和运行常见代码。
 
-## <a name="what-is-a-layout"></a>什么是一种布局
+## <a name="what-is-a-layout"></a>什么是布局
 
-大多数 web 应用都具有它们导航页之间为用户提供一致的体验的常用布局。 布局通常包括常见的用户界面元素，如应用程序标题、 导航或菜单元素和页脚。
+大多数 Web 应用都有一个通用布局，可在页面间切换时为用户提供一致体验。 该布局通常包括应用标头、导航或菜单元素以及页脚等常见的用户界面元素。
 
 ![页面布局示例](layout/_static/page-layout.png)
 
-在应用内的很多页也经常使用常见的 HTML 结构，如脚本和样式表。 在所有这些共享元素可定义*布局*文件，然后在应用程序中使用任何视图引用。 布局减少重复的代码在视图中，帮助他们按照[不重复自己 （模拟） 原则](http://deviq.com/don-t-repeat-yourself/)。
+应用中的许多页面也经常使用脚本和样式表等常用的 HTML 结构。 所有这些共享元素均可在布局文件中进行定义，应用内使用的任何视图随后均可引用此文件。 布局可减少视图中的重复代码，帮助它们遵循[不要自我重复 (DRY) 原则](http://deviq.com/don-t-repeat-yourself/)。
 
-按照约定，名为 ASP.NET 应用程序的默认布局`_Layout.cshtml`。 Visual Studio ASP.NET 核心 MVC 项目模板包含在此布局文件`Views/Shared`文件夹：
+按照约定，ASP.NET 应用的默认布局名为 `_Layout.cshtml`。 Visual Studio ASP.NET Core MVC 项目模板在 `Views/Shared` 文件夹中包含此布局文件：
 
-![在解决方案资源管理器的视图文件夹](layout/_static/web-project-views.png)
+![解决方案资源管理器中的视图文件夹](layout/_static/web-project-views.png)
 
-此布局在应用程序定义视图的顶级模板。 应用不需要一种布局，并应用可以定义多个布局，与指定不同布局的不同视图。
+此布局为应用中的视图定义顶级模板。 应用不需要布局，它们可以定义多个布局，并且不同的视图指定不同的布局。
 
-示例`_Layout.cshtml`:
+示例 `_Layout.cshtml`：
 
 [!code-html[Main](../../common/samples/WebApplication1/Views/Shared/_Layout.cshtml?highlight=42,66)]
 
 ## <a name="specifying-a-layout"></a>指定布局
 
-具有 razor 视图`Layout`属性。 单个视图，通过设置此属性指定布局：
+Razor 视图具有 `Layout` 属性。 单个视图通过设置此属性来指定布局：
 
 [!code-html[Main](../../common/samples/WebApplication1/Views/_ViewStart.cshtml?highlight=2)]
 
-指定的布局可以使用完整路径 (示例： `/Views/Shared/_Layout.cshtml`) 或部分名称 (示例： `_Layout`)。 如果提供部分名称，Razor 视图引擎将搜索使用其标准的发现进程的布局文件。 控制器关联文件夹搜索第一次后, 跟`Shared`文件夹。 此发现过程等同于用来发现[分部视图](partial.md)。
+指定的布局可以使用完整路径（例如：`/Views/Shared/_Layout.cshtml`）或部分名称（例如：`_Layout`）。 如果提供部分名称，Razor 视图引擎将使用其标准发现过程来搜索布局文件。 首先搜索与控制器关联的文件夹，然后搜索 `Shared` 文件夹。 此发现过程与用于发现[分部视图](partial.md)的过程相同。
 
-默认情况下，必须调用每个布局`RenderBody`。 任何位置调用`RenderBody`是放置，就将呈现的视图的内容。
+默认情况下，每个布局必须调用 `RenderBody`。 无论在何处调用 `RenderBody`，都会呈现视图的内容。
 
-<a name=layout-sections-label></a>
+<a name="layout-sections-label"></a>
 
 ### <a name="sections"></a>部分
 
-布局 （可选） 可以引用一个或多个*部分*，通过调用`RenderSection`。 各节提供了一种方法来组织放置某些页元素。 每次调用`RenderSection`可以指定该部分为必需或可选。 如果未找到所需的部分，将引发异常。 单个视图指定要在中部分使用呈现的内容`@section`Razor 语法。 如果视图可用于定义一个部分，必须呈现 （或将发生错误）。
+布局可以通过调用 `RenderSection` 来选择引用一个或多个节。 节提供一种方法来组织某些页面元素应当放置的位置。 对 `RenderSection` 的每次调用均可指定该节是必需的还是可选的。 如果找不到所需的节，则会引发异常。 单个视图使用 `@section` Razor 语法指定要在节中呈现的内容。 如果视图定义某个节，则必须呈现该节（否则会发生错误）。
 
-示例`@section`视图中的定义：
+视图中的示例 `@section` 定义：
 
 ```html
 @section Scripts {
@@ -65,23 +63,23 @@ ms.lasthandoff: 09/12/2017
    }
    ```
 
-在上面的代码中，验证脚本添加到`scripts`包含一个窗体的视图上的部分。 同一个应用程序中的其他视图可能不需要任何其他脚本，并因此不需要定义脚本部分。
+在上面的代码中，验证脚本添加到了视图（包含窗体）上的 `scripts` 节。 同一应用程序中的其他视图可能不需要任何其他脚本，因此无需定义脚本节。
 
-在视图中定义的部分是仅在其立即进行布局页中可用。 不能从它们、 将视图组件或查看系统的其他部分引用。
+视图中定义的节仅在其即时布局页面中可用。 不能从部分、视图组件或视图系统的其他部分引用它们。
 
-### <a name="ignoring-sections"></a>忽略部分
+### <a name="ignoring-sections"></a>忽略节
 
-默认情况下，正文和内容页中的所有部分必须所有来呈现布局页。 Razor 视图引擎将强制实施此通过跟踪是否在呈现的正文和每个部分。
+默认情况下，必须由布局页面呈现内容页中的正文和所有节。 Razor 视图引擎通过跟踪是否已呈现正文和每个节来强制执行此操作。
 
-若要让视图引擎以忽略正文或部分，请调用`IgnoreBody`和`IgnoreSection`方法。
+要让视图引擎忽略正文或节，请调用 `IgnoreBody` 和 `IgnoreSection` 方法。
 
-正文和 Razor 页中的每个部分必须呈现或忽略。
+必须呈现或忽略 Razor 页面中的正文和每个节。
 
-<a name=viewimports></a>
+<a name="viewimports"></a>
 
-## <a name="importing-shared-directives"></a>导入共享的指令
+## <a name="importing-shared-directives"></a>导入共享指令
 
-视图可以使用 Razor 指令来执行很多东西，例如导入命名空间或执行[依赖关系注入](dependency-injection.md)。 可能在一组公共中指定指令由许多视图共享`_ViewImports.cshtml`文件。 `_ViewImports`文件支持以下指令：
+视图可以使用 Razor 指令来执行许多操作，例如导入命名空间或执行[依赖关系注入](dependency-injection.md)。 可在一个共同的 `_ViewImports.cshtml` 文件中指定由许多视图共享的指令。 `_ViewImports` 文件支持以下指令：
 
 * `@addTagHelper`
 
@@ -97,41 +95,41 @@ ms.lasthandoff: 09/12/2017
 
 * `@inject`
 
-该文件不支持其他 Razor 功能，如函数和部分定义。
+该文件不支持函数和节定义等其他 Razor 功能。
 
-示例`_ViewImports.cshtml`文件：
+示例 `_ViewImports.cshtml` 文件：
 
 [!code-html[Main](../../common/samples/WebApplication1/Views/_ViewImports.cshtml)]
 
-`_ViewImports.cshtml`文件的 ASP.NET 核心 MVC 应用程序通常置于`Views`文件夹。 A`_ViewImports.cshtml`可以将文件放在任何文件夹中，它将仅应用于的情况下该文件夹及其子文件夹内的视图。 `_ViewImports`根级别中，开始处理文件，然后对截止到每个文件夹的位置的视图本身，以便设置指定的根级别可能重写在文件夹级别。
+针对 ASP.NET Core MVC 应用的 `_ViewImports.cshtml` 文件通常放置在 `Views` 文件夹中。 `_ViewImports.cshtml` 文件可以放置在任何文件夹中，在这种情况下，它仅适用于该文件夹及其子文件夹中的视图。 由于从根级别开始处理 `_ViewImports` 文件，然后处理视图本身的位置之前的每个文件夹，因此在根级别指定的设置可能会覆盖在文件夹级别。
 
-例如，如果根级别`_ViewImports.cshtml`文件指定`@model`和`@addTagHelper`，以及另一个`_ViewImports.cshtml`控制器相关视图的文件夹中的文件指定一个不同`@model`和添加另一个`@addTagHelper`，视图将有权访问这两个标记帮助程序，并将使用后者`@model`。
+例如，如果根级别 `_ViewImports.cshtml` 文件指定 `@model` 和 `@addTagHelper`，在该视图的控制器关联文件夹中，另一个 `_ViewImports.cshtml` 文件指定不同的 `@model` 并添加另一个 `@addTagHelper`，该视图将有权访问这两个标记帮助程序，并将使用后一个 `@model`。
 
-如果选择多个`_ViewImports.cshtml`文件是否为视图运行、 组合中包含的指令的行为`ViewImports.cshtml`文件将如下所示：
+如果对一个视图运行多个 `_ViewImports.cshtml` 文件，那么包含在 `ViewImports.cshtml` 文件中的指令的组合行为如下所示：
 
-* `@addTagHelper``@removeTagHelper`： 所有运行，按顺序
+* `@addTagHelper``@removeTagHelper`：按顺序全部运行
 
-* `@tagHelperPrefix`： 到视图最近的一个替代的任何其他
+* `@tagHelperPrefix`：最接近视图的文件会替代任何其他文件
 
-* `@model`： 到视图最近的一个替代的任何其他
+* `@model`：最接近视图的文件会替代任何其他文件
 
-* `@inherits`： 到视图最近的一个替代的任何其他
+* `@inherits`：最接近视图的文件会替代任何其他文件
 
-* `@using`： 所有都包含;将忽略重复项
+* `@using`：全部包括在内；忽略重复项
 
-* `@inject`： 对于每个属性，则最近到视图将覆盖具有相同的属性名称的任何其他
+* `@inject`：针对每个属性，最接近视图的属性会替代具有相同属性名的任何其他属性
 
-<a name=viewstart></a>
+<a name="viewstart"></a>
 
-## <a name="running-code-before-each-view"></a>运行代码之前每个视图
+## <a name="running-code-before-each-view"></a>在呈现每个视图之前运行代码
 
-如果你的代码需要在每个视图之前运行，这应置于`_ViewStart.cshtml`文件。 按照约定，`_ViewStart.cshtml`文件位于`Views`文件夹。 中列出的语句`_ViewStart.cshtml`在每个完整的视图 （不布局和非分部视图） 之前运行。 如[ViewImports.cshtml](xref:mvc/views/layout#viewimports)，`_ViewStart.cshtml`是分层。 如果`_ViewStart.cshtml`控制器关联的视图文件夹中定义文件，它将运行后的根目录中定义的一个`Views`文件夹 （如果有）。
+如果有需要在呈现每个视图之前运行的代码，应将其置于 `_ViewStart.cshtml` 文件中。 按照约定，`_ViewStart.cshtml` 文件位于 `Views` 文件夹中。 在呈现每个完整视图（不是布局，也不是分部视图）之前运行 `_ViewStart.cshtml` 中列出的语句。 与 [ViewImports.cshtml](xref:mvc/views/layout#viewimports) 一样，`_ViewStart.cshtml` 是分层的。 如果在控制器关联的视图文件夹中定义了 `_ViewStart.cshtml` 文件，则将在 `Views` 文件夹根目录中定义的文件（如有）之后运行该文件。
 
-示例`_ViewStart.cshtml`文件：
+示例 `_ViewStart.cshtml` 文件：
 
 [!code-html[Main](../../common/samples/WebApplication1/Views/_ViewStart.cshtml)]
 
-上述文件指定所有视图将都使用`_Layout.cshtml`布局。
+上述文件指定所有视图都将使用 `_Layout.cshtml` 布局。
 
 > [!NOTE]
-> 既不`_ViewStart.cshtml`也不`_ViewImports.cshtml`通常置于`/Views/Shared`文件夹。 应直接在放置这些文件的应用程序级版本`/Views`文件夹。
+> `_ViewStart.cshtml` 和 `_ViewImports.cshtml` 通常不会放置在 `/Views/Shared` 文件夹中。 这些应用级别版本的文件应直接放置在 `/Views` 文件夹中。

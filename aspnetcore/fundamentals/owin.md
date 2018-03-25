@@ -1,44 +1,42 @@
 ---
-title: "打开.NET (OWIN) 的 Web 界面"
+title: ".NET 的开放 Web 接口 (OWIN)"
 author: ardalis
-description: "发现如何 ASP.NET Core 支持打开的 Web 接口的.NET (OWIN)，这允许 web 应用程序从 web 服务器分离。"
-keywords: "ASP.NET 核心，为使.NET，OWIN 打开 Web 接口"
-ms.author: riande
+description: "了解 ASP.NET Core 如何支持 .NET 的开放 Web 接口 (OWIN)，将 Web 应用与 Web 服务器分离。"
 manager: wpickett
-ms.date: 10/14/2016
-ms.topic: article
-ms.assetid: 70c4e6bc-a773-4039-96ec-6fe557c9369d
-ms.technology: aspnet
-ms.prod: asp.net-core
-uid: fundamentals/owin
+ms.author: riande
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: e111a451bcc741f3e77f7ce756356cc1b57a5b52
-ms.sourcegitcommit: 732cd2684246e49e796836596643a8d37e20c46d
-ms.translationtype: MT
+ms.date: 10/14/2016
+ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
+uid: fundamentals/owin
+ms.openlocfilehash: 1a6a49715840d66dc37465758d3a896af96e2976
+ms.sourcegitcommit: f2a11a89037471a77ad68a67533754b7bb8303e2
+ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 10/01/2017
+ms.lasthandoff: 02/01/2018
 ---
-# <a name="introduction-to-open-web-interface-for-net-owin"></a>若要打开.NET (OWIN) 的 Web 界面的简介
+# <a name="introduction-to-open-web-interface-for-net-owin"></a>.NET 的开放 Web 接口 (OWIN) 的介绍
 
-通过[Steve Smith](https://ardalis.com/)和[Rick Anderson](https://twitter.com/RickAndMSFT)
+作者：[Steve Smith](https://ardalis.com/) 和 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-ASP.NET 核心支持打开的 Web 接口的.NET (OWIN)。 OWIN 允许 web 应用程序从 web 服务器分离。 它定义的中间件来用于在管道中使用，以处理请求和响应关联的标准方法。 ASP.NET Core 应用程序和中间件可以与基于 OWIN 的应用程序、 服务器和中间件互操作。
+ASP.NET Core 支持 .NET 的开放 Web 接口 (OWIN)。 OWIN 允许 Web 应用从 Web 服务器分离。 它定义了在管道中使用中间件来处理请求和相关响应的标准方法。 ASP.NET Core 应用程序和中间件可以与基于 OWIN 的应用程序、服务器和中间件进行互操作。
 
-OWIN 提供了允许与不同的对象模型一起使用的两个框架解除层。 `Microsoft.AspNetCore.Owin`包提供了两个适配器实现：
-- OWIN 到 ASP.NET 核心 
-- OWIN 到 ASP.NET 核心
+OWIN 提供了一个分离层，可一起使用具有不同对象模型的两个框架。 `Microsoft.AspNetCore.Owin` 包提供了两个适配器实现：
+- ASP.NET Core 到 OWIN 
+- OWIN 到 ASP.NET Core
 
-这允许基于 OWIN 兼容服务器/主机，或在 ASP.NET Core 上运行其他 OWIN 兼容组件托管的 ASP.NET Core。
+此方法可将 ASP.NET Core 托管在兼容 OWIN 的服务器/主机上，或在 ASP.NET Core 上运行其他兼容 OWIN 的组件。
 
-注意： 使用这些适配器附带有一定的性能开销。 使用仅 ASP.NET 核心组件的应用程序不应使用 Owin 包或适配器。
+注意：使用这些适配器会带来性能成本。 仅使用 ASP.NET Core 组件的应用程序不应使用 Owin 包或适配器。
 
-[查看或下载的示例代码](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/owin/sample)([如何下载](xref:tutorials/index#how-to-download-a-sample))
+[查看或下载示例代码](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/owin/sample)（[如何下载](xref:tutorials/index#how-to-download-a-sample)）
 
-## <a name="running-owin-middleware-in-the-aspnet-pipeline"></a>在 ASP.NET 管线中运行 OWIN 中间件
+## <a name="running-owin-middleware-in-the-aspnet-pipeline"></a>在 ASP.NET 管道中运行 OWIN 中间件
 
-ASP.NET 核心 OWIN 支持部署的一部分`Microsoft.AspNetCore.Owin`包。 你可以通过安装此包导入你的项目的 OWIN 支持。
+ASP.NET Core 的 OWIN 支持作为 `Microsoft.AspNetCore.Owin` 包的一部分进行部署。 可通过安装此包将 OWIN 支持导入到项目中。
 
-OWIN 中间件符合[OWIN 规范](http://owin.org/spec/spec/owin-1.0.0.html)，这要求`Func<IDictionary<string, object>, Task>`接口和特定的密钥设置 (如`owin.ResponseBody`)。 以下简单的 OWIN 中间件将显示"Hello World":
+OWIN 中间件符合 [OWIN 规范](http://owin.org/spec/spec/owin-1.0.0.html)，该规范要求使用 `Func<IDictionary<string, object>, Task>` 接口，并设置特定的键（如 `owin.ResponseBody`）。 以下简单的 OWIN 中间件显示“Hello World”：
 
 ```csharp
 public Task OwinHello(IDictionary<string, object> environment)
@@ -57,9 +55,9 @@ public Task OwinHello(IDictionary<string, object> environment)
 }
 ```
 
-示例签名返回`Task`并接受`IDictionary<string, object>`OWIN 通过所需的方式。
+示例签名返回 `Task`，并接受 OWIN 所要求的 `IDictionary<string, object>`。
 
-下面的代码演示如何添加`OwinHello`（上面所述） 向 ASP.NET 管道使用的中间件`UseOwin`扩展方法。
+以下代码显示了如何使用 `UseOwin` 扩展方法将 `OwinHello` 中间件（如上所示）添加到 ASP.NET 管道。
 
 ```csharp
 public void Configure(IApplicationBuilder app)
@@ -71,13 +69,13 @@ public void Configure(IApplicationBuilder app)
 }
 ```
 
-你可以配置在 OWIN 管道中进行其他操作。
+可配置在 OWIN 管道中要进行的其他操作。
 
 > [!NOTE]
-> 仅应在首次向响应流写入之前修改响应标头。
+> 响应标头只能在首次写入响应流之前进行修改。
 
 > [!NOTE]
-> 多次调用`UseOwin`出于性能原因不建议这样做。 如果组合在一起，OWIN 组件将最好地运行。
+> 由于性能原因，不建议多次调用 `UseOwin`。 组合在一起时 OWIN 组件的性能最佳。
 
 ```csharp
 app.UseOwin(pipeline =>
@@ -91,19 +89,19 @@ app.UseOwin(pipeline =>
 });
 ```
 
-<a name=hosting-on-owin></a>
+<a name="hosting-on-owin"></a>
 
-## <a name="using-aspnet-hosting-on-an-owin-based-server"></a>使用基于 OWIN 的服务器上的 ASP.NET 宿主
+## <a name="using-aspnet-hosting-on-an-owin-based-server"></a>在基于 OWIN 的服务器中使用 ASP.NET 托管
 
-基于 OWIN 的服务器可以承载 ASP.NET 应用程序。 此类的一台服务器是[Nowin](https://github.com/Bobris/Nowin)，.NET OWIN web 服务器。 在本文示例中，我已包含引用 Nowin 并使用它来创建一个项目项目`IServer`能够自承载 ASP.NET Core。
+基于 OWIN 的服务器可托管 ASP.NET 应用程序。 [Nowin](https://github.com/Bobris/Nowin)（.NET OWIN Web 服务器）属于这种服务器。 本文的示例中包含了一个引用 Nowin 的项目，并使用它创建了一个自托管 ASP.NET Core 的 `IServer`。
 
 [!code-csharp[Main](owin/sample/src/NowinSample/Program.cs?highlight=15)]
 
-`IServer`是接口，需要`Features`属性和`Start`方法。
+`IServer` 是需要 `Features` 属性和 `Start` 方法的接口。
 
-`Start`负责配置和启动服务器，在这种情况下通过一系列从 IServerAddressesFeature 设置地址分析的 fluent API 调用。 请注意的 fluent 配置`_builder`变量指定将由处理请求`appFunc`先前在方法中定义。 这`Func`称为上每个请求以处理传入的请求。
+`Start` 负责配置和启动服务器，在此情况下，此操作通过一系列 Fluent API 调用完成，这些调用设置从 IServerAddressesFeature 分析的地址。 请注意，`_builder` 变量的 Fluent 配置指定请求将由方法中之前定义的 `appFunc` 来处理。 对于每个请求，都会调用此 `Func` 以处理传入请求。
 
-我们还将添加`IWebHostBuilder`扩展，以便可以方便地添加和配置 Nowin 服务器。
+我们还将添加一个 `IWebHostBuilder` 扩展，以便添加和配置 Nowin 服务器。
 
 ```csharp
 using System;
@@ -136,7 +134,7 @@ namespace Microsoft.AspNetCore.Hosting
 }
 ```
 
-与此就地，所有，具有需要运行 ASP.NET 应用程序使用此自定义服务器调用扩展*Program.cs*:
+准备就绪后，只需使用此自定义服务器来运行 ASP.NET 应用程序以调用 Program.cs 中的扩展：
 
 ```csharp
 
@@ -167,11 +165,11 @@ namespace NowinSample
 
 ```
 
-了解有关 ASP.NET[服务器](servers/index.md)。
+了解有关 ASP.NET [服务器](servers/index.md)的更多信息。
 
-## <a name="run-aspnet-core-on-an-owin-based-server-and-use-its-websockets-support"></a>基于 OWIN 的服务器上运行 ASP.NET 核心，并使用其 Websocket 支持
+## <a name="run-aspnet-core-on-an-owin-based-server-and-use-its-websockets-support"></a>在基于 OWIN 的服务器上运行 ASP.NET Core 并使用其 WebSocket 支持
 
-如何基于 OWIN 的服务器的功能的另一个示例可以利用 ASP.NET 核心是对等 Websocket 功能的访问。 在前面的示例使用的.NET OWIN web 服务器具有用于 Web 套接字内置的这可以利用 ASP.NET Core 应用程序支持。 下面的示例演示一个简单的 web 应用，支持 Web 套接字回显 Websocket 通过向服务器发送的所有内容。
+ASP.NET Core 如何利用基于 OWIN 的服务器功能的另一个示例是访问 WebSocket 等功能。 前面示例中使用的 .NET OWIN Web 服务器支持内置的 Web 套接字，可由 ASP.NET Core 应用程序利用。 下面的示例显示了简单的 Web 应用，它支持 Web 套接字并回显通过 WebSocket 发送到服务器的所有内容。
 
 ```csharp
 public class Startup
@@ -219,13 +217,13 @@ public class Startup
 }
 ```
 
-这[示例](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/owin/sample)使用相同配置`NowinServer`与之前的唯一的区别是在应用程序中的配置方式其`Configure`方法。 测试使用[简单 websocket 客户端](https://chrome.google.com/webstore/detail/simple-websocket-client/pfdhoblngboilpfeibdedpjgfnlcodoo?hl=en)演示应用程序：
+使用与前一个相同的 `NowinServer` 来配置此[示例](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/owin/sample) - 唯一的区别是如何在其 `Configure` 方法中配置应用程序。 使用[简单的 websocket 客户端](https://chrome.google.com/webstore/detail/simple-websocket-client/pfdhoblngboilpfeibdedpjgfnlcodoo?hl=en)的测试演示应用程序：
 
 ![Web 套接字测试客户端](owin/_static/websocket-test.png)
 
 ## <a name="owin-environment"></a>OWIN 环境
 
-你可以构造 OWIN 环境使用`HttpContext`。
+可使用 `HttpContext` 来构造 OWIN 环境。
 
 ```csharp
 
@@ -235,94 +233,92 @@ public class Startup
 
 ## <a name="owin-keys"></a>OWIN 键
 
-取决于 OWIN`IDictionary<string,object>`对象进行通信信息的整个 HTTP 请求/响应交换。 ASP.NET 核心实现下面列出的密钥。 请参阅[主规范、 扩展](http://owin.org/#spec)，和[OWIN 键指导原则和常见的键](http://owin.org/spec/spec/CommonKeys.html)。
+OWIN 依赖于 `IDictionary<string,object>` 对象，以在整个 HTTP请求/响应交换中传达信息。 ASP.NET Core 实现以下所列的键。 请参阅[主规范、扩展](http://owin.org/#spec)和 [OWIN Key Guidelines and Common Keys](http://owin.org/spec/spec/CommonKeys.html)（OWIN 键指南和常用键）。
 
-### <a name="request-data-owin-v100"></a>请求的数据 (OWIN v1.0.0)
+### <a name="request-data-owin-v100"></a>请求数据 (OWIN v1.0.0)
 
-| 键               | 值 （类型） | 描述 |
+| 键               | 值（类型） | 描述 |
 | ----------------- | ------------ | ----------- |
-| owin。RequestScheme | `String` |  |
-| owin。RequestMethod  | `String` | |    
-| owin。RequestPathBase  | `String` | |    
-| owin。RequestPath | `String` | |     
-| owin。RequestQueryString  | `String` | |    
-| owin。RequestProtocol  | `String` | |    
-| owin。RequestHeaders | `IDictionary<string,string[]>`  | |
-| owin。RequestBody | `Stream`  | |
+| owin.RequestScheme | `String` |  |
+| owin.RequestMethod  | `String` | |    
+| owin.RequestPathBase  | `String` | |    
+| owin.RequestPath | `String` | |     
+| owin.RequestQueryString  | `String` | |    
+| owin.RequestProtocol  | `String` | |    
+| owin.RequestHeaders | `IDictionary<string,string[]>`  | |
+| owin.RequestBody | `Stream`  | |
 
-### <a name="request-data-owin-v110"></a>请求的数据 (OWIN v1.1.0)
+### <a name="request-data-owin-v110"></a>请求数据 (OWIN v1.1.0)
 
-| 键               | 值 （类型） | 描述 |
+| 键               | 值（类型） | 描述 |
 | ----------------- | ------------ | ----------- |
-| owin。请求 Id | `String` | Optional |
+| owin.RequestId | `String` | Optional |
 
 ### <a name="response-data-owin-v100"></a>响应数据 (OWIN v1.0.0)
 
-| 键               | 值 （类型） | 描述 |
+| 键               | 值（类型） | 描述 |
 | ----------------- | ------------ | ----------- |
-| owin。ResponseStatusCode | `int` | Optional |
-| owin。ResponseReasonPhrase | `String` | Optional |
-| owin。ResponseHeaders | `IDictionary<string,string[]>`  | |
-| owin。ResponseBody | `Stream`  | |
+| owin.ResponseStatusCode | `int` | Optional |
+| owin.ResponseReasonPhrase | `String` | Optional |
+| owin.ResponseHeaders | `IDictionary<string,string[]>`  | |
+| owin.ResponseBody | `Stream`  | |
 
 
 ### <a name="other-data-owin-v100"></a>其他数据 (OWIN v1.0.0)
 
-| 键               | 值 （类型） | 描述 |
+| 键               | 值（类型） | 描述 |
 | ----------------- | ------------ | ----------- |
-| owin。CallCancelled | `CancellationToken` |  |
-| owin。版本  | `String` | |   
+| owin.CallCancelled | `CancellationToken` |  |
+| owin.Version  | `String` | |   
 
 
-### <a name="common-keys"></a>常见的键
+### <a name="common-keys"></a>常用键
 
-| 键               | 值 （类型） | 描述 |
+| 键               | 值（类型） | 描述 |
 | ----------------- | ------------ | ----------- |
-| ssl。ClientCertificate | `X509Certificate` |  |
-| ssl。LoadClientCertAsync  | `Func<Task>` | |    
-| 服务器。RemoteIpAddress  | `String` | |    
-| 服务器。端口远程端口 | `String` | |     
-| 服务器。LocalIpAddress  | `String` | |    
-| 服务器。LocalPort  | `String` | |    
-| 服务器。IsLocal  | `bool` | |    
-| 服务器。OnSendingHeaders  | `Action<Action<object>,object>` | |
+| ssl.ClientCertificate | `X509Certificate` |  |
+| ssl.LoadClientCertAsync  | `Func<Task>` | |    
+| server.RemoteIpAddress  | `String` | |    
+| server.RemotePort | `String` | |     
+| server.LocalIpAddress  | `String` | |    
+| server.LocalPort  | `String` | |    
+| server.IsLocal  | `bool` | |    
+| server.OnSendingHeaders  | `Action<Action<object>,object>` | |
 
 
 ### <a name="sendfiles-v030"></a>SendFiles v0.3.0
 
-| 键               | 值 （类型） | 描述 |
+| 键               | 值（类型） | 描述 |
 | ----------------- | ------------ | ----------- |
-| sendfile。SendAsync | 请参阅[委托签名](http://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) | 每个请求 |
+| sendfile.SendAsync | 请参阅[委托签名](http://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) | 每请求 |
 
 
-### <a name="opaque-v030"></a>不透明 v0.3.0
+### <a name="opaque-v030"></a>Opaque v0.3.0
 
-| 键               | 值 （类型） | 描述 |
+| 键               | 值（类型） | 描述 |
 | ----------------- | ------------ | ----------- |
-| 不透明。版本 | `String` |  |
-| 不透明。升级 | `OpaqueUpgrade` | 请参阅[委托签名](http://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) |
-| 不透明。流 | `Stream` |  |
-| 不透明。CallCancelled | `CancellationToken` |  |
+| opaque.Version | `String` |  |
+| opaque.Upgrade | `OpaqueUpgrade` | 请参阅[委托签名](http://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) |
+| opaque.Stream | `Stream` |  |
+| opaque.CallCancelled | `CancellationToken` |  |
 
 
 ### <a name="websocket-v030"></a>WebSocket v0.3.0
 
-| 键               | 值 （类型） | 描述 |
+| 键               | 值（类型） | 描述 |
 | ----------------- | ------------ | ----------- |
-| websocket。版本 | `String` |  |
-| websocket。接受 | `WebSocketAccept` | 请参阅[委托签名](http://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) |
-| websocket。AcceptAlt |  | 非规范 |
-| websocket。子协议 | `String` | 请参阅[RFC6455 4.2.2](https://tools.ietf.org/html/rfc6455#section-4.2.2)步骤 5.5 |
-| websocket。SendAsync | `WebSocketSendAsync` | 请参阅[委托签名](http://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm)  |
-| websocket。ReceiveAsync | `WebSocketReceiveAsync` | 请参阅[委托签名](http://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm)  |
-| websocket。CloseAsync | `WebSocketCloseAsync` | 请参阅[委托签名](http://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm)  |
-| websocket。CallCancelled | `CancellationToken` |  |
-| websocket。ClientCloseStatus | `int` | Optional |
-| websocket。ClientCloseDescription | `String` | Optional |
-
+| websocket.Version | `String` |  |
+| websocket.Accept | `WebSocketAccept` | 请参阅[委托签名](http://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm) |
+| websocket.AcceptAlt |  | 非规范 |
+| websocket.SubProtocol | `String` | 请参阅 [RFC6455 4.2.2 节](https://tools.ietf.org/html/rfc6455#section-4.2.2)步骤 5.5 |
+| websocket.SendAsync | `WebSocketSendAsync` | 请参阅[委托签名](http://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm)  |
+| websocket.ReceiveAsync | `WebSocketReceiveAsync` | 请参阅[委托签名](http://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm)  |
+| websocket.CloseAsync | `WebSocketCloseAsync` | 请参阅[委托签名](http://owin.org/spec/extensions/owin-SendFile-Extension-v0.3.0.htm)  |
+| websocket.CallCancelled | `CancellationToken` |  |
+| websocket.ClientCloseStatus | `int` | Optional |
+| websocket.ClientCloseDescription | `String` | Optional |
 
 ## <a name="additional-resources"></a>其他资源
 
-* [中间件](middleware.md)
-
-* [服务器](servers/index.md)
+* [中间件](xref:fundamentals/middleware/index)
+* [服务器](xref:fundamentals/servers/index)

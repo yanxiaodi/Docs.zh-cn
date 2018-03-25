@@ -2,20 +2,18 @@
 title: "添加搜索"
 author: rick-anderson
 description: "演示如何将搜索添加到简单的 ASP.NET Core MVC 应用"
-keywords: ASP.NET Core
-ms.author: riande
 manager: wpickett
+ms.author: riande
 ms.date: 04/07/2017
-ms.topic: get-started-article
-ms.assetid: d69e5529-ffff-4628-855d-200206d96269
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: get-started-article
 uid: tutorials/first-mvc-app-xplat/search
-ms.openlocfilehash: 57419c697aea80a054e906c75002f5a39c512fc6
-ms.sourcegitcommit: 0b6c8e6d81d2b3c161cd375036eecbace46a9707
+ms.openlocfilehash: e237b432e411faf6e8a1fe8c907c5daaf6eeef9e
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/11/2017
+ms.lasthandoff: 01/30/2018
 ---
 [!INCLUDE[adding-model](../../includes/mvc-intro/search1.md)]
 

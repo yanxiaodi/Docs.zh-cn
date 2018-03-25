@@ -2,26 +2,22 @@
 title: "将模型添加到 ASP.NET Core MVC 应用"
 author: rick-anderson
 description: "将模型添加到简单的 ASP.NET Core 应用。"
-keywords: ASP.NET Core
-ms.author: riande
 manager: wpickett
-ms.date: 03/30/2017
-ms.topic: get-started-article
-ms.assetid: 8dc28498-00ee-4d66-b903-b593059e9f39
-ms.technology: aspnet
+ms.author: riande
+ms.date: 12/8/2017
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: get-started-article
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: 7469546494ec54bfe36bc5bd2f5f9702889ddf4a
-ms.sourcegitcommit: 2e61e287e220eddd5f3f4cd9147aa6417cfd9236
+ms.openlocfilehash: 1819aff0e6ae68ad3c609466e52fcb6510fe1dcd
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/12/2017
+ms.lasthandoff: 01/30/2018
 ---
 [!INCLUDE[adding-model](../../includes/mvc-intro/adding-model1.md)]
 
 请注意：ASP.NET Core 2.0 模板包含 Models 文件夹。
-
-在“解决方案资源管理器”中，右键单击 MvcMovie 项目，然后单击“添加” > “新文件夹”。 将文件夹命名为“Models”。
 
 右键单击 Models 文件夹，然后单击“添加” > “类”。 将类命名为“Movie”，并添加以下属性：
 
@@ -37,15 +33,10 @@ ms.lasthandoff: 09/12/2017
 
 ![上述步骤的视图](adding-model/_static/add_controller.png)
 
-在“添加 MVC 依赖项”对话框中，选择“最小依赖项”，然后选择“添加”。
+如果出现“添加 MVC 依赖项”对话框：
 
-![上述步骤的视图](adding-model/_static/add_depend.png)
-
-Visual Studio 将添加所需的依赖项为控制器搭建基架，但不创建控制器本身。 接下来调用“添加”>“控制器”以创建控制器。 
-
-在“解决方案资源管理器”中，右键单击“控制器”文件夹，然后单击“添加”>“控制器”。
-
-![上述步骤的视图](adding-model/_static/add_controller.png)
+* [将 Visual Studio 更新到最新版本](https://www.visualstudio.com/downloads/)。 15.5 之前的 Visual Studio 版本显示此对话框。
+* 如果无法更新，请选择“添加”，然后再次按照添加控制器步骤操作。
 
 在“添加基架”对话框中，点击“包含视图的 MVC 控制器(使用 Entity Framework)”>“添加”。
 
@@ -72,7 +63,7 @@ Visual Studio 将创建：
 
 自动创建数据库上下文和 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete)（创建、读取、更新和删除）操作方法和视图的过程称为“搭建基架”。 你很快将具有功能完整的 Web 应用程序，可使用此应用程序管理电影数据库。
 
-如果运行应用并单击“Mvc 电影”链接，则将出现以下类似的错误：
+如果运行应用并单击“Mvc 电影”链接，则会出现以下类似的错误：
 
 ```
 An unhandled exception occurred while processing the request.
@@ -110,7 +101,7 @@ Update-Database
 
 `Add-Migration` 命令创建代码以创建初始数据库架构。 此架构基于（Data/MvcMovieContext.cs 文件中的）`DbContext` 中指定的模型。 `Initial` 参数用于为迁移命名。 可以使用任意名称，但是按照惯例应选择描述迁移的名称。 有关详细信息，请参阅[迁移简介](xref:data/ef-mvc/migrations#introduction-to-migrations)。
 
-`Update-Database` 命令在用于创建数据库的 Migrations/\<time-stamp>_InitialCreate.cs 文件中运行 `Up` 方法。
+`Update-Database` 命令在用于创建数据库的 Migrations/\<time-stamp>_Initial.cs 文件中运行 `Up` 方法。
 
 <a name="cli"></a> 还可以使用命令行接口 (CLI) 来执行前面的步骤，而不使用 PMC：
 
@@ -118,7 +109,7 @@ Update-Database
 * 从控制台（在项目目录中）运行以下命令：
 
   ```console
-  dotnet ef migrations add InitialCreate
+  dotnet ef migrations add Initial
   dotnet ef database update
   ```     
   

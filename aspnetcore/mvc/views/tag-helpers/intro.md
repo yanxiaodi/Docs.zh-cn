@@ -1,71 +1,70 @@
 ---
-title: "在 ASP.NET 核心中的标记帮助程序"
+title: "ASP.NET Core 中的标记帮助程序"
 author: rick-anderson
-description: "了解标记帮助程序是什么以及如何在 ASP.NET 核心中使用它们。"
-keywords: "ASP.NET 核心，标记帮助程序"
-ms.author: riande
+description: "了解标记帮助程序的定义及其在 ASP.NET Core 中的用法。"
 manager: wpickett
-ms.date: 7/14/2017
-ms.topic: article
-ms.technology: aspnet
-ms.prod: asp.net-core
-uid: mvc/views/tag-helpers/intro
+ms.author: riande
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 06644b8359fb5ccc2e61a17a4c6e20e354d5ceef
-ms.sourcegitcommit: 6e83c55eb0450a3073ef2b95fa5f5bcb20dbbf89
-ms.translationtype: MT
+ms.date: 7/14/2017
+ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
+uid: mvc/views/tag-helpers/intro
+ms.openlocfilehash: 939eccd45ec437f379fb9349c24246cc0683528b
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
+ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/28/2017
+ms.lasthandoff: 01/30/2018
 ---
-# <a name="introduction-to-tag-helpers-in-aspnet-core"></a>在 ASP.NET 核心中的标记帮助器简介 
+# <a name="introduction-to-tag-helpers-in-aspnet-core"></a>ASP.NET Core 中标记帮助程序的介绍 
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
-## <a name="what-are-tag-helpers"></a>标记帮助器有哪些？
+## <a name="what-are-tag-helpers"></a>什么是标记帮助程序？
 
-标记帮助程序启用服务器端代码，以参与创建和呈现 Razor 文件中的 HTML 元素。 例如，内置`ImageTagHelper`可以追加到映像名称的版本号。 当映像发生更改时，服务器将生成的映像的新唯一版本，因此，保证客户端以获取当前映像 （而不是过时缓存的映像）。 有许多内置的标记帮助器常见任务-例如，创建窗体、 链接、 加载资产和详细的和甚至更多的可用在公共 GitHub 存储库并作为 NuGet 程序包。 在使用 C# 中，创作标记帮助程序和它们目标基于元素名称、 属性名称或父标记的 HTML 元素。 例如，内置`LabelTagHelper`可以面向 HTML`<label>`元素时`LabelTagHelper`属性均适用。 如果你熟悉[HTML 帮助器](http://stephenwalther.com/archive/2009/03/03/chapter-6-understanding-html-helpers)，标记帮助程序减少之间 HTML 和 C# 在 Razor 视图中的显式转换。 在许多情况下，HTML 帮助器向特定的标记帮助器，提供的备用方法，但务必要识别标记帮助程序不替换 HTML 帮助器并不是每个 HTML 帮助器标记帮助器。 [标记帮助程序与 HTML 帮助器相比](#tag-helpers-compared-to-html-helpers)介绍更多详细信息中的差异。
+标记帮助程序使服务器端代码可以在 Razor 文件中参与创建和呈现 HTML 元素。 例如，内置 `ImageTagHelper` 可以将版本号追加到映像名称。 每当映像发生变化时，服务器都会为映像生成一个新的唯一版本，因此客户端总能获得当前映像（而不是过时的缓存映像）。 有多种常见任务（例如创建窗体、链接，加载资产等）的内置标记帮助程序，公共 GitHub 存储库和 NuGet 包中甚至还有更多可用标记帮助程序。 标记帮助程序使用 C# 创建，基于元素名称、属性名称或父标记以 HTML 元素为目标。 例如，应用 `LabelTagHelper` 属性时，内置 `LabelTagHelper` 可以 HTML `<label>` 元素为目标。 如果熟悉 [ HTML 帮助程序](http://stephenwalther.com/archive/2009/03/03/chapter-6-understanding-html-helpers)，则标记帮助程序将减少 Razor 视图中 HTML 和 C# 之间的显式转换。 在很多情况下，HTML 帮助程序为特定标记帮助程序提供了一种替代方法，但标记帮助程序不会替代 HTML 帮助程序，且并非每个 HTML 帮助程序都有对应的标记帮助程序，认识到这点也很重要。 [标记帮助程序与 HTML 帮助程序的比较](#tag-helpers-compared-to-html-helpers)更详细地介绍了两者之间的差异。
 
-## <a name="what-tag-helpers-provide"></a>标记帮助程序提供的内容
+## <a name="what-tag-helpers-provide"></a>标记帮助程序的功能
 
-**HTML 友好开发体验**对于在多数情况下，使用标记帮助程序 Razor 标记看起来像标准 HTML。 与 HTML/CSS/JavaScript conversant 前端设计器可以编辑 Razor，而无需学习 C# Razor 语法。
+**HTML 友好开发体验** 在多数情况下，使用标记帮助程序的 Razor 标记看起来像是标准 HTML。 熟悉 HTML/CSS/JavaScript 的前端设计师，无需学习 C# Razor 语法即可编辑 Razor。
 
-**用于创建 HTML 和 Razor 标记的丰富智能感知环境**这是到 HTML 帮助器，在 Razor 视图中的标记的服务器端创建与前一方法尖锐相反。 [标记帮助程序与 HTML 帮助器相比](#tag-helpers-compared-to-html-helpers)介绍更多详细信息中的差异。 [标记帮助器的 IntelliSense 支持](#intellisense-support-for-tag-helpers)还是解释了 IntelliSense 环境。 具有 Razor C# 语法的经验的甚至开发人员提高工作效率比编写 C# Razor 标记中使用标记帮助程序。
+**用于创建 HTML 和 Razor 标记的丰富 IntelliSense 环境** 这与 HTML 帮助程序形成鲜明对比，HTML 帮助程序是 Razor 视图中标记的曾用服务器端创建方法。 [标记帮助程序与 HTML 帮助程序的比较](#tag-helpers-compared-to-html-helpers)更详细地介绍了两者之间的差异。 [标记帮助程序的 IntelliSense 支持](#intellisense-support-for-tag-helpers)解释了 IntelliSense 环境。 即使是熟悉 Razor C# 语法的开发人员，使用标记帮助程序也比编写 C# Razor 标记更高效。
 
-**方法使你更高效且能够生成更为可靠、 可靠和可维护的代码使用在服务器上的信息只能**例如，从历史上看上更新映像箴言是在更改时更改映像的名称图像。 映像应激进缓存出于性能原因，并更改映像的名称，除非你存在的风险获取陈旧副本的客户端。 从历史上看，映像中进行了编辑后，名称必须更改并且 web 应用中的图像的每次引用所需更新。 这不只是非常人工密集型的它也是 （你可能缺少引用、 意外输入错误字符串，等等），而且容易出错内置`ImageTagHelper`可以自动执行此操作为你。 `ImageTagHelper`可以追加版本数字到映像名称，因此当该图像发生更改时，服务器自动生成的映像的新唯一版本。 保证客户端都获得当前的图像。 通过使用实质上是免费的可靠性和人工节约附送`ImageTagHelper`。
+**使用仅在服务器上可用的信息，可提高生产力，并能生成更稳定、可靠和可维护的代码** 例如，过去更新映像时，必须在更改映像时更改映像名称。 出于性能原因，要主动缓存映像，而若不更改映像的名称，客户端就可能获得过时的副本。 以前，编辑完映像后，必须更改名称，而且需要更新 Web 应用中对该映像的每个引用。 这不仅大费周章，还容易出错（可能会漏掉某个引用、意外输入错误的字符串等等）内置 `ImageTagHelper` 可自动执行此操作。 `ImageTagHelper` 可将版本号追加到映像名称，这样每当映像出现更改时，服务器都会自动为该映像生成新的唯一版本。 客户端总是能获得最新映像。 使用 `ImageTagHelper` 实质上是免费获得稳健性而节省劳动力。
 
-大部分内置标记帮助器目标现有 HTML 元素，而为的元素提供服务器端属性。 例如，`<input>`元素中的视图中的许多使用*视图/帐户*文件夹包含`asp-for`属性，它将指定的模型属性的名称提取到呈现的 HTML。 以下 Razor 标记：
+大多数内置标记帮助程序以现有 HTML 元素为目标，为该元素提供服务器端属性。 例如，Views/Account 文件夹中的许多视图都使用的 `<input>` 元素包含 `asp-for` 特性，它会将指定模型属性的名称提取到呈现的 HTML 中。 以下 Razor 标记：
 
-```html
+```cshtml
 <label asp-for="Email"></label>
 ```
 
-生成的以下 HTML:
+生成以下 HTML：
 
-```html
+```cshtml
 <label for="Email">Email</label>
 ```
 
-`asp-for`属性可通过`For`中的属性`LabelTagHelper`。 请参阅[创作标记帮助程序](authoring.md)有关详细信息。
+通过 `LabelTagHelper` 中的 `For` 属性，可使用 `asp-for` 特性。 请参阅[创作标记帮助程序](authoring.md)，获取详细信息。
 
-## <a name="managing-tag-helper-scope"></a>管理标记帮助器作用域
+## <a name="managing-tag-helper-scope"></a>管理标记帮助程序作用域
 
-标记帮助器作用域控制的组合来`@addTagHelper`， `@removeTagHelper`，与"！"选择退出字符。
+标记帮助程序作用域由 `@addTagHelper`、`@removeTagHelper` 和“!”选择退出字符联合控制。
 
-<a name=add-helper-label></a>
+<a name="add-helper-label"></a>
 
-### <a name="addtaghelper-makes-tag-helpers-available"></a>`@addTagHelper`提供标记帮助程序
+### <a name="addtaghelper-makes-tag-helpers-available"></a>使用 `@addTagHelper` 添加标记帮助程序
 
-如果你创建新的 ASP.NET 核心 web 应用名为*AuthoringTagHelpers* （不带身份验证），以下*Views/_ViewImports.cshtml*文件将添加到你的项目：
+如果创建名为 AuthoringTagHelpers的新 ASP.NET Core Web 应用（无身份验证），将向项目添加以下 Views/_ViewImports.cshtml 文件：
 
-[!code-html[Main](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopy.cshtml?highlight=2&range=2-3)]
+[!code-cshtml[Main](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopy.cshtml?highlight=2&range=2-3)]
 
-`@addTagHelper`指令使标记帮助程序可供查看。 在此示例中，视图文件仅*Views/_ViewImports.cshtml*，默认情况下由继承中的所有视图文件*视图*文件夹和子目录; 提供标记帮助程序。 上面的代码中使用通配符语法 ("\*") 来指定在指定的程序集中的所有标记帮助程序 (*Microsoft.AspNetCore.Mvc.TagHelpers*) 将可供在每个视图文件*视图*目录或子目录。 之后的第一个参数`@addTagHelper`指定标记帮助程序，以加载 (我们将使用"\*"的所有标记帮助程序)，和第二个参数"Microsoft.AspNetCore.Mvc.TagHelpers"指定包含标记帮助程序的程序集。 *Microsoft.AspNetCore.Mvc.TagHelpers*是内置的 ASP.NET 核心标记帮助程序的程序集。
+`@addTagHelper` 指令让视图可以使用标记帮助程序。 在此示例中，视图文件是 Views/_ViewImports.cshtml，“Views”文件夹及其子目录中的所有视图文件都会默认继承它，使得标记帮助程序可用。 上面的代码使用通配符语法（“\*”），指定程序集 (Microsoft.AspNetCore.Mvc.TagHelpers) 中的所有标记帮助程序对于 Views 目录或子目录中的所有视图文件可用。 `@addTagHelper` 后第一个参数指定要加载的标记帮助程序（我们使用“\*”指定加载所有标记帮助程序），第二个参数“Microsoft.AspNetCore.Mvc.TagHelpers”指定包含标记帮助程序的程序集。 Microsoft.AspNetCore.Mvc.TagHelpers 是内置 ASP.NET Core 标记帮助程序的程序集。
 
-公开所有在此项目中的标记帮助程序 (这将创建名为程序集*AuthoringTagHelpers*)，则将使用以下命令：
+要公开此项目中的所有标记帮助程序（将创建名为 AuthoringTagHelpers 的程序集），可使用以下内容：
 
-[!code-html[Main](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopy.cshtml?highlight=3)]
+[!code-cshtml[Main](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopy.cshtml?highlight=3)]
 
-如果你的项目包含`EmailTagHelper`具有默认命名空间 (`AuthoringTagHelpers.TagHelpers.EmailTagHelper`)，你可以提供标记帮助器的完全限定的名称 (FQN):
+如果项目包含具有默认命名空间 (`AuthoringTagHelpers.TagHelpers.EmailTagHelper`) 的 `EmailTagHelper`，则可提供标记帮助程序的完全限定名称 (FQN)：
 
 ```cshtml
 @using AuthoringTagHelpers
@@ -73,190 +72,187 @@ ms.lasthandoff: 09/28/2017
 @addTagHelper AuthoringTagHelpers.TagHelpers.EmailTagHelper, AuthoringTagHelpers
 ```
 
-若要将标记帮助器添加到使用 FQN 的视图，你首先添加 FQN (`AuthoringTagHelpers.TagHelpers.EmailTagHelper`)，，然后是程序集名称 (*AuthoringTagHelpers*)。 大多数开发人员更愿意使用"\*"通配符语法。 通配符语法，可插入通配符"\*"FQN 中的后缀。 例如，任何以下指令将`EmailTagHelper`:
+若要使用 FQN 将标记帮助程序添加到视图，请首先添加 FQN (`AuthoringTagHelpers.TagHelpers.EmailTagHelper`)，然后添加程序集名称 (AuthoringTagHelpers)。 大多数开发人员更喜欢使用“\*”通配符语法。 使用通配符语法，可在 FQN 中插入通配符“\*”作为后缀。 例如，以下任何指令都将引入 `EmailTagHelper`：
 
-```csharp
+```cshtml
 @addTagHelper AuthoringTagHelpers.TagHelpers.E*, AuthoringTagHelpers
 @addTagHelper AuthoringTagHelpers.TagHelpers.Email*, AuthoringTagHelpers
 ```
 
-如前所述，添加`@addTagHelper`指令至*Views/_ViewImports.cshtml*文件使标记帮助器可用于中的所有视图文件*视图*目录及其子目录。 你可以使用`@addTagHelper`指令特定视图文件，如果你想要参加公开标记帮助器到仅这些视图中。
+如前所述，将 `@addTagHelper` 指令添加到 Views/_ViewImports.cshtml 文件，将使标记帮助程序对于 Views 目录及子目录中的所有视图文件可用。 如果想选择仅对特定视图公开标记帮助程序，可在这些视图文件中使用 `@addTagHelper` 指令。
 
-<a name=remove-razor-directives-label></a>
+<a name="remove-razor-directives-label"></a>
 
-### <a name="removetaghelper-removes-tag-helpers"></a>`@removeTagHelper`删除标记帮助程序
+### <a name="removetaghelper-removes-tag-helpers"></a>`@removeTagHelper` 删除标记帮助程序
 
-`@removeTagHelper`具有相同的两个参数为`@addTagHelper`，它会删除以前添加标记帮助器。 例如，`@removeTagHelper`应用于特定视图中删除指定的标记帮助器从视图。 使用`@removeTagHelper`中*Views/Folder/_ViewImports.cshtml*从视图中的所有文件中都移除的指定的标记帮助器*文件夹*。
+`@removeTagHelper` 与 `@addTagHelper` 具有相同的两个参数，它会删除之前添加的标记帮助程序。 例如，应用于特定视图的 `@removeTagHelper` 会删除该视图中的指定标记帮助程序。 在 Views/Folder/_ViewImports.cshtml 文件中使用 `@removeTagHelper`，将从 Folder 中的所有视图删除指定的标记帮助程序。
 
-### <a name="controlling-tag-helper-scope-with-the-viewimportscshtml-file"></a>控制具有标记帮助器作用域*_ViewImports.cshtml*文件
+### <a name="controlling-tag-helper-scope-with-the-viewimportscshtml-file"></a>使用 _ViewImports.cshtml 文件控制标记帮助程序作用域
 
-你可以添加*_ViewImports.cshtml*任何视图文件夹中，和视图引擎应用到指令从这两个文件和*Views/_ViewImports.cshtml*文件。 如果你添加一个空*Views/Home/_ViewImports.cshtml*文件以获取*主页*视图，则不存在任何更改因为*_ViewImports.cshtml*文件是累加性。 任何`@addTagHelper`指令将添加到*Views/Home/_ViewImports.cshtml*文件 (位于不在默认*Views/_ViewImports.cshtml*文件) 将公开到视图这些标记帮助器仅在*主页*文件夹。
+可将 _ViewImports.cshtml 添加到任何视图文件夹，视图引擎将同时应用该文件和 Views/_ViewImports.cshtml 文件中的指令。 如果为 Home 视图添加空的 Views/Home/_ViewImports.cshtml 文件，则不会发生任何更改，因为 _ViewImports.cshtml 文件是附加的。 添加到 Views/Home/_ViewImports.cshtml 文件（不在默认 Views/_ViewImports.cshtml 文件中）的任何 `@addTagHelper` 指令，都只会将这些标记帮助程序公开给 Home 文件夹中的视图。
 
 <a name="opt-out"></a>
 
 ### <a name="opting-out-of-individual-elements"></a>选择退出各个元素
 
-你可以禁用与标记帮助器选择退出字符元素级别的标记帮助器 ("！")。 例如，`Email`中禁用验证`<span>`标记帮助器选择退出字符：
+使用标记帮助程序选择退出字符（“!”），可在元素级别禁用标记帮助程序。 例如，使用标记帮助程序选择退出字符在 `<span>` 中禁用 `Email` 验证：
 
-```csharp
+```cshtml
 <!span asp-validation-for="Email" class="text-danger"></!span>
 ```
 
-必须将标记帮助器选择退出字符应用于的开始和结束标记。 （Visual Studio 编辑器会自动向退出字符结束标记时你添加到的开始标记）。 添加退出字符后和标记帮助器属性的元素将不再显示在不同的字体。
+须将标记帮助程序选择退出字符应用于开始和结束标记。 （将选择退出字符添加到开始标记时，Visual Studio 编辑器会自动为结束标记添加相应字符）。 添加选择退出字符后，元素和标记帮助程序属性不再以独特字体显示。
 
-<a name=prefix-razor-directives-label></a>
+<a name="prefix-razor-directives-label"></a>
 
-### <a name="using-taghelperprefix-to-make-tag-helper-usage-explicit"></a>使用`@tagHelperPrefix`以便显式标记帮助程序使用情况
+### <a name="using-taghelperprefix-to-make-tag-helper-usage-explicit"></a>使用 `@tagHelperPrefix` 阐明标记帮助程序用途
 
-`@tagHelperPrefix`指令允许你指定的标记前缀字符串来启用标记帮助器支持和明确标记帮助程序使用情况。 例如，可以添加到以下标记*Views/_ViewImports.cshtml*文件：
+`@tagHelperPrefix` 指令可指定一个标记前缀字符串，以启用标记帮助程序支持并阐明标记帮助程序用途。 例如，可以将以下标记添加到 Views/_ViewImports.cshtml 文件：
 
-```html
+```cshtml
 @tagHelperPrefix th:
 ```
-在下面的代码图中，标记帮助器前缀设置为`th:`，因此只有这些元素使用前缀`th:`支持标记帮助程序 （已启用标记帮助器的元素具有不同的字体）。 `<label>`和`<input>`元素具有标记帮助器前缀和标记帮助器支持，而是`<span>`元素不一样。
+在以下代码图像中，标记帮助程序前缀设置为 `th:`，所以只有使用前缀 `th:` 的元素才支持标记帮助程序（可使用标记帮助程序的元素以独特字体显示）。 `<label>` 和 `<input>` 元素具有标记帮助程序前缀，可使用标记帮助程序，而 `<span>` 元素则相反。
 
 ![图像](intro/_static/thp.png)
 
-相同的层次结构规则适用于`@addTagHelper`也适用于`@tagHelperPrefix`。
+适用于 `@addTagHelper` 的层次结构规则也适用于 `@tagHelperPrefix`。
 
-## <a name="intellisense-support-for-tag-helpers"></a>标记帮助器的 IntelliSense 支持
+## <a name="intellisense-support-for-tag-helpers"></a>标记帮助程序的 Intellisense 支持
 
-Visual Studio 中创建新的 ASP.NET web 应用程序，它会添加 NuGet 包"Microsoft.AspNetCore.Razor.Tools"。 这是添加标记帮助程序工具的包。
+在 Visual Studio 中创建新的 ASP.NET Web 应用时，会添加 NuGet 包“Microsoft.AspNetCore.Razor.Tools”。 这是添加标记帮助程序工具的包。
 
-请考虑编写 HTML`<label>`元素。 你输入时，就会立即`<l`在 Visual Studio 编辑器中，IntelliSense 将显示匹配的元素：
+请考虑编写 HTML `<label>` 元素。 只要在 Visual Studio 编辑器中输入 `<l`，IntelliSense 就会显示匹配的元素：
 
 ![图像](intro/_static/label.png)
 
-你不仅获取 HTML 帮助，但图标 ("@"符号与在其下的"<>")。
+不仅会获得 HTML 帮助，还会有图标（下方带有“<>”的“@" symbol with "）
 
 ![图像](intro/_static/tagSym.png)
 
-为为目标的标记帮助程序，请标识此元素。 纯 HTML 元素 (如`fieldset`) 显示"<>"图标。
+将该元素标识为标记帮助程序的目标。 纯 HTML 元素（如 `fieldset`）显示“<>”图标。
 
-纯 HTML`<label>`标记棕色的进度的字体，以红色的属性中显示 （与默认 Visual Studio 颜色主题） 的 HTML 标记，并以蓝色的属性值。
+纯 HTML `<label>` 标记以棕色字体显示 HTML 标记（使用默认 Visual Studio 颜色主题时），以红色字体显示属性，并以蓝色字体显示属性值。
 
 ![图像](intro/_static/LableHtmlTag.png)
 
-输入后`<label`，IntelliSense 将列出可用的 HTML/CSS 属性和标记帮助程序目标属性：
+输入 `<label` 后，IntelliSense 会列出可用的 HTML/CSS 属性和以标记帮助程序为目标的属性：
 
 ![图像](intro/_static/labelattr.png)
 
-IntelliSense 语句结束允许您输入 tab 键完成语句的选定值：
+通过 IntelliSense 语句完成功能，按 Tab 键即可用选择的值完成语句：
 
 ![图像](intro/_static/stmtcomplete.png)
 
-只要输入标记帮助器属性，标记和特性字体更改。 使用默认 Visual Studio"蓝色"或"Light"颜色主题，此字体是粗体紫色。 如果你使用的"深色"主题此字体是粗体蓝绿色。 本文档中的映像已使用默认主题执行。
+只要输入标记帮助程序属性，标记和属性字体就会更改。 如果使用默认的 Visual Studio“蓝色”或“浅色”颜色主题，则字体是粗体紫色。 如果使用“深色”主题，则字体为粗体青色。 本文档中的图像在使用默认主题时截取的。
 
 ![图像](intro/_static/labelaspfor2.png)
 
-你可以输入 Visual Studio *CompleteWord*快捷方式 (Ctrl + 空格键是[默认](https://docs.microsoft.com/visualstudio/ide/default-keyboard-shortcuts-in-visual-studio)在双引号 ("")，，您现在在 C# 中，就像你将 C# 类中一样。 IntelliSense 显示页面模型上的所有方法和属性。 方法和属性有该属性类型是因为`ModelExpression`。 在下图中，我将编辑`Register`视图中，因此`RegisterViewModel`可用。
+可在双引号 ("") 内输入 Visual Studio CompleteWord 快捷方式（[默认值](https://docs.microsoft.com/visualstudio/ide/default-keyboard-shortcuts-in-visual-studio)为 Ctrl+空格键），即可使用 C#，就像在 C# 类中一样。 IntelliSense 会显示页面模型上的所有方法和属性。 由于属性类型是 `ModelExpression`，所以这些方法和属性可用。 在下图中，我正在编辑 `Register` 视图，所以 `RegisterViewModel` 是可用的。
 
 ![图像](intro/_static/intellemail.png)
 
-IntelliSense 将列出的属性和方法可用于在页上的模型。 丰富智能感知环境可帮助你选择的 CSS 类：
+IntelliSense 会列出页面上模型可用的属性和方法。 丰富 IntelliSense 环境可帮助选择 CSS 类：
 
 ![图像](intro/_static/iclass.png)
 
 ![图像](intro/_static/intel3.png)
 
-## <a name="tag-helpers-compared-to-html-helpers"></a>标记帮助器相比 HTML 帮助器
+## <a name="tag-helpers-compared-to-html-helpers"></a>标记帮助程序与 HTML 帮助程序的比较
 
-标记帮助程序将附加到在 Razor 视图中的 HTML 元素时[HTML 帮助器](http://stephenwalther.com/archive/2009/03/03/chapter-6-understanding-html-helpers)如方法穿插 HTML 在 Razor 视图中调用。 请考虑使用 CSS 类"标题"创建一个 HTML 标签的以下 Razor 标记：
+标记帮助程序附加到 Razor 视图中的 HTML 元素，[HTML 帮助程序](http://stephenwalther.com/archive/2009/03/03/chapter-6-understanding-html-helpers)是作为与 Razor 视图中 HTML 交织的方法被调用的。 请考虑下列 Razor 标记，它创建具有 CSS 类“caption”的 HTML 标签：
 
-```html
+```cshtml
 @Html.Label("FirstName", "First Name:", new {@class="caption"})
 ```
 
-在 (`@`) 符号通知 Razor 这是代码的开始位置。 下面的两个参数 ("FirstName"和"第一个名称:") 都是字符串，因此[IntelliSense](https://docs.microsoft.com/visualstudio/ide/using-intellisense)无法提供帮助。 最后一个自变量：
+艾特 (`@`) 符号告诉 Razor 这是代码的开始。 接下来的两个参数（“FirstName”和“First Name:”）是字符串，所以 [IntelliSense](https://docs.microsoft.com/visualstudio/ide/using-intellisense) 无法提供帮助。 最后一个参数：
 
-```html
+```cshtml
 new {@class="caption"}
 ```
 
-用于表示属性的匿名对象。 因为**类**是保留的关键字在 C# 中，你使用`@`符号以强制 C#，以解释"@class="为符号 （属性名称）。 到前端的设计器 (人熟悉 HTML/CSS/JavaScript 和其他客户端技术，但不是熟悉 C# 和 Razor)，行的大多数是外部角色。 从 IntelliSense 没有帮助，必须编写的整个行。
+是用于表示属性的匿名对象。 由于 class 是 C# 中的保留关键字，因此要使用 `@` 符号强制 C# 将“@class=”解释为符号（属性名称）。 对于前端设计师（熟悉 HTML/CSS/JavaScript 及其他客户端技术，但不熟悉 C# 和 Razor 的人），这行代码中大部分内容是陌生是。 必须在没有 IntelliSense 帮助的情况下编写整行代码。
 
-使用`LabelTagHelper`，相同的标记可以编写为：
+使用 `LabelTagHelper`，相同标记可以编写为：
 
 ![图像](intro/_static/label2.png)
 
-使用标记帮助器版本，你输入时，就会立即`<l`在 Visual Studio 编辑器中，IntelliSense 将显示匹配的元素：
+使用标记帮助程序版本，只要在 Visual Studio 编辑器中输入 `<l`，IntelliSense 就会显示匹配的元素：
 
 ![图像](intro/_static/label.png)
 
-IntelliSense 可帮助您编写的整个行。 `LabelTagHelper`也默认为设置的内容`asp-for`到"名字"; 属性值 ("FirstName")它将转换为句子组成与每个新的大小写字母的出现位置空间的属性名称混合使用大小写的属性。 在下列标记中：
+IntelliSense 可帮助编写整行。 `LabelTagHelper` 也默认将 `asp-for` 属性值（“FirstName”）的内容设置为“First Name”：即在属性值中每个大写字母前添加一个空格，将驼峰式大小写的属性转换为由属性名称组成的语句。 在下列标记中：
 
 ![图像](intro/_static/label2.png)
 
 生成：
 
-```html
+```cshtml
 <label class="caption" for="FirstName">First Name</label>
 ```
 
-如果你将内容添加到未使用 camel 大小写形式句子大小写形式内容`<label>`。 例如: 
+如果将内容添加到 `<label>`，则不会使用由驼峰式大小写转换为语句式书写的内容。 例如:
 
 ![图像](intro/_static/1stName.png)
 
 生成：
 
-```html
+```cshtml
 <label class="caption" for="FirstName">Name First</label>
 ```
 
-下面的代码图显示的窗体部分*Views/Account/Register.cshtml* Razor 视图从 Visual Studio 2015 中包含旧 ASP.NET 4.5.x MVC 模板生成。
+以下代码图像显示了由 Visual Studio 2015 包含的旧版 ASP.NET 4.5.x MVC 模板生成的 Views/Account/Register.cshtml Razor 视图的 Form 部分。
 
 ![图像](intro/_static/regCS.png)
 
-Visual Studio 编辑器会显示包含一个灰色背景的 C# 代码。 例如，`AntiForgeryToken`的 HTML 帮助器：
+Visual Studio 编辑器以灰色背景显示 C# 代码。 例如，`AntiForgeryToken` HTML 帮助程序：
 
-```html
+```cshtml
 @Html.AntiForgeryToken()
 ```
 
-将显示灰色背景。 注册视图中的大多数是标记的 C#。 与等效的方法使用标记帮助程序进行的比较：
+以灰色背景显示。 Register 视图中的标记大部分是 C#。 将其与使用标记帮助程序的等效方法进行比较：
 
 ![图像](intro/_static/regTH.png)
 
-标记是得更简洁且更轻松地读取、 编辑和维护的 HTML 帮助器方法。 C# 代码都会减少到所需要了解的有关服务器的最低要求。 Visual Studio 编辑器会显示不同的字体中标记帮助程序目标的标记。
+与 HTML 帮助程序方法相比，此标记更清晰，更容易阅读、编辑和维护。 C# 代码会被减少至服务器需要知道的最小值。 Visual Studio 编辑器以独特的字体显示标记帮助程序的目标标记。
 
-请考虑*电子邮件*组：
+请考虑 Email 组：
 
 [!code-csharp[Main](intro/sample/Register.cshtml?range=12-18)]
 
-每个"asp-"属性具有值为"电子邮件"，但是"Email"不是字符串。 在此上下文中，"Email"为 C# 模型表达式属性`RegisterViewModel`。
+每个“asp-”属性都有一个“Email”值，但是“Email”不是字符串。 在此上下文中，“Email”是 `RegisterViewModel` 的 C# 模型表达式属性。
 
-Visual Studio 编辑器可帮助您编写**所有**的寄存器窗体，而 Visual Studio 中的 HTML 帮助器方法的代码的大部分提供没有帮助的标记帮助程序方法中的标记。 [标记帮助器的 IntelliSense 支持](#intellisense-support-for-tag-helpers)进入使用在 Visual Studio 编辑器中的标记帮助器的详细信息。
+Visual Studio 编辑器可帮助编写注册窗体的标记帮助程序方法中的所有标记，而 Visual Studio 不会为 HTML 帮助程序方法中的大多数代码提供帮助。 [标记帮助程序的 IntelliSense 支持](#intellisense-support-for-tag-helpers)详细介绍了如何在 Visual Studio 编辑器中使用标记帮助程序。
 
-## <a name="tag-helpers-compared-to-web-server-controls"></a>与 Web 服务器控件的标记帮助程序
+## <a name="tag-helpers-compared-to-web-server-controls"></a>标记帮助程序与 Web 服务器控件的比较
 
-* 标记帮助程序不属于他们正在与; 关联的元素他们只需参与的元素和内容的呈现。 ASP.NET[控件 Web 服务器控件](https://msdn.microsoft.com/library/7698y1f0.aspx)是声明并调用在页面上。
+* 标记帮助程序不拥有与其相关的元素：它们只是参与元素和内容的呈现。 ASP.NET [Web 服务器控件](https://msdn.microsoft.com/library/7698y1f0.aspx)在页面上进行声明和调用。
 
-* [Web 服务器控件](https://msdn.microsoft.com/library/zsyt68f1.aspx)具有重要的生命周期，难以在开发和调试。
+* [Web 服务器控件](https://msdn.microsoft.com/library/zsyt68f1.aspx)具有可观的生命周期，因而难以进行开发和调试。
 
-* Web 服务器控件，可以使用的客户端控件将功能添加到客户端文档对象模型 (DOM) 元素。 标记帮助程序有任何 dom。
+* 通过 Web 服务器控件，可使用客户端控件向客户端文档对象模型 (DOM) 元素添加功能。 标记帮助程序没有 DOM。
 
-* Web 服务器控件包括浏览器自动检测。 标记帮助程序具有浏览器没有的知识。
+* Web 服务器控件包括自动浏览器检测。 标记帮助程序不了解浏览器。
 
-* 多个标记帮助程序可以在同一元素上执行操作 (请参阅[避免标记帮助器冲突](https://docs.microsoft.com/aspnet/core/mvc/views/tag-helpers/authoring#avoiding-tag-helper-conflicts)) 时通常不能撰写 Web 服务器控件。
+* 通常不能撰写 Web 服务器控件时，多个标记帮助程序可作用于同一元素（请参阅[避免标记帮助程序冲突](https://docs.microsoft.com/aspnet/core/mvc/views/tag-helpers/authoring#avoiding-tag-helper-conflicts)）。
 
-* 标记帮助程序可以修改的标记和它们在作用于的 HTML 元素的内容，但不要直接修改任何其他页上。 Web 服务器控件具有更具体的作用域，并且可以执行影响你页; 的其他部件的操作启用意外的副作用。
+* 标记帮助程序可以修改其作用域内 HTML 元素的标记和内容，但不会直接修改页面上的其他内容。 Web 服务器控件的作用域较广，并且可以执行影响页面其他部分的操作，从而可能造成意想不到的副作用。
 
-* Web 服务器控件使用的类型转换器将字符串转换为对象。 通过标记帮助程序，您可以以本机方式在 C# 中，因此无需进行类型转换。
+* Web 服务器控件使用类型转换器将字符串转换为对象。 使用标记帮助程序时，本身就用 C# 语言工作，因此无需进行类型转换。
 
-* Web 服务器控件使用[System.ComponentModel](https://docs.microsoft.com/dotnet/api/system.componentmodel)实现组件和控件的运行时和设计时行为。 `System.ComponentModel`包括基类和实现属性和类型转换器、 绑定到数据源，以及授权组件的接口。 相比之下，到标记帮助程序，通常派生自`TagHelper`，和`TagHelper`基类公开只有两种方法，`Process`和`ProcessAsync`。
+* Web 服务器控件使用 [System.ComponentModel](https://docs.microsoft.com/dotnet/api/system.componentmodel) 实现组件和控件的运行时和设计时行为。 `System.ComponentModel` 包括用于属性和类型转换器的实现、数据源绑定和组件授权的基类和接口。 与通常派生自 `TagHelper` 的标记帮助程序相比，`TagHelper` 基类仅公开两个方法，即 `Process` 和 `ProcessAsync`。
 
-## <a name="customizing-the-tag-helper-element-font"></a>自定义标记帮助器元素字体
+## <a name="customizing-the-tag-helper-element-font"></a>自定义标记帮助程序元素字体
 
-你可以自定义的字体和着色从**工具** > **选项** > **环境** > **字体和颜色**:
+可以在“工具” > “选项” > “环境” > “字体和颜色”中自定义字体和着色：
 
 ![图像](intro/_static/fontoptions2.png)
 
 ## <a name="additional-resources"></a>其他资源
 
-* [创作标记帮助程序](authoring.md)
-* [使用窗体](../working-with-forms.md)
-* [在 GitHub 上的 TagHelperSamples](https://github.com/dpaquette/TagHelperSamples)包含用于处理的标记帮助程序示例[Bootstrap](http://getbootstrap.com/)。
-
-<!--
-* [Working with Forms ](xref:mvc/views/working-with-forms)
--->
+* [创作标记帮助程序](xref:mvc/views/tag-helpers/authoring)
+* [使用窗体](xref:mvc/views/working-with-forms)
+* [GitHub 上的 TagHelperSamples](https://github.com/dpaquette/TagHelperSamples) 包含用于处理 [Bootstrap](http://getbootstrap.com/) 的标记帮助程序示例。
+* [使用窗体](xref:mvc/views/working-with-forms)

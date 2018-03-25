@@ -1,23 +1,21 @@
 ---
-title: "性能"
+title: "ASP.NET Core 中的性能"
 author: ardalis
-description: 
-keywords: ASP.NET Core
-ms.author: riande
+description: "发现与 ASP.NET Core 应用性能相关的主题。"
 manager: wpickett
+ms.author: riande
 ms.date: 10/14/2016
-ms.topic: article
-ms.assetid: a8fb7eb7-e0e5-4394-84f3-1f1dbe0abcde
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: performance/index
-ms.openlocfilehash: 65a1761e0e8c2f0a397f20a790da6dc9c24b6886
-ms.sourcegitcommit: aa6951e0c2e62209bf7c25e3b3138f04eb92898d
+ms.openlocfilehash: df69d608bc8bd802a9bbba7616807c6c8e794b26
+ms.sourcegitcommit: 493a215355576cfa481773365de021bcf04bb9c7
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/18/2017
+ms.lasthandoff: 03/15/2018
 ---
-# <a name="performance"></a>性能
+# <a name="performance-in-aspnet-core"></a>ASP.NET Core 中的性能
 
 *   [缓存](caching/index.md)
     *   [内存中缓存](caching/memory.md)

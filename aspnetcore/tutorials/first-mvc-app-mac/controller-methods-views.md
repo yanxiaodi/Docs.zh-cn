@@ -2,20 +2,18 @@
 title: "ASP.NET Core MVC 应用中的控制器方法和视图"
 author: rick-anderson
 description: "使用控制器方法、视图和 DataAnnotations"
-keywords: ASP.NET Core
-ms.author: riande
 manager: wpickett
+ms.author: riande
 ms.date: 04/07/2017
-ms.topic: get-started-article
-ms.assetid: c7313211-babe-babe-babe-8e72603cc0ce
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: get-started-article
 uid: tutorials/first-mvc-app-mac/controller-methods-views
-ms.openlocfilehash: 846a78a09cdde0cfdbcf35bb899c1822ebe8fea2
-ms.sourcegitcommit: 0b6c8e6d81d2b3c161cd375036eecbace46a9707
+ms.openlocfilehash: 01c20e505bd9d1591e1921701f94d102822231c8
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/11/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="controller-methods-and-views-in-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC 应用中的控制器方法和视图
 

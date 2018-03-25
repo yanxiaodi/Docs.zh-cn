@@ -1,21 +1,19 @@
 ---
 title: "在 ASP.NET 和 ASP.NET Core 之间进行选择"
 author: rick-anderson
-description: "如何在 ASP.NET 和 ASP.NET Core 之间进行选择。"
-ms.author: aspnetcontent
+description: "了解如何在 ASP.NET 和 ASP.NET Core 之间进行选择。"
 manager: wpickett
-ms.date: 07/21/2017
-ms.topic: article
-ms.assetid: f0d17abf-3c69-413e-87fc-30780805e33f
-ms.technology: aspnet
+ms.author: riande
+ms.date: 09/30/2017
 ms.prod: asp.net-core
-msc.legacyurl: /learn
-msc.type: content
-ms.openlocfilehash: b9c8a54ceea3ff1c1c9bcff692c884761b17fd73
-ms.sourcegitcommit: 0b6c8e6d81d2b3c161cd375036eecbace46a9707
+ms.technology: aspnet
+ms.topic: article
+uid: fundamentals/choose-between-aspnet-and-aspnetcore
+ms.openlocfilehash: 232e82ed66ff2363230ff09d435db1074c02b53b
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/11/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="choose-between-aspnet-and-aspnet-core"></a>在 ASP.NET 和 ASP.NET Core 之间进行选择 
 

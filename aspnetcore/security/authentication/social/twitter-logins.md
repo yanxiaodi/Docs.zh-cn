@@ -1,25 +1,21 @@
 ---
 title: "Twitter 外部登录设置"
 author: rick-anderson
-description: 
-keywords: ASP.NET Core
-ms.author: riande
+description: "本教程演示的集成到现有的 ASP.NET Core 应用的 Twitter 帐户用户身份验证。"
 manager: wpickett
+ms.author: riande
 ms.date: 11/01/2016
-ms.topic: article
-ms.assetid: E5931607-31C0-4B20-B416-85E3550F5EA8
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: security/authentication/twitter-logins
-ms.openlocfilehash: 87be0bdd4637cff609a4908b303a13272656e2a4
-ms.sourcegitcommit: 6e83c55eb0450a3073ef2b95fa5f5bcb20dbbf89
+ms.openlocfilehash: f684a0e43a4c20092d0edb1d82a31ed3cc611232
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/28/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="configuring-twitter-authentication"></a>配置 Twitter 身份验证
-
-<a name=security-authentication-twitter-logins></a>
 
 作者：[Valeriy Novytskyy](https://github.com/01binary) 和 [Rick Anderson](https://twitter.com/RickAndMSFT)
 

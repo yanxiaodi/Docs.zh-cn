@@ -2,24 +2,22 @@
 title: "小于，Sass 和 ASP.NET Core 中出色的字体"
 author: ardalis
 description: "了解如何在 ASP.NET Core 应用程序中使用较少，Sass，和字体出色。"
-keywords: "ASP.NET 核心，小于 Sass、 字体出色、 预处理器"
-ms.author: tdykstra
 manager: wpickett
+ms.author: tdykstra
 ms.date: 10/14/2016
-ms.topic: article
-ms.assetid: 94c988f9-95fd-425d-b37e-7f846598c6d4
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: client-side/less-sass-fa
-ms.openlocfilehash: 159377300d33e98393fd6705d0fec578f8f6b735
-ms.sourcegitcommit: 78d28178345a0eea91556e4cd1adad98b1446db8
+ms.openlocfilehash: 979f5639e382560d952df45ba6e0b8af3b132c2d
+ms.sourcegitcommit: 6548a3dd0cd1e3e92ac2310dee757ddad9fd6456
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/22/2017
+ms.lasthandoff: 03/16/2018
 ---
 # <a name="introduction-to-styling-applications-with-less-sass-and-font-awesome-in-aspnet-core"></a>简介事半功倍的样式应用程序、 Sass，和在 ASP.NET 核心中出色的字体
 
-通过[Steve Smith](https://ardalis.com/)
+作者：[Steve Smith](https://ardalis.com/)
 
 Web 应用程序的用户有越来越高的期望时设置的样式和总体体验。 现代 web 应用程序频繁地利用丰富的工具和框架用于定义和管理其外观和感觉以一致的方式。 框架喜欢[Bootstrap](http://getbootstrap.com/)可以地长定义一组通用的样式和网站的布局选项。 但是，大多数重要站点还受益于能够有效地定义和维护样式和级联样式表 (CSS) 文件，以及能够轻松访问帮助使站点的接口更直观的非图像图标。 就是在此处的支持语言和工具[较少](http://lesscss.org/)和[Sass](http://sass-lang.com/)，库等，以及将[字体出色](http://fontawesome.io/)，进入。
 
@@ -99,9 +97,9 @@ body {
 .bgDark2    {color:@darker2}
 ```
 
-`@base`和其他@-prefixed项是变量。 每个表示一种颜色。 除`@base`，它们设置使用颜色函数： 加亮、 变暗，和旋转。 淡化和加深执行几乎你将预期;数值调节钮调整颜色色调的大量度 （围绕颜色盘中）。 较少处理器是足够智能，可忽略不使用的变量，因此若要展示了这些变量的工作原理，我们需要某个位置使用它们。 类`.baseColor`，等将演示每个生成的 CSS 文件中的变量的计算的值。
+`@base` 和其他@-prefixed项是变量。 每个表示一种颜色。 除`@base`，设置它们并使用颜色函数： 加亮、 变暗，和旋转。 淡化和加深执行几乎你将预期;数值调节钮调整颜色色调的大量度 （围绕颜色盘中）。 较少处理器是足够智能，可忽略不使用的变量，因此若要展示了这些变量的工作原理，我们需要某个位置使用它们。 类`.baseColor`，等将演示每个生成的 CSS 文件中的变量的计算的值。
 
-### <a name="getting-started"></a>入门
+### <a name="get-started"></a>入门
 
 创建**npm 配置文件**(*package.json*) 在你的项目文件夹并编辑它以引用`gulp`和`gulp-less`:
 
@@ -248,7 +246,7 @@ nav {
 }
 ```
 
-请注意，在此情况下，所有的从属元素`nav`包含在其作用域内。 不再父元素的任何重复 (`nav`， `li`， `a`)，并且 （尽管其中一部分是将值放在第二个示例的同一行上的结果） 的总的行计数已以及删除。 它可以是非常有帮助，组织，若要查看的所有规则的给定的用户界面元素在显式限定范围内，在这种情况下设置从文件的其余部分由大括号。
+请注意，在此情况下，所有的从属元素`nav`包含在其作用域内。 不再父元素的任何重复 (`nav`， `li`， `a`)，并且总的行计数也已删除 （尽管某些就是将值放在第二个示例的同一行上的结果）。 它可以是非常有帮助，组织，若要查看的所有规则的给定的用户界面元素在显式限定范围内，在这种情况下设置从文件的其余部分由大括号。
 
 `&`语法是较少的选择器功能，与 （&) 表示当前的选择器父级。 这样，在 {...} 块中，`&`表示`a`标记，因此`&:link`等效于`a:link`。
 
@@ -325,7 +323,7 @@ CSS 文件，尤其是对于大型站点 （和尤其是如果正在使用媒体
 
 Sass 类似于较少，是为许多相同功能，但使用略有不同的语法提供支持。 它使用 Ruby，而不是 JavaScript 中，生成，因此不同的安装要求。 原始 Sass 语言未使用大括号或分号，但改为定义使用空白和缩进的作用域。 在 Sass 3 版本中，引入了新的语法， **SCSS** ("Sassy CSS")。 SCSS 是类似于 CSS，可忽略缩进级别和空格，并改为使用分号和大括号。
 
-若要安装 Sass，通常你将首先安装 Ruby （预安装在 Mac 上），，然后运行：
+若要安装 Sass，通常你将首先安装 Ruby （预安装在 macOS 上），，然后运行：
 
 ```console
 gem install sass
@@ -547,6 +545,6 @@ Sass 还包括函数和条件逻辑操作，类似于小于。 事实上，这�
 
 http://fontawesome.io/icons/
 
-## <a name="summary"></a>摘要
+## <a name="summary"></a>总结
 
 现代 web 应用程序越来越要求清晰、 直观，编写和更易于使用的各种设备从的响应速度快、 流体设计。 管理实现这些目标所需的 CSS 样式表的复杂性最好的做法是不太使用预处理器类似或 Sass。 此外，如字体出色的工具包快速提供的已知图标添加到文本导航菜单和按钮，提高整体用户体验的应用程序。

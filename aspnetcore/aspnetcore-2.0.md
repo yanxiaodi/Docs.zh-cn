@@ -2,20 +2,18 @@
 title: "ASP.NET Core 2.0 中的新增功能"
 author: rick-anderson
 description: "ASP.NET Core 2.0 中的新增功能"
-keywords: "ASP.NET Core, 发行说明, 新增功能"
-ms.author: riande
 manager: wpickett
+ms.author: riande
 ms.date: 07/10/2017
-ms.topic: article
-ms.assetid: 08c9f457-9c24-40f9-a08b-47dc251e4cec
-ms.technology: aspnet
 ms.prod: aspnet-core
+ms.technology: aspnet
+ms.topic: article
 uid: aspnetcore-2.0
-ms.openlocfilehash: c572315d7a801b9b87d5f4cd14b82c5ed27e7a85
-ms.sourcegitcommit: 6e83c55eb0450a3073ef2b95fa5f5bcb20dbbf89
+ms.openlocfilehash: 35d57abd07e83cd5b190572962fbf43aef03a534
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/28/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>ASP.NET Core 2.0 中的新增功能
 
@@ -46,7 +44,7 @@ Razor 页面是 ASP.NET Core MVC 的一个新功能，它可以使基于页面�
 
 ASP.NET Core 2.0 包面向 NET Standard 2.0。 这些包可以由其他 .NET Standard 2.0 库引用，也可以在兼容 .NET Standard 2.0 的 .NET 实现上运行，其中包括 .NET Core 2.0 和 .NET Framework 4.6.1。 
 
-`Microsoft.AspNetCore.All` 元包仅面向 .NET Core 2.0，因为设计它的目的就是将它与 .NET Core 2.0 运行时存储一起使用。
+`Microsoft.AspNetCore.All` 元包仅面向 .NET Core 2.0，因为它旨在与 .NET Core 2.0 运行时存储一起使用。
 
 ## <a name="configuration-update"></a>配置更新
 
@@ -58,7 +56,7 @@ ASP.NET Core 2.0 包面向 NET Standard 2.0。 这些包可以由其他 .NET Sta
 
 在 ASP.NET Core 2.0 中，已默认将日志记录并入依存关系注入 (DI) 系统。 在 Program.cs 文件（而非 Startup.cs 文件）中添加提供程序并配置筛选。 此外，默认的 `ILoggerFactory` 支持进行筛选，并且你可以使用灵活的方式来进行跨提供程序筛选和特定于提供程序的筛选。
 
-有关详细信息，请参阅[日志记录介绍](xref:fundamentals/logging)。
+有关详细信息，请参阅[日志记录介绍](xref:fundamentals/logging/index)。
 
 ## <a name="authentication-update"></a>身份验证更新
 
@@ -84,7 +82,7 @@ ASP.NET Core 2.0 包面向 NET Standard 2.0。 这些包可以由其他 .NET Sta
 
 ## <a name="kestrel-improvements"></a>Kestrel 改进
 
-Kestrel Web 服务器包含一项新功能，使其更适合作为面向 Internet 的服务器。 我们在 `KestrelServerOptions` 类的新 `Limits` 属性中添加了一些服务器限制配置选项。 现在可为以下内容添加限制：
+Kestrel Web 服务器包含一项新功能，使其更适合作为面向 Internet 的服务器。 在 `KestrelServerOptions` 类的新 `Limits` 属性中添加大量服务器约束配置选项。 为以下内容添加限制：
 
 - 客户端最大连接数
 - 请求正文最大大小
@@ -122,7 +120,7 @@ return File(data, "text/plain", "downloadName.txt", lastModified: DateTime.UtcNo
 
 ## <a name="automatic-use-of-anti-forgery-tokens"></a>自动使用防伪标记
 
-默认情况下，ASP.NET Core 始终在帮助对内容进行 HTML 编码，但是在新版本中，我们还采用了额外的措施来帮助预防跨网站请求伪造 (XSRF) 攻击。 现在在默认情况下，ASP.NET Core 会发出防伪标记，并在窗体 POST 操作和页面上验证它们，且无需其他配置。
+默认情况下，ASP.NET Core 始终在帮助对内容进行 HTML 编码，但是在新版本中，还采用了额外的措施来帮助预防跨网站请求伪造 (XSRF) 攻击。 现在在默认情况下，ASP.NET Core 会发出防伪标记，并在窗体 POST 操作和页面上验证它们，且无需其他配置。
 
 有关详细信息，请参阅[在 ASP.NET Core 中预防跨网站请求伪造 (XSRF/CSRF) 攻击](xref:security/anti-request-forgery)。
 
@@ -142,7 +140,7 @@ Razor 视图引擎已更新为可使用新的 Roslyn 编译器。 其中包含�
 
 ## <a name="other-documentation-updates-for-20"></a>2.0 的其他文档更新
 
-* [创建 Visual Studio 和 MSBuild 的发布配置文件，以部署 ASP.NET Core 应用程序](xref:publishing/web-publishing-vs)
+* [用于 ASP.NET Core 应用部署的 Visual Studio 发布配置文件](xref:host-and-deploy/visual-studio-publish-profiles)
 * [密钥管理](xref:security/data-protection/implementation/key-management)
 * [为 Facebook 配置身份验证](xref:security/authentication/facebook-logins)
 * [为 Twitter 配置身份验证](xref:security/authentication/twitter-logins)
@@ -160,4 +158,4 @@ Razor 视图引擎已更新为可使用新的 Roslyn 编译器。 其中包含�
 
 有关更改的完整列表，请参阅 [ASP.NET Core 2.0 发行说明](https://github.com/aspnet/Home/releases/tag/2.0.0)。
 
-若要实时了解 ASP.NET Core 开发团队的进度和计划，请收看每周的 [ASP.NET Community Standup](https://live.asp.net/)。
+若要实时了解 ASP.NET Core 开发团队的进度和计划，请收看 [ASP.NET Community Standup](https://live.asp.net/)。

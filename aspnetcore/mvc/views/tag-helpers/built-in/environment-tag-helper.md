@@ -1,36 +1,35 @@
 ---
-title: "在 ASP.NET Core 环境标记帮助器"
+title: "ASP.NET Core 中的环境标记帮助程序"
 author: pkellner
-description: "ASP.Net 核心环境标记帮助器定义包括所有的属性"
-keywords: "ASP.NET Core, 标记帮助程序"
-ms.author: riande
+description: "定义的 ASP.NET Core 环境标记帮助程序（包括所有属性）"
 manager: wpickett
+ms.author: riande
 ms.date: 07/14/2017
-ms.topic: article
-ms.technology: aspnet
 ms.prod: aspnet-core
+ms.technology: aspnet
+ms.topic: article
 uid: mvc/views/tag-helpers/builtin-th/environment-tag-helper
-ms.openlocfilehash: 6da7840b84ae453483519e9610d9bb59c0e8fdb5
-ms.sourcegitcommit: 6e83c55eb0450a3073ef2b95fa5f5bcb20dbbf89
-ms.translationtype: MT
+ms.openlocfilehash: 7a99ee0e59c7f49a3208d2c86c11cabce4294889
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
+ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/28/2017
+ms.lasthandoff: 01/30/2018
 ---
-# <a name="environment-tag-helper-in-aspnet-core"></a>在 ASP.NET Core 环境标记帮助器
+# <a name="environment-tag-helper-in-aspnet-core"></a>ASP.NET Core 中的环境标记帮助程序
 
-通过[Peter Kellner](http://peterkellner.net)和[Hisham Bin Ateya](https://twitter.com/hishambinateya)
+作者：[Peter Kellner](http://peterkellner.net) 和 [Hisham Bin Ateya](https://twitter.com/hishambinateya)
 
-环境标记帮助器有条件地呈现其包含的内容，根据当前的托管环境。 其单一属性`names`是环境的逗号分隔列表名称，如果任何匹配到当前的环境，将触发要呈现的封闭的内容。
+环境标记帮助程序根据当前宿主环境，有条件地呈现其包含的内容。 其单一属性 `names` 是一个以逗号分隔的环境名称列表，如果其中的任何名称与当前环境匹配，就会触发已包含内容的呈现。
 
-## <a name="environment-tag-helper-attributes"></a>环境标记帮助器属性
+## <a name="environment-tag-helper-attributes"></a>环境标记帮助程序属性
 
 ### <a name="names"></a>名称
 
-接受单个宿主环境名称或宿主触发的包含的内容呈现的环境名称的逗号分隔列表。
+采用单个宿主环境名称或以逗号分隔的宿主环境名称列表，用于触发已包含内容的呈现。
 
-这些值与从 ASP.NET Core 静态属性返回的当前值进行比较`HostingEnvironment.EnvironmentName`。  此值是以下之一：**过渡**;**开发**或**生产**。 比较不区分大小写。
+这些值与从 ASP.NET Core 静态属性 `HostingEnvironment.EnvironmentName` 返回的当前值进行比较。  此值为以下值之一：**Staging**、**Development** 或 **Production**。 比较不区分大小写。
 
-一个有效的示例`environment`标记帮助程序是：
+有效的 `environment` 标记帮助程序示例为：
 
 ```cshtml
 <environment names="Staging,Production">
@@ -38,13 +37,13 @@ ms.lasthandoff: 09/28/2017
 </environment>
 ```
 
-## <a name="include-and-exclude-attributes"></a>包括和排除属性
+## <a name="include-and-exclude-attributes"></a>include 和 exclude 属性
 
-ASP.NET 核心 2.x 添加`include`  &  `exclude`属性。 这些特性控制以下方面呈现基于包含或排除宿主环境名称包含的内容。
+ASP.NET Core 2.x 添加了 `include` & `exclude` 属性。 这些属性基于已包括或已排除的宿主环境名称，控制已包含内容的呈现。
 
-### <a name="include-aspnet-core-20-and-later"></a>包括 ASP.NET Core 2.0 及更高版本
+### <a name="include-aspnet-core-20-and-later"></a>include ASP.NET Core 2.0 及更高版本
 
-`include`属性具有类似的行为的`names`在 ASP.NET 核心 1.0 中的属性。
+`include` 属性的行为与 ASP.NET Core 1.0 中 `names` 属性的行为类似。
 
 ```cshtml
 <environment include="Staging,Production">
@@ -52,9 +51,9 @@ ASP.NET 核心 2.x 添加`include`  &  `exclude`属性。 这些特性控制以�
 </environment>
 ```
 
-### <a name="exclude-aspnet-core-20-and-later"></a>排除 ASP.NET Core 2.0 及更高版本
+### <a name="exclude-aspnet-core-20-and-later"></a>exclude ASP.NET Core 2.0 及更高版本
 
-与此相反，`exclude`属性允许`EnvironmentTagHelper`呈现的除你指定的密钥的所有宿主环境名称包含的内容。
+相反，`exclude` 属性允许 `EnvironmentTagHelper` 为指定名称以外的所有宿主环境名称呈现已包含内容。
 
 ```cshtml
 <environment exclude="Development">

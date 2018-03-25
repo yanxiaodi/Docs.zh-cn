@@ -1,24 +1,26 @@
 ---
-title: "测试和调试 ASP.NET Core"
+title: "在 ASP.NET Core 中测试和调试"
 author: ardalis
 description: "指向用于测试和调试 ASP.NET Core 应用程序的资源的链接。"
-keywords: "ASP.NET Core, 单元测试, 集成测试, 控制器, 调试, 远程调试"
-ms.author: riande
 manager: wpickett
-ms.date: 10/14/2016
-ms.topic: article
-ms.assetid: 2159536c-ebf7-4ebd-ba85-9cc6a335a295
-ms.technology: aspnet
+ms.author: riande
+ms.date: 11/20/2017
 ms.prod: asp.net-core
-ms.openlocfilehash: dc22f03f7369fc58a6db685d60421198d11b875e
-ms.sourcegitcommit: 78d28178345a0eea91556e4cd1adad98b1446db8
+ms.technology: aspnet
+ms.topic: article
+uid: testing/index
+ms.openlocfilehash: 5cf482941e0a45c349d21b27a8cdcc2068e45056
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/22/2017
+ms.lasthandoff: 01/30/2018
 ---
-# <a name="testing-and-debugging-aspnet-core"></a>测试和调试 ASP.NET Core
+# <a name="test-and-debug-in-aspnet-core"></a>在 ASP.NET Core 中测试和调试
 
-- [单元测试](https://docs.microsoft.com/dotnet/articles/core/testing/unit-testing-with-dotnet-test)
-- [集成测试](xref:testing/integration-testing)
-- [测试控制器](xref:mvc/controllers/testing)
-- [远程调试](https://docs.microsoft.com/visualstudio/debugger/remote-debugging-azure)
+* [单元测试](/dotnet/articles/core/testing/unit-testing-with-dotnet-test)
+* [集成测试](xref:testing/integration-testing)
+* [Razor 页面单位与集成测试](xref:testing/razor-pages-testing)
+* [测试控制器](xref:mvc/controllers/testing)
+* [调试 ASP.NET Core 2.x 源](https://github.com/aspnet/Docs/issues/4155)
+* [远程调试](/visualstudio/debugger/remote-debugging-azure)
+* [快照调试](/azure/application-insights/app-insights-snapshot-debugger)

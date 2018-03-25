@@ -2,20 +2,18 @@
 title: "添加验证"
 author: rick-anderson
 description: "如何将验证添加到简单 ASP.NET Core 应用。"
-keywords: "ASP.NET Core,验证,数据注释"
-ms.author: riande
 manager: wpickett
+ms.author: riande
 ms.date: 04/13/2017
-ms.topic: get-started-article
-ms.assetid: edbed483-6858-4f19-8082-3ac7d2752999
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: get-started-article
 uid: tutorials/first-mvc-app-xplat/validation
-ms.openlocfilehash: cbca251ea1ac987036f86054425e3ddcf09bacb2
-ms.sourcegitcommit: 78d28178345a0eea91556e4cd1adad98b1446db8
+ms.openlocfilehash: 083f7cd05bf47e9540d66791a032058f244449da
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/22/2017
+ms.lasthandoff: 01/30/2018
 ---
 [!INCLUDE[validation](../../includes/mvc-intro/validation.md)]
 

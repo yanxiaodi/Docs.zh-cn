@@ -1,21 +1,19 @@
 ---
 title: "ASP.NET Core 中的 Web 服务器实现"
 author: tdykstra
-description: "介绍适用于 ASP.NET Core 的 Web 服务器 Kestrel 和 WebListener。 提供了如何进行选择以及何时将其与反向代理服务器结合使用的指南。"
-keywords: "ASP.NET Core, IServer, Web 服务器, Kestrel, WebListener, 反向代理"
-ms.author: tdykstra
+description: "发现适用于 ASP.NET Core 的 Web 服务器 Kestrel 和 HTTP.sys。 了解如何进行选择以及何时将其与反向代理服务器结合使用。"
 manager: wpickett
+ms.author: tdykstra
 ms.date: 08/03/2017
-ms.topic: article
-ms.assetid: dba74f39-58cd-4dee-a061-6d15f7346959
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: fundamentals/servers/index
-ms.openlocfilehash: 04dee100dff91f7868175ff4be01156787e13e81
-ms.sourcegitcommit: 78d28178345a0eea91556e4cd1adad98b1446db8
+ms.openlocfilehash: b9a7fa4e33c56a5973b4bc35f88ca0ebb3d67101
+ms.sourcegitcommit: 7ac15eaae20b6d70e65f3650af050a7880115cbf
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/22/2017
+ms.lasthandoff: 03/02/2018
 ---
 # <a name="web-server-implementations-in-aspnet-core"></a>ASP.NET Core 中的 Web 服务器实现
 
@@ -41,7 +39,7 @@ ASP.NET Core 交付两种服务器实现：
 
 ## <a name="kestrel"></a>Kestrel
 
-Kestrel 是 Web 服务器，它默认包括在 ASP.NET Core 新项目模板中。 
+Kestrel 是 Web 服务器，默认包括在 ASP.NET Core 新项目模板中。 
 
 # <a name="aspnet-core-2xtabaspnetcore2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
 
@@ -79,11 +77,11 @@ Kestrel 是 Web 服务器，它默认包括在 ASP.NET Core 新项目模板中�
 
 ### <a name="nginx-with-kestrel"></a>Nginx 与 Kestrel
 
-有关如何将在 Linux 上使用 Nginx 作为 Kestrel 的反向代理服务器的信息，请参阅[发布到 Linux 生产环境](../../publishing/linuxproduction.md)。
+有关如何在 Linux 上使用 Nginx 作为 Kestrel 的反向代理服务器的信息，请参阅[在 Linux 上使用 Nginx 进行托管](xref:host-and-deploy/linux-nginx)。
 
 ### <a name="apache-with-kestrel"></a>Apache 与 Kestrel
 
-有关如何将在 Linux 上使用 Apache 作为 Kestrel 的反向代理服务器的信息，请参阅[将 Apache Web 服务器用作反向代理](../../publishing/apache-proxy.md)。
+有关如何在 Linux 上使用 Apache 作为 Kestrel 的反向代理服务器的信息，请参阅[在 Linux 上使用 Apache 进行托管](xref:host-and-deploy/linux-apache)。
 
 ## <a name="httpsys"></a>HTTP.sys
 
@@ -131,16 +129,16 @@ HTTP.sys 在 ASP.NET Core 1.x 中被命名为 WebListener。 如果在 Windows �
 
 - [Kestrel](kestrel.md)
 - [Kestrel 与 IIS](aspnet-core-module.md)
-- [Kestrel 与 Nginx](../../publishing/linuxproduction.md)
-- [Kestrel 与 Apache](../../publishing/apache-proxy.md)
+- [在 Linux 上使用 Nginx 进行托管](xref:host-and-deploy/linux-nginx)
+- [在 Linux 上使用 Apache 进行托管](xref:host-and-deploy/linux-apache)
 - [HTTP.sys](httpsys.md)
 
 # <a name="aspnet-core-1xtabaspnetcore1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
 
 - [Kestrel](kestrel.md)
 - [Kestrel 与 IIS](aspnet-core-module.md)
-- [Kestrel 与 Nginx](../../publishing/linuxproduction.md)
-- [Kestrel 与 Apache](../../publishing/apache-proxy.md)
+- [在 Linux 上使用 Nginx 进行托管](xref:host-and-deploy/linux-nginx)
+- [在 Linux 上使用 Apache 进行托管](xref:host-and-deploy/linux-apache)
 - [WebListener](weblistener.md)
 
 ---

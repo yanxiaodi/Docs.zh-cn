@@ -2,20 +2,18 @@
 title: "ASP.NET Core 1.1 入门"
 author: rick-anderson
 description: "介绍如何使用 ASP.NET Core 1.1 创建并运行简单的 Hello World 应用的快速教程。"
-keywords: "ASP.NET Core, 教程, 入门"
-ms.author: riande
 manager: wpickett
+ms.author: riande
 ms.date: 08/07/2017
-ms.topic: get-started-article
-ms.assetid: 73543e9d-d9d5-47d6-9664-17a9beea6cd3
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: get-started-article
 uid: getting-started-1.1
-ms.openlocfilehash: e8fd9ef60ebc1cff6ca0e03000ea50eebff0a9f9
-ms.sourcegitcommit: 297ee5d2f3b3b24eb8a2c4a25195c9e2973cb91b
+ms.openlocfilehash: 895e91efbba931923540e4cd182862cbc1851585
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/14/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="getting-started-with-aspnet-core-11"></a>ASP.NET Core 1.1 入门
 

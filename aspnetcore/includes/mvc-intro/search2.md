@@ -49,7 +49,7 @@
 
 ![显示“来自 HttpPost 索引: 筛选 ghost”应用程序响应的浏览器窗口](../../tutorials/first-mvc-app/search/_static/fo.png)
 
-但是，即使添加 `Index` 方法的 `[HttpPost]` 版本，其实现方式也受到限制。 假设你想要将特定搜索加入书签，或向朋友发送一个链接，让他们单击链接即可查看筛选出的相同电影列表。 请注意，HTTP POST 请求的 URL 与 GET 请求的 URL 相同 (localhost:xxxxx/Movies/Index)，其中不包含搜索信息。 搜索字符串信息作为[表单域值](https://developer.mozilla.org/docs/Web/Guide/HTML/Forms/Sending_and_retrieving_form_data)发送给服务器。 可使用浏览器开发人员工具或出色的 [Fiddler 工具](http://www.telerik.com/fiddler)对其进行验证。 下图展示了 Chrome 浏览器开发人员工具：
+但是，即使添加 `Index` 方法的 `[HttpPost]` 版本，其实现方式也受到限制。 假设你想要将特定搜索加入书签，或向朋友发送一个链接，让他们单击链接即可查看筛选出的相同电影列表。 请注意，HTTP POST 请求的 URL 与 GET 请求的 URL 相同 (localhost:xxxxx/Movies/Index)，其中不包含搜索信息。 搜索字符串信息作为[表单域值](https://developer.mozilla.org/docs/Learn/HTML/Forms/Sending_and_retrieving_form_data)发送给服务器。 可使用浏览器开发人员工具或出色的 [Fiddler 工具](http://www.telerik.com/fiddler)对其进行验证。 下图展示了 Chrome 浏览器开发人员工具：
 
 ![Microsoft Edge 中开发人员工具的“网络”选项卡，显示了 ghost 的 searchString 值的请求正文](../../tutorials/first-mvc-app/search/_static/f12_rb.png)
 

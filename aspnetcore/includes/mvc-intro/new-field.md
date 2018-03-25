@@ -4,7 +4,7 @@
 
 本教程将向 `Movies` 表添加一个新字段。 当更改架构（添加一个新的字段）时，我们将丢弃数据库并创建一个新的数据库。 此工作流适用于在没有要保留的任何生产数据的早期开发阶段。
 
-在部署了应用并且具有要保留的数据后，在需要更改架构时则不能丢弃数据库。 Entity Framework [Code First 迁移](https://docs.microsoft.com/ef/core/get-started/aspnetcore/new-db)使你能够更新架构并迁移数据库，而不会导致数据丢失。 迁移是使用 SQL Server 时的一个常用的功能，但 SQLite 不支持许多迁移架构操作，因此只可能进行非常简单的迁移。 有关详细信息，请参阅 [SQLite 限制](https://docs.microsoft.com/ef/core/providers/sqlite/limitations)。
+在部署了应用并且具有要保留的数据后，在需要更改架构时则不能丢弃数据库。 Entity Framework [Code First 迁移](https://docs.microsoft.com/ef/core/get-started/aspnetcore/new-db)使你能够更新架构并迁移数据库，而不会导致数据丢失。 迁移是使用 SQL Server 时的一个常用的功能，但 SQLlite 不支持许多迁移架构操作，因此只可能进行非常简单的迁移。 有关详细信息，请参阅 [SQLite 限制](https://docs.microsoft.com/ef/core/providers/sqlite/limitations)。
 
 ## <a name="adding-a-rating-property-to-the-movie-model"></a>向电影模型添加分级属性
 

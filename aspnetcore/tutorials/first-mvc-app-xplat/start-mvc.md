@@ -2,26 +2,26 @@
 title: "Mac、Linux 或 Windows 上的 ASP.NET Core MVC 简介"
 author: rick-anderson
 description: "Mac、Linux 和 Windows 上的 ASP.NET Core MVC 和 Visual Studio Code 入门"
-keywords: ASP.NET Core,MVC,VS Code,Visual Studio Code,Mac,Linux,Windows
-ms.author: riande
 manager: wpickett
+ms.author: riande
 ms.date: 07/07/2017
-ms.topic: get-started-article
-ms.assetid: 1d18b589-1638-4dc6-1638-fb0f41998d78
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: get-started-article
 uid: tutorials/first-mvc-app-xplat/start-mvc
-ms.openlocfilehash: 87ce5dca011a7bc37d34799db159d933c158cba1
-ms.sourcegitcommit: 78d28178345a0eea91556e4cd1adad98b1446db8
+ms.openlocfilehash: 4771555b66f328a819f17a32eb3959f9ecf33d44
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/22/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="getting-started-with-aspnet-core-mvc--on-mac-linux-or-windows"></a>Mac、Linux 或 Windows 上的 ASP.NET Core MVC 入门
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
-本教程将介绍基础知识，指导你使用 [Visual Studio Code](https://code.visualstudio.com) (VS Code) 构建 ASP.NET Core MVC Web 应用。 本教程假定用户熟悉 VS Code。 有关详细信息，请参阅 [VS Code 入门](https://code.visualstudio.com/docs) 和 [Visual Studio Code 帮助](#visual-studio-code-help)。 [!INCLUDE[consider RP](../../includes/razor.md)]
+本教程将介绍基础知识，指导你使用 [Visual Studio Code](https://code.visualstudio.com) (VS Code) 构建 ASP.NET Core MVC Web 应用。 本教程假定用户熟悉 VS Code。 有关详细信息，请参阅 [VS Code 入门](https://code.visualstudio.com/docs) 和 [Visual Studio Code 帮助](#visual-studio-code-help)。 
+
+[!INCLUDE[consider RP](../../includes/razor.md)]
 
 本教程提供 3 个版本：
 

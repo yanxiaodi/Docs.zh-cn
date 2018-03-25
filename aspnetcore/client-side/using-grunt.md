@@ -2,20 +2,18 @@
 title: "在 ASP.NET 核心中使用 Grunt"
 author: rick-anderson
 description: 
-keywords: ASP.NET Core,
-ms.author: riande
 manager: wpickett
+ms.author: riande
 ms.date: 10/14/2016
-ms.topic: article
-ms.assetid: 471112e9-2c33-454b-96fc-32916102ce73
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: client-side/using-grunt
-ms.openlocfilehash: 8ae50514ce24c7f9e3bb1e347d5d860e1de43c5f
-ms.sourcegitcommit: 9cdbfd0d670d70b9c354216aabee260c52dad5ee
+ms.openlocfilehash: c23f170b36ac1b9623835337020f2b5ac9514971
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/12/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="using-grunt-in-aspnet-core"></a>在 ASP.NET 核心中使用 Grunt 
 
@@ -53,7 +51,7 @@ Grunt 是自动化脚本缩减、 TypeScript 编译、 代码质量"链接形式
 
 4.  添加一个名为的新文件夹`TypeScript`到你的项目目录。
 
-5.  在添加之前的任何文件，我们必须确保 Visual Studio 具有选项编译保存 TypeScript 文件检查。 *工具 > 选项 > 文本编辑器 > Typescript > 项目*
+5.  在添加之前的任何文件，请确保 Visual Studio 具有选项编译保存 TypeScript 文件检查。 导航到**工具** > **选项** > **文本编辑器** > **Typescript**  > **项目**:
 
     ![设置自动 compliation TypeScript 文件的选项](using-grunt/_static/typescript-options.png)
 
@@ -96,7 +94,7 @@ Grunt 是自动化脚本缩减、 TypeScript 编译、 代码质量"链接形式
 
 1. 在解决方案资源管理器，右键单击该项目并选择**添加 > 新项**从上下文菜单。 选择**NPM 配置文件**项，保留默认名称， *package.json*，然后单击**添加**按钮。
 
-2. 在*package.json*文件内,`devDependencies`对象大括号中，输入"grunt"。 选择`grunt`从智能感知列表并按 Enter 键。 Visual Studio 将 quote grunt 包名称，并添加一个冒号。 从 Intellisense 列表的顶部中的冒号右侧，选择包的最新稳定版本 (按`Ctrl-Space`如果未显示 Intellisense)。
+2. 在*package.json*文件内,`devDependencies`对象大括号中，输入"grunt"。 选择`grunt`从智能感知列表并按 Enter 键。 Visual Studio 将 quote grunt 包名称，并添加一个冒号。 从 Intellisense 列表的顶部中的冒号右侧，选择包的最新稳定版本 (按`Ctrl-Space`如果 Intellisense 不显示)。
 
     ![grun Intellisense](using-grunt/_static/devdependencies-grunt.png)
     

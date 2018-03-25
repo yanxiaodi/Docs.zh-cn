@@ -2,32 +2,31 @@
 title: "ASP.NET Core 中的客户端开发"
 author: rick-anderson
 description: 
-keywords: ASP.NET Core
-ms.author: riande
 manager: wpickett
-ms.date: 10/14/2016
-ms.topic: article
-ms.assetid: a8fb7eb7-e0e5-4394-84f3-1f1dbe0ba2e4
-ms.technology: aspnet
+ms.author: riande
+ms.date: 02/21/2018
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: client-side/index
-ms.openlocfilehash: 875dfda8794aff69ea3d13c43d21ae805a199ed2
-ms.sourcegitcommit: 74a8ad9c1ba5c155d7c4303e67632a0922c38e86
+ms.openlocfilehash: a4b42f7f4de07351e4e9a48ebc59bab2f187cedd
+ms.sourcegitcommit: 49fb3b7669b504d35edad34db8285e56b958a9fc
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/20/2017
+ms.lasthandoff: 02/23/2018
 ---
 # <a name="client-side-development-in-aspnet-core"></a>ASP.NET Core 中的客户端开发
 
-- [使用 Gulp](using-gulp.md)
-- [使用 Grunt](using-grunt.md)
-- [使用 Bower 管理客户端包](bower.md)
-- [使用 Bootstrap 构建美观的响应式站点](bootstrap.md)
-- [Knockout.js MVVM Framework](knockout.md)
-- [为单一页面应用 (SPA) 使用 AngularJS](angular.md)
-- [为单一页面应用 (SPA) 使用 JavaScriptServices](spa-services.md)
-- [使用 Less、Sass 和 Font Awesome 为应用程序设置样式](less-sass-fa.md)
-- [捆绑和缩小](bundling-and-minification.md)
+- [使用 Gulp](xref:client-side/using-gulp)
+- [使用 Grunt](xref:client-side/using-grunt)
+- [使用 Bower 管理客户端包](xref:client-side/bower)
+- [使用 Bootstrap 构建响应式站点](xref:client-side/bootstrap)
+- [使用 LESS、Sass 和 Font Awesome 为应用设置样式](xref:client-side/less-sass-fa)
+- [捆绑和缩小](xref:client-side/bundling-and-minification)
 - [TypeScript](https://www.typescriptlang.org/docs/handbook/asp-net-core.html)
-- [使用 Yeoman 生成项目](yeoman.md)
-- [使用浏览器链接](using-browserlink.md)
+- [使用浏览器链接](xref:client-side/using-browserlink)
+- [对 SPA 使用 JavaScriptServices](xref:client-side/spa-services)
+- [使用 SPA 项目模板](xref:spa/index)
+    - [Angular 项目模板](xref:spa/angular)
+    - [React 项目模板](xref:spa/react)
+    - [带 Redux 的 React 项目模板](xref:spa/react-with-redux)

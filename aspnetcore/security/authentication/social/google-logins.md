@@ -1,24 +1,21 @@
 ---
 title: "在 ASP.NET Core Google 外部登录安装程序"
 author: rick-anderson
-description: "在 ASP.NET Core Google 外部登录安装程序"
-keywords: ASP.NET Core
-ms.author: riande
+description: "本教程演示的集成到现有的 ASP.NET Core 应用程序的 Google 帐户用户身份验证。"
 manager: wpickett
+ms.author: riande
 ms.date: 08/02/2017
-ms.topic: article
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: security/authentication/google-logins
-ms.openlocfilehash: 8723a74250ff1b0a63139057bfc17fdd31dd169e
-ms.sourcegitcommit: 6e83c55eb0450a3073ef2b95fa5f5bcb20dbbf89
+ms.openlocfilehash: 1ca63593a7cf2b0eff1e52c0beda7ef2b826d474
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/28/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="configuring-google-authentication-in-aspnet-core"></a>在 ASP.NET 核心中配置 Google 身份验证
-
-<a name=security-authentication-google-logins></a>
 
 作者：[Valeriy Novytskyy](https://github.com/01binary) 和 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -51,7 +48,7 @@ ms.lasthandoff: 09/28/2017
 ![API 管理器 Google + API 页](index/_static/GoogleConsoleGoCredentials.png)
 
 * 选择：
-   * **Google + API**
+   * **Google+ API**
    * **Web 服务器 (例如 node.js，Tomcat)**，和
    * **用户数据**:
 
@@ -89,13 +86,6 @@ ms.lasthandoff: 09/28/2017
 
 ## <a name="configure-google-authentication"></a>配置 Google 身份验证
 
-在本教程使用的项目模板可确保[Microsoft.AspNetCore.Authentication.Google](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Google)安装包。
-
- * 若要使用 Visual Studio 2017 安装此包，请右键单击项目并选择**管理 NuGet 包**。
- * 若要使用.NET 核心 CLI 安装，请在项目目录中执行以下命令：
-
-   `dotnet add package Microsoft.AspNetCore.Authentication.Google`
-
 # <a name="aspnet-core-2xtabaspnetcore2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
 
 添加中的 Google 服务`ConfigureServices`中的方法*Startup.cs*文件：
@@ -115,6 +105,13 @@ services.AddAuthentication().AddGoogle(googleOptions =>
 [!INCLUDE[default settings configuration](includes/default-settings.md)]
 
 # <a name="aspnet-core-1xtabaspnetcore1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
+
+在本教程使用的项目模板可确保[Microsoft.AspNetCore.Authentication.Google](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Google)安装包。
+
+ * 若要使用 Visual Studio 2017 安装此包，请右键单击项目并选择**管理 NuGet 包**。
+ * 若要使用.NET 核心 CLI 安装，请在项目目录中执行以下命令：
+
+   `dotnet add package Microsoft.AspNetCore.Authentication.Google`
 
 添加中的 Google 中间件`Configure`中的方法*Startup.cs*文件：
 

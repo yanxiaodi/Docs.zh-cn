@@ -2,33 +2,30 @@
 title: "ASP.NET Core MVC 和 Visual Studio 入门"
 author: rick-anderson
 description: "ASP.NET Core MVC 和 Visual Studio 入门"
-keywords: ASP.NET Core, MVC
-ms.author: riande
 manager: wpickett
-ms.date: 08/07/2017
-ms.topic: get-started-article
-ms.technology: aspnet
+ms.author: riande
+ms.date: 10/07/2017
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: get-started-article
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: 6e233a0114967405a67b05365e0125620441efb4
-ms.sourcegitcommit: 78d28178345a0eea91556e4cd1adad98b1446db8
+ms.openlocfilehash: d07d133aa0ed83962b6dc60b9fa0c42993f87843
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/22/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="getting-started-with-aspnet-core-mvc-and-visual-studio"></a>ASP.NET Core MVC 和 Visual Studio 入门
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
-本教程将指导你使用 [Visual Studio 2017](https://www.visualstudio.com/) 构建 ASP.NET Core MVC Web 应用所涉及的基础知识。 [!INCLUDE[consider RP](../../includes/razor.md)]
+[!INCLUDE[consider RP](../../includes/razor.md)]
 
-本教程有三个版本：
+本教程提供 3 个版本：
 
 * macOS：[使用 Visual Studio for Mac 创建 ASP.NET Core MVC 应用](xref:tutorials/first-mvc-app-mac/start-mvc)
 * Windows：[使用 Visual Studio 创建 ASP.NET Core MVC 应用](xref:tutorials/first-mvc-app/start-mvc)
 * macOS、Linux 和 Windows：[使用 Visual Studio Code 创建 ASP.NET Core MVC 应用](xref:tutorials/first-mvc-app-xplat/start-mvc)
-
-有关本教程的 Visual Studio 2015 版本，请参阅 [PDF 格式的 ASP.NET Core 文档的 VS 2015 版本](https://github.com/aspnet/Docs/blob/master/aspnetcore/common/_static/aspnet-core-project-json.pdf)。
 
 ## <a name="install-visual-studio-and-net-core"></a>安装 Visual Studio 和 .NET Core
 
@@ -98,7 +95,7 @@ Visual Studio 为刚刚创建的 MVC 项目使用默认模板。 输入项目名
 <!-- These images are also used by uid: tutorials/first-mvc-app-xplat/start-mvc -->
 ![运行应用](start-mvc/_static/1.png)
 
-* Visual Studio 启动 [IIS Express](https://docs.microsoft.com/iis/extensions/introduction-to-iis-express/iis-express-overview) 并运行你的应用。 请注意，地址栏显示 `localhost:port#`，而不显示 `example.com`。 这是因为 `localhost` 是本地计算机的标准主机名。 Visual Studio 创建 Web 项目时，为 Web 服务器使用随机端口。 在上图中，端口号为 5000。 运行应用时，会看到不同的端口号。
+* Visual Studio 启动 [IIS Express](https://docs.microsoft.com/iis/extensions/introduction-to-iis-express/iis-express-overview) 并运行应用。 请注意，地址栏显示 `localhost:port#`，而不显示 `example.com` 之类的内容。 这是因为 `localhost` 是本地计算机的标准主机名。 Visual Studio 创建 Web 项目时，Web 服务器使用的是随机端口。 在上图中，端口号为 5000。 浏览器中的 URL 显示 `localhost:5000`。 运行应用时，将看到不同的端口号。
 * 使用“Ctrl+F5”启动应用（非调试模式）后，可执行代码更改、保存文件、刷新浏览器和查看代码更改等操作。 许多开发人员更喜欢使用非调试模式快速启动应用并查看更改。
 * 可以从“调试”菜单项中以调试或非调试模式启动应用：
 

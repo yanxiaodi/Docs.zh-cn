@@ -2,27 +2,26 @@
 title: "在 ASP.NET Core on Mac 中开始使用 Razor 页面"
 author: rick-anderson
 description: "利用 Visual Studio for Mac 在 ASP.NET Core 中开始使用 Razor 页面"
-keywords: "ASP.NET Core, Razor 页面, 基架, Entity Framework Core, EF, EF Core, 数据库, mac, macOS, Visual Studio for Mac"
-ms.author: riande
 manager: wpickett
+ms.author: riande
 ms.date: 07/27/2017
-ms.topic: get-started-article
-ms.technology: aspnet
 ms.prod: aspnet-core
+ms.technology: aspnet
+ms.topic: get-started-article
 uid: tutorials/razor-pages-mac/razor-pages-start
-ms.openlocfilehash: 9431e8160011d1485925db5cc4f9f83bf7381e97
-ms.sourcegitcommit: 67f54fabbfa4e3942f5bfe1f8a7fdfe4a7a75358
+ms.openlocfilehash: 9e7d1db47e4cc9d753b1629e20345ca1f4403b2f
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/19/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="getting-started-with-razor-pages-in-aspnet-core-with-visual-studio-for-mac"></a>借助 Visual Studio for Mac 在 ASP.NET Core 中开始使用 Razor 页面
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT)
 
-本教程介绍构建 ASP.NET Core Razor 页面 Web 应用的基础知识。 我们建议在学习本教程前先阅读 [Razor 页面介绍](xref:mvc/razor-pages/index)。 Razor 页面是在 ASP.NET Core 中为 Web 应用程序生成 UI 时建议使用的方法。
+本教程介绍构建 ASP.NET Core Razor Pages Web 应用的基础知识。 建议在学习本教程前先查看 [Razor 页面介绍](xref:mvc/razor-pages/index)。 Razor 页面是在 ASP.NET Core 中为 Web 应用程序生成 UI 时建议使用的方法。
 
-## <a name="prerequisites"></a>先决条件
+## <a name="prerequisites"></a>系统必备
 
 安装以下组件：
 

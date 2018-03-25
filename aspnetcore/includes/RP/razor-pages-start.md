@@ -8,12 +8,11 @@
 
 下表列出了项目中的文件和文件夹。 对于本教程而言，Startup.cs 是最有必要了解的文件。 无需查看下面提供的每一个链接。 需要详细了解项目中的某个文件或文件夹时，可参考此处提供的链接。
 
-| 文件或文件夹              | 用途 |
+| 文件或文件夹              | 目标 |
 | ----------------- | ------------ | 
 | wwwroot | 包含静态文件。 请参阅[使用静态文件](xref:fundamentals/static-files)。 |
-| 页数 | [Razor 页面](xref:mvc/razor-pages/index)的文件夹。 | 
-| *appsettings.json* | [配置](xref:fundamentals/configuration) |
-| *bower.json* | 客户端包管理。 请参阅 [Bower](xref:client-side/bower)。|
+| 页数 | [Razor Pages](xref:mvc/razor-pages/index)的文件夹。 | 
+| *appsettings.json* | [配置](xref:fundamentals/configuration/index) |
 | *Program.cs* | [托管](xref:fundamentals/hosting) ASP.NET Core 应用。|
 | *Startup.cs* | 配置服务和请求管道。 请参阅[启动](xref:fundamentals/startup)。|
 
@@ -21,7 +20,7 @@
 
 _Layout.cshtml 文件包含常见的 HTML 元素（脚本和样式表），并设置应用程序的布局。 例如，单击“RazorPagesMovie”、“主页”、“关于”或“联系人”时，将看到相同的元素。 常见的元素包括顶部的导航菜单和窗口底部的标题。 请参阅[布局](xref:mvc/views/layout)了解详细信息。
 
-_ViewStart.cshtml 将 Razor 页面 `Layout` 属性设置为使用 _Layout.cshtml 文件。 请参阅[布局](xref:mvc/views/layout)了解详细信息。
+*_ViewStart.cshtml*将 Razor Pages `Layout` 属性设置为使用 *_Layout.cshtml* 文件。 请参阅[布局](xref:mvc/views/layout)了解详细信息。
 
 _ViewImports.cshtml 文件包含要导入每个 Razor 页面的 Razor 指令。 请参阅[导入共享指令](xref:mvc/views/layout#importing-shared-directives)了解详细信息。
 

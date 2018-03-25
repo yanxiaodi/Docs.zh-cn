@@ -2,20 +2,18 @@
 title: "将模型添加到 ASP.NET Core MVC 应用。"
 author: rick-anderson
 description: "将模型添加到简单的 ASP.NET Core 应用。"
+manager: wpickett
 ms.author: riande
 ms.date: 09/18/2017
-ms.topic: get-started-article
-ms.technology: aspnet
-keywords: "ASP.NET Core, WebAPI, Web API, REST, Mac, Linux, HTTP, 服务, HTTP 服务, VS Code"
 ms.prod: asp.net-core
-manager: wpickett
-ms.assetid: 8dc28498-eeee-4666-b903-b593059e9f39
+ms.technology: aspnet
+ms.topic: get-started-article
 uid: tutorials/first-mvc-app-xplat/adding-model
-ms.openlocfilehash: 70aa344ca4ceafacf53907c925fd595e47104d7e
-ms.sourcegitcommit: 78d28178345a0eea91556e4cd1adad98b1446db8
+ms.openlocfilehash: 81511b05a3cc11a58b93452d3c6e5305e7ee4357
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/22/2017
+ms.lasthandoff: 01/30/2018
 ---
 [!INCLUDE[adding-model1](../../includes/mvc-intro/adding-model1.md)]
 
@@ -24,7 +22,7 @@ ms.lasthandoff: 09/22/2017
 
 [!code-csharp[Main](../../tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Models/MovieNoEF.cs?name=snippet_1)]
 
-数据库需要 `ID` 字段作为主键。 
+数据库需要 `ID` 字段以获取主键。 
 
 生成应用以确认没有任何错误，最后将 Model 添加到你的 MVC 应用。
 
@@ -59,10 +57,6 @@ ms.lasthandoff: 09/22/2017
 dotnet restore
 dotnet aspnet-codegenerator controller -name MoviesController -m Movie -dc MvcMovieContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries 
 ```
-
-> [!NOTE]
-> 如果在基架命令运行时遇到错误，请参阅[基架存储库中的问题 444](https://github.com/aspnet/scaffolding/issues/444)，以获得解决方案。
-
 基架引擎创建以下组件：
 
 * 电影控制器 (Controllers/MoviesController.cs)

@@ -1,43 +1,42 @@
 ---
 title: "配置可移植对象本地化"
 author: sebastienros
-description: "本文介绍可移植的对象文件，并概述了有关使用 ASP.NET Core 应用程序的 Orchard 核心框架中的步骤。"
-keywords: "ASP.NET 核心、 本地化、 区域性、 语言、 可移植的对象"
-ms.author: scaddie
+description: "本文介绍可移植对象文件，并概述通过 Orchard Core 框架在 ASP.NET Core 应用程序中使用这些文件的步骤。"
 manager: wpickett
+ms.author: scaddie
 ms.date: 09/26/2017
-ms.topic: article
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: fundamentals/portable-object-localization
-ms.openlocfilehash: 4fa73ae08b10217de657681a27f6097fc3443737
-ms.sourcegitcommit: 732cd2684246e49e796836596643a8d37e20c46d
-ms.translationtype: MT
+ms.openlocfilehash: 6fefbd9b28d481184e358e7d66af68d112c63696
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
+ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 10/01/2017
+ms.lasthandoff: 01/30/2018
 ---
-# <a name="configure-portable-object-localization-with-orchard-core"></a>使用 Orchard 核心配置可移植对象本地化
+# <a name="configure-portable-object-localization-with-orchard-core"></a>使用 Orchard Core 配置可移植对象本地化
 
-通过[Sébastien Ros](https://github.com/sebastienros)和[Scott Addie](https://twitter.com/Scott_Addie)
+作者：[Sébastien Ros](https://github.com/sebastienros) 和 [Scott Addie](https://twitter.com/Scott_Addie)
 
-本文将指导完成使用 ASP.NET Core 应用程序中的可移植对象 (PO) 文件的步骤[Orchard 核心](https://github.com/OrchardCMS/OrchardCore)framework。
+本文演示通过 [Orchard Core](https://github.com/OrchardCMS/OrchardCore) 框架在 ASP.NET Core 应用程序中使用可移植对象 (PO) 文件的步骤。
 
-**注意：** Orchard 核心不是 Microsoft 的产品。 因此，Microsoft 不提供支持此功能。
+**请注意：**Orchard Core 不是 Microsoft 产品。 因此，Microsoft 不提供针对此功能的支持。
 
-[查看或下载的示例代码](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/localization/sample/POLocalization)([如何下载](xref:tutorials/index#how-to-download-a-sample))
+[查看或下载示例代码](https://github.com/aspnet/Docs/tree/master/aspnetcore/fundamentals/localization/sample/POLocalization)（[如何下载](xref:tutorials/index#how-to-download-a-sample)）
 
-## <a name="what-is-a-po-file"></a>PO 文件是什么文件？
+## <a name="what-is-a-po-file"></a>什么是 PO 文件？
 
-PO 文件以包含给定语言的已翻译的字符串的文本文件分发。 改为使用 PO 文件的一些优势*.resx*文件包括：
-- PO 文件支持复数形式;*.resx*文件不支持复数形式。
-- PO 文件不编译像一样*.resx*文件。 在这种情况下，专用的工具和生成步骤不是必需的。
-- PO 文件很好地配合协作联机编辑工具。
+PO 文件作为包含给定语言的已转换字符串的文本文件分发。 使用 PO 文件替代 .resx 文件的一些优势包括：
+- PO 文件支持复数形式；而 .resx 文件不支持复数形式。
+- PO 文件的编译方法与 .resx 文件不同。 同样，无需专用工具和生成步骤。
+- PO 文件可很好地与协作联机编辑工具结合使用。
 
 ### <a name="example"></a>示例
 
-下面是包含用法语，包括另一个使用其复数形式的两个字符串的转换的示例 PO 文件：
+下面是一个包含两个法语字符串（其中一个具有复数形式）转换的示例 PO 文件：
 
-*fr.po*
+fr.po
 
 ```text
 #: Services/EmailService.cs:29
@@ -51,71 +50,71 @@ msgstr[0] "L'adresse email est \"{0}\"."
 msgstr[1] "Les adresses email sont \"{0}\""
 ```
 
-此示例使用以下语法：
+此示例使用下列语法：
 
-- `#:`： 指示要转换的字符串的上下文中的注释。 相同的字符串可能产生不同的翻译具体取决于它正在使用的位置。
-- `msgid`： 在未转换的字符串。
-- `msgstr`: 已翻译的字符串。
+- `#:`：注释，用于指示要转换的字符串的上下文。 根据使用的位置，可对相同字符串进行不同转换。
+- `msgid`：未转换的字符串。
+- `msgstr`：已转换的字符串。
 
-对于复数形式的支持，可以定义多个条目。
+在支持复数形式的情况下，可定义多个条目。
 
-- `msgid_plural`： 在未转换复数形式的字符串。
-- `msgstr[0]`: 这种情况 0 转换的字符串。
-- `msgstr[N]`： 在已翻译的字符串的大小写的 n。
+- `msgid_plural`：未转换的复数形式字符串。
+- `msgstr[0]`：针对事例 0 的已转换的字符串。
+- `msgstr[N]`：针对事例 N 的已转换的字符串。
 
-找不到 PO 文件规范[此处](https://www.gnu.org/savannah-checkouts/gnu/gettext/manual/html_node/PO-Files.html)。
+可在[此处](https://www.gnu.org/savannah-checkouts/gnu/gettext/manual/html_node/PO-Files.html)找到 PO 文件规范。
 
-## <a name="configuring-po-file-support-in-aspnet-core"></a>在 ASP.NET 核心中配置 PO 文件支持
+## <a name="configuring-po-file-support-in-aspnet-core"></a>在 ASP.NET Core 中配置 PO 文件支持
 
-此示例基于 ASP.NET 核心 MVC 应用程序从 Visual Studio 2017 项目模板生成。
+此示例基于从 Visual Studio 2017 项目模板中生成的 ASP.NET Core MVC 应用程序。
 
 ### <a name="referencing-the-package"></a>引用包
 
-添加对的引用`OrchardCore.Localization.Core`NuGet 包。 适用于的[MyGet](https://www.myget.org/)在以下的包源： https://www.myget.org/F/orchardcore-preview/api/v3/index.json
+添加对 `OrchardCore.Localization.Core` NuGet 包的引用。 该包可在以下包源：https://www.myget.org/F/orchardcore-preview/api/v3/index.json 处的 [MyGet](https://www.myget.org/) 上找到
 
-*.Csproj*文件现包含类似于以下的行 （版本号可能不同）：
+.csproj 文件现在包含类似于以下内容的行（版本号可能不同）：
 
 [!code-xml[Main](localization/sample/POLocalization/POLocalization.csproj?range=9)]
 
-### <a name="registering-the-service"></a>注册该服务
+### <a name="registering-the-service"></a>注册服务
 
-添加到所需的服务`ConfigureServices`方法*Startup.cs*:
+将所需服务添加到 Startup.cs 的 `ConfigureServices` 方法：
 
 [!code-csharp[Main](localization/sample/POLocalization/Startup.cs?name=snippet_ConfigureServices&highlight=4-21)]
 
-添加到所需的中间件`Configure`方法*Startup.cs*:
+将所需中间件添加到 Startup.cs 的 `Configure` 方法：
 
 [!code-csharp[Main](localization/sample/POLocalization/Startup.cs?name=snippet_Configure&highlight=15)]
 
-将下面的代码添加到选择的 Razor 视图中。 *About.cshtml*此示例中使用。
+将以下代码添加到所选的 Razor 视图中。 在此示例中，使用了 About.cshtml。
 
 [!code-cshtml[Main](localization/sample/POLocalization/Views/Home/About.cshtml)]
 
-`IViewLocalizer`注入实例并将其用于翻译文本"Hello world ！"。
+注入了 `IViewLocalizer` 实例并将其用于转换文本“Hello world！”。
 
 ### <a name="creating-a-po-file"></a>创建 PO 文件
 
-创建名为的文件 *<culture code>.po*应用程序根文件夹中。 在此示例中，文件名是*fr.po*因为使用法语语言：
+在应用程序根文件夹中创建名为 <culture code>.po 的文件。 在此示例中，文件名为 fr.po，因为使用了法语：
 
 [!code-text[Main](localization/sample/POLocalization/fr.po)]
 
-要转换的字符串和法语翻译字符串，将存储此文件。 如有必要，翻译恢复到其父区域性。 在此示例中， *fr.po*如果请求的区域性，则使用文件`fr-FR`或`fr-CA`。
+此文件存储了要转换的字符串和已转换为法语的字符串。 如有必要，转换将还原为其父级区域性。 在此示例中，如果请求的区域性为 `fr-FR` 或 `fr-CA`，则使用 fr.po 文件。
 
 ### <a name="testing-the-application"></a>测试应用程序
 
-运行你的应用程序，并导航到 URL `/Home/About`。 文本**Hello world ！** 将显示。
+运行应用程序并导航到 URL `/Home/About`。 此时将显示文本 Hello world! 。
 
-导航到的 URL `/Home/About?culture=fr-FR`。 文本**Bonjour le monde ！** 将显示。
+导航到 URL `/Home/About?culture=fr-FR`。 此时将显示文本 Bonjour le monde! 。
 
 ## <a name="pluralization"></a>复数形式
 
-PO 文件支持复数形式窗体时相同的字符串会以不同的方式基于基数不需要进行转换，这非常有用。 执行此任务较为复杂，因为每种语言定义自定义规则，以选择要使用哪些字符串基于基数。
+PO 文件支持复数形式，在相同字符串需要基于基数以不同方式进行转换时，这非常有用。 此任务较为复杂，因为每种语言均定义了自定义规则，以基于基数选择要使用的字符串。
 
-Orchard 本地化包提供了一个 API 来自动调用这些不同的复数形式。
+Orchard 本地化包提供了一个 API 以自动调用这些不同的复数形式。
 
 ### <a name="creating-pluralization-po-files"></a>创建复数形式 PO 文件
 
-将以下内容添加到前面所述*fr.po*文件：
+将以下内容添加到前面所述的 fr.po 文件：
 
 ```text
 msgid "There is one item."
@@ -124,19 +123,19 @@ msgstr[0] "Il y a un élément."
 msgstr[1] "Il y a {0} éléments."
 ```
 
-请参阅[PO 文件是什么文件？](#what-is-a-po-file)有关在此示例中的每个条目表示的说明。
+有关此示例中每个条目所表示的内容的说明，请参阅[什么是 PO 文件？](#what-is-a-po-file)。
 
-### <a name="adding-a-language-using-different-pluralization-forms"></a>添加使用不同的复数形式窗体的语言
+### <a name="adding-a-language-using-different-pluralization-forms"></a>使用不同的复数形式添加语言
 
-在前面的示例使用英语和法语的字符串。 英语和法语有只有两个复数形式窗体并且共享相同的窗体规则，这是基数为一映射到第一个复数形式。 任何其他基数映射到第二个复数形式。
+前面的示例中使用了英语和法语字符串。 英语和法语只有两种复数形式且拥有相同形式规则，即一的基数映射到第一种复数形式。 任何其他基数映射到第二种复数形式。
 
-并非所有语言都共享相同的规则。 这一点与捷克语语言，它具有三个复数形式。
+并非所有语言都拥有相同的规则。 捷克语就是一个例子，它具有三种复数形式。
 
-创建`cs.po`，如下所示，文件并记下复数形式需要三个不同的翻译的如何：
+如下所示，创建 `cs.po` 文件，并记下复数形式如何需要三种不同转换：
 
 [!code-text[Main](localization/sample/POLocalization/cs.po)]
 
-若要接受捷克语本地化信息，请添加`"cs"`到中支持的区域性列表`ConfigureServices`方法：
+若要接受捷克语本地化，请将 `"cs"` 添加到 `ConfigureServices` 方法中受支持的区域性列表：
 
 ```csharp
 var supportedCultures = new List<CultureInfo>
@@ -149,7 +148,7 @@ var supportedCultures = new List<CultureInfo>
 };
 ```
 
-编辑*Views/Home/About.cshtml*文件来呈现的几个基数的本地化，复数形式的字符串：
+编辑 Views/Home/About.cshtml 文件以呈现一些基数的已本地化复数形式字符串：
 
 ```cshtml
 <p>@Localizer.Plural(1, "There is one item.", "There are {0} items.")</p>
@@ -157,9 +156,9 @@ var supportedCultures = new List<CultureInfo>
 <p>@Localizer.Plural(5, "There is one item.", "There are {0} items.")</p>
 ```
 
-**注意：**在实际方案中，变量将用于表示计数。 在这里，我们重复和三个不同的值，以公开非常具体的用例相同的代码。
+**注意：**在实际方案中，变量将用于表示计数。 此处，我们通过三个不同的值重复相同代码，以公开非常特定的事例。
 
-在切换区域性，您会看到如下：
+切换区域性时，将显示如下内容：
 
 对于 `/Home/About`：
 
@@ -185,17 +184,17 @@ Existují 2 položky.
 Existuje 5 položek.
 ```
 
-请注意，对于捷克语的区域性，三个翻译都不同。 法语和英语区域性共享同一个构造为两个最后一个已翻译的字符串。
+请注意，对于捷克语区域性，这三种转换各不相同。 对于最后两个已转换字符串，法语和英语区域性具有相同构造。
 
-## <a name="advanced-tasks"></a>高级的任务
+## <a name="advanced-tasks"></a>高级任务
 
-### <a name="contextualizing-strings"></a>不一而足字符串
+### <a name="contextualizing-strings"></a>将字符串置于上下文中理解
 
-应用程序通常包含在多个位置中要转换的字符串。 在应用程序 （Razor 视图或类文件） 中的某些位置，相同的字符串可能具有不同的翻译。 PO 文件支持的文件上下文，可用来对其进行分类所表示的字符串的概念。 使用的文件上下文，字符串可以产生不同的翻译，具体取决于文件上下文 （或缺乏文件上下文）。
+应用程序通常包含要在多个位置中进行转换的字符串。 在应用中的特定位置（Razor 视图或类文件），相同字符串可能具有不同转换。 PO 文件支持文件上下文概念，此概念可用于对所表示的字符串进行分类。 使用文件上下文，可将字符串进行不同转换，具体取决于文件上下文（或缺乏文件上下文）。
 
-PO 本地化服务使用的完整类或转换字符串时使用的视图的名称。 这通过设置上的值实现`msgctxt`条目。
+PO 本地化服务使用完整类的名称或转换字符串时使用的视图。 这通过在 `msgctxt` 条目上设置值来完成。
 
-请考虑为上一次添加*fr.po*示例。 Razor 视图位于*Views/Home/About.cshtml*可以通过设置保留定义为的文件上下文`msgctxt`条目的值：
+请考虑对以前的 fr.po 示例作一点小小的补充。 可通过设置保留的 `msgctxt` 条目的值将位于 Views/Home/About.cshtml 的 Razor 视图定义为文件上下文：
 
 ```text
 msgctxt "Views.Home.About"
@@ -203,28 +202,28 @@ msgid "Hello world!"
 msgstr "Bonjour le monde!"
 ```
 
-与`msgctxt`设置这种情况下，文本转换发生时导航到`/Home/About?culture=fr-FR`。 导航到时，就不会发生转换`/Home/Contact?culture=fr-FR`。
+这样设置 `msgctxt` 后，导航到 `/Home/About?culture=fr-FR` 时将发生文本转换。 而导航到 `/Home/Contact?culture=fr-FR` 时，则不发生转换。
 
-当与给定的文件上下文匹配时没有特定条目时，Orchard 核心回退机制查找没有上下文的适当 PO 文件。 假设存在是没有为定义的特定文件上下文*Views/Home/Contact.cshtml*、 导航至`/Home/Contact?culture=fr-FR`如加载 PO 文件：
+当没有特定条目与给定文件上下文相匹配时，Orchard Core 的回退机制将在没有上下文的情况下查找适当的 PO 文件。 假设不存在针对 Views/Home/Contact.cshtml 定义的特定文件上下文，导航到 `/Home/Contact?culture=fr-FR`，加载 PO 文件，如：
 
 [!code-text[Main](localization/sample/POLocalization/fr.po)]
 
 ### <a name="changing-the-location-of-po-files"></a>更改 PO 文件的位置
 
-可以在中更改 PO 文件的默认位置`ConfigureServices`:
+可以在 `ConfigureServices` 中更改 PO 文件的默认位置：
 
 ```csharp
 services.AddPortableObjectLocalization(options => options.ResourcesPath = "Localization");
 ```
 
-在此示例中，从加载这些 PO 文件*本地化*文件夹。
+在此示例中，从本地化文件夹加载 PO 文件。
 
-### <a name="implementing-a-custom-logic-for-finding-localization-files"></a>实现用于查找本地化文件自定义逻辑
+### <a name="implementing-a-custom-logic-for-finding-localization-files"></a>实现用于查找本地化文件的自定义逻辑
 
-当定位 PO 文件所需的更复杂的逻辑`OrchardCore.Localization.PortableObject.ILocalizationFileLocationProvider`可以实现接口，并将其注册为服务。 当 PO 文件可以存储在不同位置或在文件夹层次结构中找到所需的文件时，这非常有用。
+当需要更复杂的逻辑以查找 PO 文件时，可实现 `OrchardCore.Localization.PortableObject.ILocalizationFileLocationProvider` 接口并将其注册为服务。 在可将 PO 文件存储于不同位置或在文件夹层次结构中找到文件时，这非常有用。
 
-### <a name="using-a-different-default-pluralized-language"></a>使用不同变为复数形式的默认语言
+### <a name="using-a-different-default-pluralized-language"></a>使用不同默认复数形式语言
 
-此程序包包含`Plural`特定于两个复数形式的扩展方法。 对于需要更多的复数形式的语言，创建扩展方法。 使用扩展方法，你无需提供的默认语言任何本地化文件&mdash;对原始字符串已在代码中直接使用。
+此包包含特定于两种复数形式的 `Plural` 扩展方法。 对于需要更多复数形式的语言，请创建扩展方法。 通过扩展方法，无需提供默认语言的任何本地化文件 &mdash; 可在代码中直接使用原始字符串。
 
-你可以使用多个泛型`Plural(int count, string[] pluralForms, params object[] arguments)`接受的翻译的字符串数组的重载。
+可使用更加广泛的、接受转换的字符串数组的 `Plural(int count, string[] pluralForms, params object[] arguments)` 重载。

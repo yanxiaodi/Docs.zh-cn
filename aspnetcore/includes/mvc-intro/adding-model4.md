@@ -1,4 +1,4 @@
-上面突出显示的代码显示了要添加到[依赖关系注入](xref:fundamentals/dependency-injection)容器的电影数据库上下文。 `services.AddDbContext<MvcMovieContext>(options =>` 之后的行未显示（请查看代码）。 它指定要使用的数据库和连接字符串。 `=>` 是 [lambda 运算符](https://docs.microsoft.com/dotnet/articles/csharp/language-reference/operators/lambda-operator)。
+上面突出显示的代码显示了要添加到[依赖关系注入](xref:fundamentals/dependency-injection)容器的电影数据库上下文（在 Startup.cs 文件中）。 `services.AddDbContext<MvcMovieContext>(options =>` 指定要使用的数据库和连接字符串。 `=>` 是 [lambda 运算符](https://docs.microsoft.com/dotnet/articles/csharp/language-reference/operators/lambda-operator)。
 
 打开 Controllers/MoviesController.cs 文件并检查构造函数：
 
@@ -8,7 +8,7 @@
 
 构造函数使用[依赖关系注入](xref:fundamentals/dependency-injection)将数据库上下文 (`MvcMovieContext `) 注入到控制器中。 数据库上下文将在控制器中的每个 [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) 方法中使用。
 
-<a name=strongly-typed-models-keyword-label></a>
+<a name="strongly-typed-models-keyword-label"></a>
 
 ## <a name="strongly-typed-models-and-the-model-keyword"></a>强类型模型和 @model 关键词
 

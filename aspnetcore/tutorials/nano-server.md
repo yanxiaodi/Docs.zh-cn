@@ -2,20 +2,18 @@
 title: "Nano Server 上的 ASP.NET Core"
 author: shirhatti
 description: "了解如何采用现有的 ASP.NET Core 应用并将其部署到运行 IIS 的 Nano Server 实例。"
-keywords: ASP.NET Core, nano server
-ms.author: riande
 manager: wpickett
+ms.author: riande
 ms.date: 11/04/2016
-ms.topic: article
-ms.assetid: 50922cf1-ca58-4006-9236-99b7ff2dd0cf
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: tutorials/nano-server
-ms.openlocfilehash: 337cc69ef522452c17cdd6ea4a5e71cd122035dc
-ms.sourcegitcommit: 78d28178345a0eea91556e4cd1adad98b1446db8
+ms.openlocfilehash: 4fc5f6874f86130da9f66d13778516d984ff8b46
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/22/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="aspnet-core-with-iis-on-nano-server"></a>ASP.NET Core 与 Nano Server 上运行的 IIS
 
@@ -33,11 +31,11 @@ Nano Server 是 Windows Server 2016 中的一个安装选项，它占用内存�
 
 2. 下载 Nano Server VHD。
 
-3. 使用 Azure 库中的 Nano Server 映像在 Azure 中创建 VM。 如果没有 Azure 帐户，可以获取 30 天免费试用版。
+3. 使用 Azure 库中的 Nano Server 映像在 Azure 中创建 VM。 提供 Azure 免费试用版。
 
 在本教程中，我们将使用第二个选项，即 Windows Server 2016 中的预生成 Nano Server VHD。
 
-在继续阅读本教程之前，需要现有 ASP.NET Core 应用程序的[发布输出](xref:hosting/directory-structure)。 确保生成的应用程序在 64 位进程中运行。
+在继续阅读本教程之前，需要现有 ASP.NET Core 应用程序的[发布输出](xref:host-and-deploy/directory-structure)。 确保生成的应用程序在 64 位进程中运行。
 
 ## <a name="setting-up-the-nano-server-instance"></a>设置 Nano Server 实例
 
@@ -191,7 +189,7 @@ dotnet-install.ps1 -Version 2.0.0
 </configuration>
 ```
 
-在远程会话中运行以下命令，在不同的端口（而不是默认网站）上为已发布的应用创建一个新的站点。 此外，还需要打开该端口来访问 Web。 为简单起见，此脚本使用 `DefaultAppPool`。 关于在应用程序池下运行的更多注意事项，请参阅[应用程序池](xref:publishing/iis#application-pools)。
+在远程会话中运行以下命令，在不同的端口（而不是默认网站）上为已发布的应用创建一个新的站点。 此外，还需要打开该端口来访问 Web。 为简单起见，此脚本使用 `DefaultAppPool`。 关于在应用程序池下运行的更多注意事项，请参阅[应用程序池](xref:host-and-deploy/iis/index#application-pools)。
 
 ```PowerShell
 Import-module IISAdministration
@@ -205,4 +203,4 @@ New-NetFirewallRule -Name "AspNetCore Port 81 IIS" -DisplayName "Allow HTTP on T
 
 ## <a name="running-the-application"></a>运行应用程序
 
-可以在浏览器中转到 `http://192.168.1.10:8000` 访问已发布的 Web 应用。 如果你已按照[日志创建和重定向](xref:hosting/aspnet-core-module#log-creation-and-redirection)中所述设置了日志记录，则可以在 C:\PublishedApps\AspNetCoreSampleForNano\logs 中查看日志。
+可以在浏览器中转到 `http://192.168.1.10:8000` 访问已发布的 Web 应用。 如果你已按照[日志创建和重定向](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection)中所述设置了日志记录，则可以在 C:\PublishedApps\AspNetCoreSampleForNano\logs 中查看日志。

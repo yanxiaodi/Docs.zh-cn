@@ -1,35 +1,59 @@
 ---
-title: "安全性"
-author: rick-anderson
-description: 
-keywords: ASP.NET Core
-ms.author: riande
+title: "ASP.NET Core 安全性概述"
+author: rachelappel
+description: "了解 ASP.NET Core 中的身份验证、授权和安全基础知识。"
 manager: wpickett
-ms.date: 10/14/2016
-ms.topic: article
-ms.assetid: a8fb7eb7-e0e5-4394-84f3-1f1dbe012345
-ms.technology: aspnet
+ms.author: rachelap
+ms.date: 11/01/2017
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: security/index
-ms.openlocfilehash: f173d03f55a1ce52222a75c023f9e8a20d5c60dc
-ms.sourcegitcommit: 6e83c55eb0450a3073ef2b95fa5f5bcb20dbbf89
+ms.openlocfilehash: e03256d7b8b442569b0b0126983732c10817e20f
+ms.sourcegitcommit: 493a215355576cfa481773365de021bcf04bb9c7
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/28/2017
+ms.lasthandoff: 03/15/2018
 ---
-# <a name="security"></a>安全性
+# <a name="aspnet-core-security-overview"></a>ASP.NET Core 安全性概述
+
+通过 ASP.NET Core，开发者可轻松配置和管理其应用的安全性。 ASP.NET Core 的功能包括管理身份验证、授权、数据保护、SSL 强制、应用机密、请求防伪保护及 CORS 管理。 通过这些安全功能，可以生成安全可靠的 ASP.NET Core 应用。
+
+## <a name="aspnet-core-security-features"></a>ASP.NET Core 安全性功能
+
+ASP.NET Core 提供许多用于保护应用安全的工具和库（包括内置标识提供程序），但也可使用第三方标志服务（如 Facebook、Twitter 或 LinkedIn）。 利用 ASP.NET Core 可以轻松管理应用机密，无需将机密信息暴露在代码中就可存储和使用它们。
+
+## <a name="authentication-vs-authorization"></a>身份验证 vs授权
+
+身份验证是这样一个过程：由用户提供凭据，然后将其与存储在操作系统、数据库、应用或资源中的凭据进行比较。 在授权过程中，如果凭据匹配，则用户身份验证成功，可执行已向其授权的操作。 授权指判断允许用户执行的操作的过程。
+
+对身份验证的另一种理解是将其看作进入某一空间（如服务器、数据库、应用或资源）的方式，而将授权看作用户可对该空间（服务器、数据库或应用）内的对象执行的操作。
+
+## <a name="common-vulnerabilities-in-software"></a>软件中的常见漏洞
+
+ASP.NET Core 和 EF 提供维护应用安全、预防安全漏洞的功能。 下表中链接的文档详细介绍了在 Web 应用中避免最常见安全漏洞的技术：
+
+* [跨站点脚本攻击](https://docs.microsoft.com/aspnet/core/security/cross-site-scripting)
+* [SQL 注入式攻击](https://docs.microsoft.com/ef/core/querying/raw-sql)
+* [跨站点请求伪造 (CSRF)](https://docs.microsoft.com/aspnet/core/security/anti-request-forgery)
+* [打开重定向攻击](https://docs.microsoft.com/aspnet/core/security/preventing-open-redirects)
+
+还应注意其他漏洞。 有关详细信息，请参阅本文档中关于 ASP.NET Core 安全文档的部分。
+
+## <a name="aspnet-security-documentation"></a>ASP.NET Core 安全文档
 
 *   [身份验证](authentication/index.md)
     *   [标识简介](authentication/identity.md)
     *   [启用使用 Facebook、Google 和其他外部提供程序的身份验证](authentication/social/index.md)
+    *   [通过 WS 联合身份验证启用身份验证](authentication/ws-federation.md)
     * [配置 Windows 身份验证](authentication/windowsauth.md)
     *   [帐户确认和密码恢复](authentication/accconfirm.md)
-    *   [使用 SMS 设置双因素身份验证](authentication/2fa.md) 
-    *   [在没有 ASP.NET Core 标识的情况下使用 Cookie 身份验证](authentication/cookie.md)
+    *   [使用 SMS 设置双因素身份验证](authentication/2fa.md)
+    *   [在没有标识的情况下使用 cookie 身份验证](authentication/cookie.md)
     *   [Azure Active Directory](authentication/azure-active-directory/index.md)
-        *   [Integrating Azure AD Into an ASP.NET Core Web App](https://azure.microsoft.com/documentation/samples/active-directory-dotnet-webapp-openidconnect-aspnetcore/)（将 Azure AD 集成到 ASP.NET Core Web 应用中）
-        *   [Calling a ASP.NET Core Web API From a WPF Application Using Azure AD](https://azure.microsoft.com/documentation/samples/active-directory-dotnet-native-aspnetcore/)（从使用 Azure AD 的 WPF 应用程序调用 ASP.NET Core Web API）
-        *   [Calling a Web API in an ASP.NET Core Web Application Using Azure AD](https://azure.microsoft.com/documentation/samples/active-directory-dotnet-webapp-webapi-openidconnect-aspnetcore/)（在使用 Azure AD 的 ASP.NET Core Web 应用程序中调用 Web API）
+        *   [将 Azure AD 集成到 ASP.NET Core Web 应用中](https://azure.microsoft.com/documentation/samples/active-directory-dotnet-webapp-openidconnect-aspnetcore/)
+        *   [使用 Azure AD 从 WPF 应用调用 ASP.NET Core Web API](https://azure.microsoft.com/documentation/samples/active-directory-dotnet-native-aspnetcore/)
+        *   [使用 Azure AD 在 ASP.NET Core Web 应用中调用 Web API](https://azure.microsoft.com/documentation/samples/active-directory-dotnet-webapp-webapi-openidconnect-aspnetcore/)
         *   [带有 Azure AD B2C 的 ASP.NET Core Web 应用](https://azure.microsoft.com/resources/samples/active-directory-b2c-dotnetcore-webapp/)
     *   [使用 IdentityServer4 保护 ASP.NET Core 应用](https://identityserver4.readthedocs.io)
 *   [授权](authorization/index.md)
@@ -38,7 +62,7 @@ ms.lasthandoff: 09/28/2017
     *   [简单授权](authorization/simple.md)
     *   [基于角色的授权](authorization/roles.md)
     *   [基于声明的授权](authorization/claims.md)
-    *   [基于自定义策略的授权](authorization/policies.md)
+    *   [基于策略的授权](authorization/policies.md)
     *   [要求处理程序中的依赖关系注入](authorization/dependencyinjection.md)
     *   [基于资源的授权](authorization/resourcebased.md)
     *   [基于视图的授权](authorization/views.md)
@@ -63,7 +87,7 @@ ms.lasthandoff: 09/28/2017
         *   [密钥管理扩展性](data-protection/extensibility/key-management.md)
         *   [其他 API](data-protection/extensibility/misc-apis.md)
     *   [实现](data-protection/implementation/index.md)
-        *   [已验证的加密详细信息。](data-protection/implementation/authenticated-encryption-details.md)
+        *   [已验证的加密详细信息](data-protection/implementation/authenticated-encryption-details.md)
         *   [子项派生和已验证的加密](data-protection/implementation/subkeyderivation.md)
         *   [上下文标头](data-protection/implementation/context-headers.md)
         *   [密钥管理](data-protection/implementation/key-management.md)
@@ -73,13 +97,13 @@ ms.lasthandoff: 09/28/2017
         *   [密钥存储格式](data-protection/implementation/key-storage-format.md)
         *   [短数据保护提供程序](data-protection/implementation/key-storage-ephemeral.md)
     *   [兼容性](data-protection/compatibility/index.md)
-        *   [在应用程序之间共享 cookie](data-protection/compatibility/cookie-sharing.md)
         *   [在 ASP.NET 中替换 <machineKey>](data-protection/compatibility/replacing-machinekey.md)
 *   [通过授权保护的用户数据创建应用](xref:security/authorization/secure-data)
 *   [在开发期间安全存储应用密钥](app-secrets.md)
 *   [Azure Key Vault 配置提供程序](key-vault-configuration.md)
 *   [强制实施 SSL](enforcing-ssl.md)
-*   [反请求伪造](anti-request-forgery.md)
+*   [防请求伪造](anti-request-forgery.md)
 *   [阻止打开重定向攻击](preventing-open-redirects.md)
-*   [阻止跨网站脚本编写](cross-site-scripting.md)
+*   [阻止跨站点脚本编写](cross-site-scripting.md)
 *   [启用跨域请求 (CORS)](cors.md)
+*   [在应用之间共享 Cookie](cookie-sharing.md)

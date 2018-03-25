@@ -2,20 +2,18 @@
 title: "使用 SQLite 和 ASP.NET Core MVC"
 author: rick-anderson
 description: "配合使用 SQLite 和基础 MVC 应用"
-keywords: ASP.NET Core,SQLite,SQL Server
-ms.author: riande
 manager: wpickett
+ms.author: riande
 ms.date: 04/07/2017
-ms.topic: get-started-article
-ms.assetid: 1638d9b8-6666-1638-8641-1638e23bf541
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: get-started-article
 uid: tutorials/first-mvc-app-mac/working-with-sql
-ms.openlocfilehash: ea93fa9b13c4ca25317bd1b098089aff2aa1f0e4
-ms.sourcegitcommit: 78d28178345a0eea91556e4cd1adad98b1446db8
+ms.openlocfilehash: 45a308744525fa19c032736f327192b7ce701aad
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/22/2017
+ms.lasthandoff: 01/30/2018
 ---
 [!INCLUDE[adding-model](../../includes/mvc-intro/sql.md)]
 

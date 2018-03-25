@@ -1,25 +1,23 @@
 ---
-title: "启用使用 Facebook、Google 和其他外部提供程序的身份验证"
+title: "ASP.NET Core 中的 Facebook、Google 和外部提供程序身份验证"
 author: rick-anderson
-description: 
-keywords: "ASP.NET Core, 身份验证, 社交, 身份验证提供程序, google, facebook, twitter, microsoft 帐户"
-ms.author: riande
+description: "本教程演示如何使用外部身份验证提供程序通过 OAuth 2.0 生成 ASP.NET Core 2.x 应用。"
 manager: wpickett
+ms.author: riande
 ms.date: 11/01/2016
-ms.topic: article
-ms.assetid: eda7ee17-f38c-462e-8d1d-63f459901cf3
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: security/authentication/social/index
-ms.openlocfilehash: 56036000535156b4b5814dde2a0145dcdfff28c3
-ms.sourcegitcommit: 6e83c55eb0450a3073ef2b95fa5f5bcb20dbbf89
+ms.openlocfilehash: 76433f814d6850a449434c29eb0bd27570ce193a
+ms.sourcegitcommit: 7ac15eaae20b6d70e65f3650af050a7880115cbf
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/28/2017
+ms.lasthandoff: 03/02/2018
 ---
-# <a name="enabling-authentication-using-facebook-google-and-other-external-providers"></a>启用使用 Facebook、Google 和其他外部提供程序的身份验证
+# <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>ASP.NET Core 中的 Facebook、Google 和外部提供程序身份验证
 
-<a name=security-authentication-social-logins></a>
+<a name="security-authentication-social-logins"></a>
 
 作者：[Valeriy Novytskyy](https://github.com/01binary) 和 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -46,6 +44,13 @@ ms.lasthandoff: 09/28/2017
 ![“新建 Web 应用程序”对话框](index/_static/select-project.png)
 
 请注意：本教程适用于可从向导顶部选择的 ASP.NET Core 2.0 SDK 版本。
+
+## <a name="apply-migrations"></a>应用迁移
+
+* 运行应用并选择“登录”链接。
+* 选择“以新用户身份注册”链接。
+* 输入新帐户的电子邮件地址和密码，再选择“注册”。
+* 按照说明操作来应用迁移。
 
 ## <a name="require-ssl"></a>要求 SSL
 
@@ -75,7 +80,7 @@ OAuth 2.0 需要使用 SSL 通过 HTTPS 协议进行身份验证。
 
 ## <a name="optionally-set-password"></a>选择性地设置密码
 
-使用外部登录提供程序注册即表明还没有向应用注册密码。 这可让用户无需创建和记住站点密码，但也会使用户依赖外部登录提供程序。 如果外部登录提供程序不可用，则无法登录网站。
+使用外部登录提供程序注册，即表明还没有向应用注册密码。 这可让用户无需创建和记住站点密码，但也会使用户依赖外部登录提供程序。 如果外部登录提供程序不可用，则无法登录网站。
 
 使用外部提供程序在登录过程中设置的电子邮箱创建密码和登录：
 

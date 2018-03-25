@@ -1,21 +1,19 @@
 ---
 title: "检查详细信息和删除方法"
 author: rick-anderson
-description: "简单 ASP.NET Core MVC 中的详细信息控制器方法和视图。"
-keywords: ASP.NET Core
-ms.author: riande
+description: "基本 ASP.NET Core MVC 应用中的详细信息控制器方法和视图。"
 manager: wpickett
+ms.author: riande
 ms.date: 03/07/2017
-ms.topic: get-started-article
-ms.assetid: 870192b4-8d4f-45c7-8c14-83d02bc0ad79
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: get-started-article
 uid: tutorials/first-mvc-app/details
-ms.openlocfilehash: bab93a2faa122d9d6d2e71367519baa09bd76bd1
-ms.sourcegitcommit: 0b6c8e6d81d2b3c161cd375036eecbace46a9707
+ms.openlocfilehash: 4a0004fc79f8e1d334e3acb96b28b2954d19f0a1
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/11/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="examining-the-details-and-delete-methods"></a>检查详细信息和删除方法
 
@@ -29,7 +27,7 @@ ms.lasthandoff: 08/11/2017
 
 [!code-csharp[Main](start-mvc/sample/MvcMovie/Startup.cs?highlight=5&name=snippet_1)]
 
-EF 可以使用 `SingleOrDefaultAsync` 方法轻松搜索数据。 该方法中内置的一个重要安全功能是，代码会先验证搜索方法已经找到电影，然后再执行操作。 例如，一个黑客可能通过将链接创建的 URL 从 `http://localhost:xxxx/Movies/Details/1` 更改为类似 `http://localhost:xxxx/Movies/Details/12345` 的值（或者不代表任何实际电影的其他值）将错误引入站点。 如果没有检查是否有空电影，则应用可能引发异常。
+EF 可以使用 `SingleOrDefaultAsync` 方法轻松搜索数据。 该方法中内置的一个重要安全功能是，代码会先验证搜索方法已经找到电影，然后再执行操作。 例如，一个黑客可能通过将链接创建的 URL 从 `http://localhost:xxxx/Movies/Details/1` 更改为类似 `http://localhost:xxxx/Movies/Details/12345` 的值（或者不代表任何实际电影的其他值）将错误引入站点。 如果未检查是否有空电影，则应用可能引发异常。
 
 检查 `Delete` 和 `DeleteConfirmed` 方法。
 
@@ -55,6 +53,10 @@ EF 可以使用 `SingleOrDefaultAsync` 方法轻松搜索数据。 该方法中�
 [ValidateAntiForgeryToken]
 public async Task<IActionResult> Delete(int id, bool notUsed)
 ```
+
+### <a name="publish-to-azure"></a>发布到 Azure
+
+有关如何使用 Visual Studio 将该应用发布到 Azure 的说明，请参阅[使用 Visual Studio 将 ASP.NET Core Web 应用发布到 Azure App Service](xref:tutorials/publish-to-azure-webapp-using-vs)。  此外，还可以从[命令行](xref:tutorials/publish-to-azure-webapp-using-cli)发布应用。
 
 感谢读完这篇 ASP.NET Core MVC 简介。 我们期待你的意见。 完成本教程后，大力推荐了解 [MVC 和 EF Core 入门](xref:data/ef-mvc/intro)。
 

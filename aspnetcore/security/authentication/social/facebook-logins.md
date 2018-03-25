@@ -1,35 +1,31 @@
 ---
 title: "在 ASP.NET Core Facebook 外部登录安装程序"
 author: rick-anderson
-description: "在 ASP.NET Core Facebook 外部登录安装程序"
-keywords: ASP.NET Core
-ms.author: riande
+description: "本教程演示的集成到现有的 ASP.NET Core 应用程序的 Facebook 帐户用户身份验证。"
 manager: wpickett
+ms.author: riande
 ms.date: 08/01/2017
-ms.topic: article
-ms.assetid: 8c65179b-688c-4af1-8f5e-1862920cda95
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: security/authentication/facebook-logins
-ms.openlocfilehash: 2b478ce38e98977a7c52e9317b5bc6fa0d6624b7
-ms.sourcegitcommit: 6e83c55eb0450a3073ef2b95fa5f5bcb20dbbf89
+ms.openlocfilehash: 283de1df68c45fa1b41ed75710fe9eb7925f815f
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/28/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="configuring-facebook-authentication"></a>配置 Facebook 身份验证
 
-<a name=security-authentication-facebook-logins></a>
-
 作者：[Valeriy Novytskyy](https://github.com/01binary) 和 [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-本教程演示如何使用户可以使用示例 ASP.NET 核心 2.0 项目上创建其 Facebook 帐户登录[上一页](index.md)。 我们首先按照创建 Facebook 应用程序 ID[官方步骤](https://www.facebook.com/unsupportedbrowser)。
+本教程演示如何使用户可以使用示例 ASP.NET 核心 2.0 项目上创建其 Facebook 帐户登录[上一页](index.md)。 我们首先按照创建 Facebook 应用程序 ID[官方步骤](https://developers.facebook.com)。
 
 ## <a name="create-the-app-in-facebook"></a>在 Facebook 中创建应用程序
 
-*  导航到[开发人员的 Facebook](https://www.facebook.com/unsupportedbrowser)页上，并登录。 如果你还没有的 Facebook 帐户，使用**注册 Facebook**创建一个的登录页上的链接。
+*  导航到[Facebook 开发人员应用](https://developers.facebook.com/apps/)页上，并登录。 如果你还没有的 Facebook 帐户，使用**注册 Facebook**创建一个的登录页上的链接。
 
-* 点击**创建应用**创建一个新的应用程序 id。 右上角的按钮
+* 点击**添加新的应用程序**创建一个新的应用程序 id。 右上角的按钮
 
    ![Microsoft Edge 中打开 Facebook 开发人员门户](index/_static/FBMyApps.png)
 
@@ -37,10 +33,10 @@ ms.lasthandoff: 09/28/2017
 
    ![创建新的应用程序 ID 窗体](index/_static/FBNewAppId.png)
 
-* 当出现时**选择一个产品**提示，单击**Set Up**上**Facebook 登录名**卡。
+* 上**选择一个产品**页上，单击**Set Up**上**Facebook 登录名**卡。
 
    ![产品安装程序页](index/_static/FBProductSetup.png)
-
+  
 * **快速入门**向导将启动与**选择一个平台**作为第一页。 现在跳过该向导，通过单击**设置**左侧菜单中的链接：
 
    ![跳过快速启动](index/_static/FBSkipQuickStart.png)
@@ -65,14 +61,14 @@ ms.lasthandoff: 09/28/2017
 
 链接敏感设置，例如 Facebook`App ID`和`App Secret`到你应用程序配置中使用[机密 Manager](xref:security/app-secrets)。 对于此教程的目的，命名为令牌`Authentication:Facebook:AppId`和`Authentication:Facebook:AppSecret`。
 
+执行以下命令以安全地存储`App ID`和`App Secret`使用密钥管理器：
+
+```console
+dotnet user-secrets set Authentication:Facebook:AppId <app-id>
+dotnet user-secrets set Authentication:Facebook:AppSecret <app-secret>
+```
+
 ## <a name="configure-facebook-authentication"></a>配置 Facebook 身份验证
-
-在本教程使用的项目模板可确保[Microsoft.AspNetCore.Authentication.Facebook](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Facebook)已安装包。
-
-* 若要使用 Visual Studio 2017 安装此包，请右键单击项目并选择**管理 NuGet 包**。
-* 若要使用.NET 核心 CLI 安装，请在项目目录中执行以下命令：
-
-   `dotnet add package Microsoft.AspNetCore.Authentication.Facebook`
 
 # <a name="aspnet-core-2xtabaspnetcore2x"></a>[ASP.NET Core 2.x](#tab/aspnetcore2x)
 
@@ -93,6 +89,13 @@ services.AddAuthentication().AddFacebook(facebookOptions =>
 [!INCLUDE[default settings configuration](includes/default-settings.md)]
 
 # <a name="aspnet-core-1xtabaspnetcore1x"></a>[ASP.NET Core 1.x](#tab/aspnetcore1x)
+
+安装[Microsoft.AspNetCore.Authentication.Facebook](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Facebook)包。
+
+* 若要使用 Visual Studio 2017 安装此包，请右键单击项目并选择**管理 NuGet 包**。
+* 若要使用.NET 核心 CLI 安装，请在项目目录中执行以下命令：
+
+   `dotnet add package Microsoft.AspNetCore.Authentication.Facebook`
 
 添加在 Facebook 中间件`Configure`中的方法*Startup.cs*文件：
 

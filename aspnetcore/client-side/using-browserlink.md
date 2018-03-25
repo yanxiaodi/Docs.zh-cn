@@ -1,22 +1,20 @@
 ---
 title: "在 ASP.NET 核心中的浏览器链接"
 author: ncarandini
-description: "了解如何浏览器链接是链接使用一个或多个 web 浏览器在开发环境的 Visual Studio 功能。"
-keywords: "ASP.NET 核心，浏览器链接，CSS 同步"
-ms.author: riande
+description: "说明如何浏览器链接是链接使用一个或多个 web 浏览器在开发环境的 Visual Studio 功能。"
 manager: wpickett
-ms.date: 09/22/2017
-ms.topic: article
-ms.assetid: 11813d4c-3f8a-445a-b23b-e4a57d001abc
-ms.technology: aspnet
-ms.prod: asp.net-core
-uid: client-side/using-browserlink
+ms.author: riande
 ms.custom: H1Hack27Feb2017
-ms.openlocfilehash: 67ddc58e38962bd876050739a2a1447be4f589bb
-ms.sourcegitcommit: 6e83c55eb0450a3073ef2b95fa5f5bcb20dbbf89
+ms.date: 09/22/2017
+ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
+uid: client-side/using-browserlink
+ms.openlocfilehash: 3e62bdd180bb1f5e2ce0645a8cf13c9ffe76197e
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/28/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="browser-link-in-aspnet-core"></a>在 ASP.NET 核心中的浏览器链接 
 
@@ -81,7 +79,7 @@ if (env.IsDevelopment())
 * 刷新 web 应用程序在多个浏览器中的一次。
 * 打开**浏览器链接仪表板**。
 * 启用或禁用**Browser Link**。 注意： 默认情况下，Visual Studio 2017 (15.3) 中禁用浏览器链接。
-* 启用或禁用 CSS 自动同步。
+* 启用或禁用[CSS 自动同步](#enable-or-disable-css-auto-sync)。
 
 > [!NOTE]
 > 某些 Visual Studio 插件，最值得注意的是*Web 扩展包 2015年*和*Web 扩展包 2017年*，提供扩展的功能的浏览器链接，但某些其他功能不与 ASP 配合使用。NET 核心项目。
@@ -106,7 +104,7 @@ if (env.IsDevelopment())
 
 更改索引视图中，并单击浏览器链接刷新按钮后，将更新所有连接的浏览器：
 
-![浏览器更改同步](using-browserlink/_static/browsers-sync-to-changes.png)
+![browsers-sync-to-changes](using-browserlink/_static/browsers-sync-to-changes.png)
 
 浏览器链接也适用于浏览器，从 Visual Studio 外部启动并导航到应用程序 URL。
 
@@ -114,15 +112,15 @@ if (env.IsDevelopment())
 
 从浏览器链接下拉菜单来管理与打开的浏览器的连接打开浏览器链接仪表板：
 
-![仪表-板 browserslink 打开](using-browserlink/_static/open-browserlink-dashboard.png)
+![open-browserslink-dashboard](using-browserlink/_static/open-browserlink-dashboard.png)
 
 如果连接没有浏览器，您可以通过选择启动非调试会话*用浏览器查看*链接：
 
-![浏览器链接仪表板-无连接](using-browserlink/_static/browserlink-dashboard-no-connections.png)
+![browserlink-dashboard-no-connections](using-browserlink/_static/browserlink-dashboard-no-connections.png)
 
 否则，连接的浏览器在显示时带有显示每个浏览器的页面的路径：
 
-![浏览器链接仪表板的两个连接](using-browserlink/_static/browserlink-dashboard-two-connections.png)
+![browserlink-dashboard-two-connections](using-browserlink/_static/browserlink-dashboard-two-connections.png)
 
 如果您愿意，你可以单击要刷新该单个浏览器的列出的浏览器名称。
 

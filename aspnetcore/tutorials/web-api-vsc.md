@@ -1,27 +1,25 @@
 ---
 title: "使用 ASP.NET Core 和 VS Code 创建 Web API"
-description: "在 macOS、Linux 或 Windows 上使用 ASP.NET Core MVC 和 Visual Studio Code 构建 Web API"
 author: rick-anderson
+description: "在 macOS、Linux 或 Windows 上使用 ASP.NET Core MVC 和 Visual Studio Code 构建 Web API"
+manager: wpickett
 ms.author: riande
 ms.date: 09/22/2017
-ms.topic: get-started-article
 ms.prod: asp.net-core
 ms.technology: aspnet
-keywords: "ASP.NET Core, WebAPI, Web API, REST, Mac, Linux, HTTP, 服务, HTTP 服务, VS Code"
-manager: wpickett
-ms.assetid: 830b4bf5-dd14-423e-9f59-764a6f13a8f6
+ms.topic: get-started-article
 uid: tutorials/web-api-vsc
-ms.openlocfilehash: e09943b2f810d04456a65589976aa07065a9f010
-ms.sourcegitcommit: e6bcd56a4b11e20ff55df004971f9ed384937342
+ms.openlocfilehash: 44566c4014400aa2ca3d512eeaa226637b5f0b97
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/22/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="create-a-web-api-with-aspnet-core-mvc-and-visual-studio-code-on-linux-macos-and-windows"></a>在Linux、macOS 或 Windows 上使用 ASP.NET Core MVC 和 Visual Studio Code 创建 Web API
 
 作者：[Rick Anderson](https://twitter.com/RickAndMSFT) 和 [Mike Wasson](https://github.com/mikewasson)
 
-在本教程中，将生成用于管理“待办事项”列表的 Web API。 不会生成 UI。
+本教程将生成一个用于管理“待办事项”列表的 Web API。 不构造 UI。
 
 本教程提供 3 个版本：
 
@@ -36,7 +34,7 @@ ms.lasthandoff: 09/22/2017
 ## <a name="set-up-your-development-environment"></a>设置开发环境
 
 下载和安装：
-- [.NET Core](https://www.microsoft.com/net/core)
+- [.NET Core 2.0.0 SDK](https://www.microsoft.com/net/core) 或更高版本。
 - [Visual Studio Code](https://code.visualstudio.com)
 - Visual Studio Code [C# 扩展](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
 
@@ -57,7 +55,7 @@ dotnet new webapi
 
 <!-- uid: tutorials/first-mvc-app-xplat/start-mvc uses the pic below. If you change it, make sure it's consistent -->
 
-![带有“"TodoApi" 中缺少进行生成和调试所需的资产。是否添加它们?” 警告的 VS Code “不再询问”、“稍后再说”、“是”以及“信息 - 存在未解决的依赖项”-“还原”-“关闭”](web-api-vsc/_static/vsc_restore.png)
+![带有“"TodoApi" 中缺少进行生成和调试所需的资产。是否添加它们?” 警告的 VS Code 不再询问、稍后再说、是](web-api-vsc/_static/vsc_restore.png)
 
 按“调试”(F5) 生成并运行程序。 在浏览器中，导航到 http://localhost:5000/api/values。 将显示以下内容：
 
@@ -67,11 +65,9 @@ dotnet new webapi
 
 ## <a name="add-support-for-entity-framework-core"></a>添加对 Entity Framework Core 的支持
 
-编辑“TodoApi.csproj”文件以安装 [Entity Framework Core InMemory](https://docs.microsoft.com/ef/core/providers/in-memory/) 数据库提供程序。 此数据库提供程序允许将 Entity Framework Core 和内存数据库一起使用。
+在 .NET Core 2.0 中创建新项目会在 TodoApi.csproj 文件中添加“Microsoft.AspNetCore.All”提供程序。 无需单独安装 [Entity Framework Core InMemory](https://docs.microsoft.com/ef/core/providers/in-memory/) 数据库提供程序。 此数据库提供程序允许将 Entity Framework Core 和内存数据库一起使用。
 
 [!code-xml[Main](web-api-vsc/sample/TodoApi/TodoApi.csproj?highlight=12)]
-
-运行 `dotnet restore` 以下载和安装 EF Core InMemory DB 提供程序。 可从终端运行 `dotnet restore`，或在 VS Code 中按 `⌘⇧P` (macOS) 或 `Ctrl+Shift+P` (Linux)，然后键入“.NET”。 选择“.NET: 还原包”。
 
 ## <a name="add-a-model-class"></a>添加模型类
 

@@ -2,20 +2,18 @@
 title: "将控制器添加到 ASP.NET Core MVC 应用"
 author: rick-anderson
 description: "如何使用 Visual Studio of Mac 将控制器添加到基础 ASP.NET Core MVC 应用"
-keywords: "ASP.NET Core,MVC,控制器"
-ms.author: riande
 manager: wpickett
+ms.author: riande
 ms.date: 06/28/2017
-ms.topic: article
-ms.assetid: e04b6666-d0de-4d99-b78f-d6a0c4634a87
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: tutorials/first-mvc-app-mac/adding-controller
-ms.openlocfilehash: 3a5a05d21844a30f2482841488dd7d92e5ba0475
-ms.sourcegitcommit: 78d28178345a0eea91556e4cd1adad98b1446db8
+ms.openlocfilehash: 5ec733eec7d3e47a6dd41f290da559c1eb021453
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/22/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="adding-a-controller-to-an-aspnet-core-mvc-app-with-visual-studio-for-mac"></a>使用 Visual Studio for Mac 将控制器添加到 ASP.NET Core MVC 应用
 

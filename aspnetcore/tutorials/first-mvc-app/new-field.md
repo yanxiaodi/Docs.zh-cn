@@ -2,20 +2,18 @@
 title: "添加新字段"
 author: rick-anderson
 description: 
-keywords: ASP.NET Core
-ms.author: riande
 manager: wpickett
+ms.author: riande
 ms.date: 10/14/2016
-ms.topic: get-started-article
-ms.assetid: 16efbacf-fe7b-4b41-84b0-06a1574b95c2
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: get-started-article
 uid: tutorials/first-mvc-app/new-field
-ms.openlocfilehash: 7d7e7055dd6dc0a2aefd8f4a0a170483b8504267
-ms.sourcegitcommit: 9cdbfd0d670d70b9c354216aabee260c52dad5ee
+ms.openlocfilehash: f8a5f9528d899f75aaabfbca38f075a27763567f
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/12/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="adding-a-new-field"></a>添加新字段
 
@@ -77,7 +75,7 @@ ms.lasthandoff: 09/12/2017
 
 在 PMC 中，输入以下命令：
 
-```PMC
+```powershell
 Add-Migration Rating
 Update-Database
 ```

@@ -1,27 +1,25 @@
 ---
-title: "迁移的身份验证和标识"
+title: "迁移的身份验证和标识到 ASP.NET 核心"
 author: ardalis
-description: 
-keywords: ASP.NET Core
-ms.author: riande
+description: "了解如何将身份验证和标识从 ASP.NET MVC 项目迁移到 ASP.NET 核心 MVC 项目。"
 manager: wpickett
+ms.author: riande
 ms.date: 10/14/2016
-ms.topic: article
-ms.assetid: 0db145cb-41a5-448a-b889-72e2d789ad7f
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: migration/identity
-ms.openlocfilehash: ed96266f06eb473fa3c3e1cc81b2b58fcd89f29e
-ms.sourcegitcommit: 6e83c55eb0450a3073ef2b95fa5f5bcb20dbbf89
+ms.openlocfilehash: bf452ad3969863f8f058b29a31f19af13cb2fc6b
+ms.sourcegitcommit: 493a215355576cfa481773365de021bcf04bb9c7
 ms.translationtype: MT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/28/2017
+ms.lasthandoff: 03/15/2018
 ---
-# <a name="migrating-authentication-and-identity"></a>迁移的身份验证和标识
+# <a name="migrating-authentication-and-identity-to-aspnet-core"></a>迁移的身份验证和标识到 ASP.NET 核心
 
-<a name=migration-identity></a>
+<a name="migration-identity"></a>
 
-通过[Steve Smith](https://ardalis.com/)
+作者：[Steve Smith](https://ardalis.com/)
 
 在前面文章我们[配置从 ASP.NET MVC 项目迁移到 ASP.NET 核心 MVC](configuration.md)。 在本文中，我们将迁移的注册、 登录名和用户管理功能。
 

@@ -1,24 +1,20 @@
 ---
 title: "ASP.NET Core 中的兼容性"
 author: rick-anderson
-description: 
-keywords: ASP.NET Core
-ms.author: riande
+description: "此文档充当各 ASP.NET Core 数据保护兼容性主题的目录。"
 manager: wpickett
+ms.author: riande
 ms.date: 10/14/2016
-ms.topic: article
-ms.assetid: 132f1834-db4c-4874-af6f-9a57cc0a8e83
-ms.technology: aspnet
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: article
 uid: security/data-protection/compatibility/index
-ms.openlocfilehash: ba01777b6801a17b18d9da95ec75643a24c1c942
-ms.sourcegitcommit: 0b6c8e6d81d2b3c161cd375036eecbace46a9707
+ms.openlocfilehash: 4f60f399c724a5f88e7fba3caa2c48f5cec6b137
+ms.sourcegitcommit: 493a215355576cfa481773365de021bcf04bb9c7
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 08/11/2017
+ms.lasthandoff: 03/15/2018
 ---
 # <a name="compatibility-in-aspnet-core"></a>ASP.NET Core 中的兼容性
 
-* [在应用程序之间共享 cookie](cookie-sharing.md)
-
-* [在 ASP.NET 中替换 \<machineKey>](replacing-machinekey.md)
+* [在 ASP.NET 中替换 \<machineKey>](xref:security/data-protection/compatibility/replacing-machinekey)

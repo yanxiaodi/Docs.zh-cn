@@ -1,20 +1,19 @@
 ---
 title: "添加验证"
 author: rick-anderson
-description: "如何向 Razor 页面添加验证"
-keywords: "ASP.NET Core, 验证, DataAnnotations, Razor, Razor 页面"
-ms.author: riande
+description: "说明如何向 Razor 页面添加验证。"
 manager: wpickett
+ms.author: riande
 ms.date: 08/07/2017
-ms.topic: get-started-article
-ms.technology: aspnet
 ms.prod: aspnet-core
+ms.technology: aspnet
+ms.topic: get-started-article
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: 9a822457d1581a70d59c553eb28133815f395d7d
-ms.sourcegitcommit: 6e83c55eb0450a3073ef2b95fa5f5bcb20dbbf89
+ms.openlocfilehash: 770b930373888c8b4bd578ba6d2524546549800e
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/28/2017
+ms.lasthandoff: 01/30/2018
 ---
 # <a name="adding-validation-to-a-razor-page"></a>向 Razor 页面添加验证
 
@@ -36,7 +35,12 @@ Razor 页面和 Entity Framework 提供的验证支持是 DRY 原则的极佳示
 
 [!code-csharp[Main](../../tutorials/first-mvc-app/start-mvc//sample/MvcMovie/Models/MovieDateRatingDA.cs?name=snippet1)]
 
-验证特性用于指定模型属性上强制执行的行为。 `Required` 和 `MinimumLength` 特性表示属性必须具有值；但用户可输入空格来满足验证约束。 `RegularExpression` 特性用于限制可输入的字符。 在上述代码中，`Genre` 和 `Rating` 仅可使用字母（禁用空格、数字和特殊字符）。 `Range` 特性将值限制在指定范围内。 `StringLength` 特性设置字符串的最大长度，且可视情况设置最小长度。 从本质上来说，需要[值类型](https://docs.microsoft.com/dotnet/csharp/language-reference/keywords/value-types)（如 `decimal`、`int`、`float`、`DateTime`），但不需要 `[Required]` 特性。
+验证特性用于指定模型属性上强制执行的行为：
+
+* `Required` 和 `MinimumLength` 特性指示属性必须具有一个值。 但是，用户可以随时输入空格以对可以为 null 的类型进行验证约束。 从本质上来说，需要不可以为 null 的[值类型](https://docs.microsoft.com/dotnet/csharp/language-reference/keywords/value-types)（如 `decimal`、`int`、`float` 和 `DateTime`），但不需要 `Required` 特性。
+* `RegularExpression` 特性限制用户可以输入的字符。 在上述代码中，`Genre` 和 `Rating` 仅可使用字母（禁用空格、数字和特殊字符）。
+* `Range` 特性将值限制在指定范围内。
+* `StringLength` 特性设置字符串的最大长度，且可视情况设置最小长度。 
 
 让 ASP.NET Core 强制自动执行验证规则有助于提升应用的可靠性。 自动验证模型有助于保护应用，因为添加新代码时无需手动应用它们。
 
@@ -55,7 +59,7 @@ Razor 页面和 Entity Framework 提供的验证支持是 DRY 原则的极佳示
 
 一项重要优势是，无需在“创建”或“编辑”页面中更改代码。 在模型应用 DataAnnotations 后，即已启用验证 UI。 本教程中自动创建的 Razor 页面自动选取了验证规则（使用 `Movie` 模型类的属性上的验证特性）。 使用“编辑”页面测试验证后，即已应用相同验证。
 
-存在客户端验证错误时，不会将表单数据发布到服务器。 请通过下述一个或多个方法验证是否未发布表单数据：
+存在客户端验证错误时，不会将表单数据发布到服务器。 请通过以下一种或多种方法验证是否未发布表单数据：
 
 * 在 `OnPostAsync` 方法中放置一个断点。 提交表单（选择“创建”或“保存”）。 从未命中断点。
 * 使用 [Fiddler 工具](http://www.telerik.com/fiddler)。
@@ -95,7 +99,7 @@ Razor 页面和 Entity Framework 提供的验证支持是 DRY 原则的极佳示
 
 [!code-csharp[Main](razor-pages-start/sample/RazorPagesMovie/Models/MovieDateRatingDA.cs?highlight=2,6&name=snippet2)]
 
-`DataType` 特性仅提供相关提示来帮助视图引擎设置数据格式（并提供特性，例如向 URL 提供 `<a>` 和向电子邮件提供 `<a href="mailto:EmailAddress.com">`）。 使用 `RegularExpression` 特性验证数据的格式。 `DataType` 特性用于指定比数据库内部类型更具体的数据类型。 `DataType` 特性不是验证特性。 示例应用程序中仅显示日期，不显示时间。
+`DataType` 特性仅提供相关提示来帮助视图引擎设置数据格式（并提供特性，例如向 URL 提供 `<a>` 和向电子邮件提供 `<a href="mailto:EmailAddress.com">`）。 使用 `RegularExpression` 特性验证数据的格式。 `DataType` 属性用于指定比数据库内部类型更具体的数据类型。 `DataType` 特性不是验证特性。 示例应用程序中仅显示日期，不显示时间。
 
 `DataType` 枚举提供了多种数据类型，例如日期、时间、电话号码、货币、电子邮件地址等。 应用程序还可通过 `DataType` 特性自动提供类型特定的功能。 例如，可为 `DataType.EmailAddress` 创建 `mailto:` 链接。 可在支持 HTML5 的浏览器中为 `DataType.Date` 提供日期选择器。 `DataType` 特性发出 HTML 5 `data-`（读作 data dash）特性供 HTML 5 浏览器使用。 `DataType` 特性不提供任何验证。
 
@@ -116,7 +120,7 @@ public DateTime ReleaseDate { get; set; }
 * 默认情况下，浏览器将根据区域设置采用正确的格式呈现数据。
 * 借助 `DataType` 特性，ASP.NET Core 框架可选择适当的字段模板来呈现数据。 单独使用时，`DisplayFormat` 特性将使用字符串模板。
 
-请注意：jQuery 验证不适用于 `Range` 特性和 `DateTime`。 例如，以下代码将始终显示客户端验证错误，即便日期在指定的范围内：
+注意：jQuery 验证不适用于 `Range` 属性和 `DateTime`。 例如，以下代码将始终显示客户端验证错误，即便日期在指定的范围内：
 
 ```csharp
 [Range(typeof(DateTime), "1/1/1966", "1/1/2020")]
@@ -127,6 +131,12 @@ public DateTime ReleaseDate { get; set; }
 以下代码显示组合在一行上的特性：
 
 [!code-csharp[Main](razor-pages-start/sample/RazorPagesMovie/Models/MovieDateRatingDAmult.cs?name=snippet1)]
+
+[Razor 页面和 EF Core 入门](xref:data/ef-rp/intro)显示了 Razor 页面的更多高级 EF Core 操作。
+
+### <a name="publish-to-azure"></a>发布到 Azure
+
+有关如何将该应用发布到 Azure 的说明，请参阅[使用 Visual Studio 将 ASP.NET Core Web 应用发布到 Azure App Service](xref:tutorials/publish-to-azure-webapp-using-vs)。
 
 ## <a name="additional-resources"></a>其他资源
 

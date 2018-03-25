@@ -2,31 +2,29 @@
 title: "ASP.NET Core 2.0 入门"
 author: rick-anderson
 description: "介绍如何使用 ASP.NET Core 创建并运行简单的 Hello World 应用的快速教程。"
-keywords: "ASP.NET Core, 教程, 入门"
-ms.author: riande
 manager: wpickett
-ms.date: 08/30/2017
-ms.topic: get-started-article
-ms.assetid: 73543e9d-d9d5-47d6-9664-17a9beea6cd3
-ms.technology: aspnet
+ms.author: riande
+ms.date: 10/18/2017
 ms.prod: asp.net-core
+ms.technology: aspnet
+ms.topic: get-started-article
 uid: getting-started
-ms.openlocfilehash: c81e1328fda6d1652ab937bd580be2342924d241
-ms.sourcegitcommit: 9cdbfd0d670d70b9c354216aabee260c52dad5ee
+ms.openlocfilehash: eb1fd748029743ca6991927cc95b612ed1975338
+ms.sourcegitcommit: a510f38930abc84c4b302029d019a34dfe76823b
 ms.translationtype: HT
 ms.contentlocale: zh-CN
-ms.lasthandoff: 09/12/2017
+ms.lasthandoff: 01/30/2018
 ---
-# <a name="getting-started-with-aspnet-core"></a>ASP.NET Core 入门
+# <a name="get-started-with-aspnet-core"></a>ASP.NET Core 入门
 
 > [!NOTE]
-> 这些说明适用于 ASP.NET Core 的最新版本。 想要从早期版本开始？ 请参阅[本教程的 1.1 版本](xref:getting-started-1.1)。
+> 这些说明仅适用于 ASP.NET Core 的最新版本。 如果想要从早期版本开始？ 请参阅 [本教程的 1.1 版本](xref:getting-started-1.1)。
 
 1. 安装 [.NET Core](https://www.microsoft.com/net/core/)。
 
 2. 创建新的 .NET Core 项目。
 
-   在 macOS 和 Linux 上，打开终端窗口。 在 Windows 上，打开命令提示符。
+   在 macOS 和 Linux 上，打开终端窗口。 在 Windows 上，打开命令提示符。 输入以下命令：
 
     ```terminal
     dotnet new razor -o aspnetcoreapp
